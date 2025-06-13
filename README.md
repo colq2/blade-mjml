@@ -87,9 +87,25 @@ composer require colq2/blade-mjml:dev-main
 
 ## Usage
 
-```php
-$variable = new VendorName\Skeleton();
-echo $variable->echoPhrase('Hello, VendorName!');
+Just put mjml template into your blade files and use the view for sending emails.
+
+Relevant documentation for laravel and mjml:
+* [Sending Emails in Laravel](https://laravel.com/docs/12.x/mail#configuring-the-view)
+* [MJML Documentation](https://mjml.io/documentation/)
+
+```bladehtml
+// resources/views/emails/example.blade.php
+<mjml>
+    <mj-body>
+        <mj-section>
+            <mj-column>
+                <mj-image width="100px" src="https://mjml.io/assets/img/logo-small.png"></mj-image>
+                <mj-divider border-color="#F45E43"></mj-divider>
+                <mj-text font-size="20px" color="#F45E43" font-family="helvetica">Hello World</mj-text>
+            </mj-column>
+        </mj-section>
+    </mj-body>
+</mjml>
 ```
 
 ## Testing

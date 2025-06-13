@@ -42,9 +42,34 @@ return view('mjml-example.blade.php');
 
 * mj-raw attribute `position="file-start"` is not supported yet.
 
-## Open Issues
+## Component overview
 
-* [] Support for mj-attributes
+Head Components:
+* [ ] mj-attributes
+* [x] mj-breakpoint
+* [x] mj-font
+* [ ] mj-html-attributes
+* [x] mj-preview
+* [x] mj-style
+* [x] mj-title
+
+Body Components:
+* [ ] mj-accordion
+* [ ] mj-button
+* [ ] mj-carousel
+* [x] mj-column
+* [x] mj-divider
+* [ ] mj-group
+* [ ] mj-hero
+* [ ] mj-image
+* [ ] mj-navbar
+* [x] mj-raw
+* [x] mj-section
+* [ ] mj-social
+* [ ] mj-spacer
+* [ ] mj-table
+* [x] mj-text
+* [ ] mj-wrapper
 
 ## Good to know
 

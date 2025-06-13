@@ -1,37 +1,33 @@
 <?php
 
-namespace VendorName\Skeleton\Tests;
+namespace colq2\BladeMjml\Tests;
 
+use colq2\BladeMjml\BladeMjmlGlobalContext;
+use colq2\BladeMjml\BladeMjmlServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Orchestra\Testbench\TestCase as Orchestra;
-use VendorName\Skeleton\SkeletonServiceProvider;
+use Illuminate\Foundation\Testing\Concerns\InteractsWithViews;
 
-class TestCase extends Orchestra
+
+class TestCase extends \Orchestra\Testbench\TestCase
 {
+
     protected function setUp(): void
     {
         parent::setUp();
 
-        Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'VendorName\\Skeleton\\Database\\Factories\\'.class_basename($modelName).'Factory'
-        );
+        $this->artisan('view:clear');
     }
 
+    /**
+     * Get package providers.
+     *
+     * @param  \Illuminate\Foundation\Application  $app
+     * @return array<int, class-string<\Illuminate\Support\ServiceProvider>>
+     */
     protected function getPackageProviders($app)
     {
         return [
-            SkeletonServiceProvider::class,
+            BladeMjmlServiceProvider::class,
         ];
-    }
-
-    public function getEnvironmentSetUp($app)
-    {
-        config()->set('database.default', 'testing');
-
-        /*
-         foreach (\Illuminate\Support\Facades\File::allFiles(__DIR__ . '/database/migrations') as $migration) {
-            (include $migration->getRealPath())->up();
-         }
-         */
     }
 }

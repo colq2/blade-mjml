@@ -1,4 +1,4 @@
-# :package_description
+# Blade Mjml
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/:vendor_slug/:package_slug.svg?style=flat-square)](https://packagist.org/packages/:vendor_slug/:package_slug)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/:vendor_slug/:package_slug/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/:vendor_slug/:package_slug/actions?query=workflow%3Arun-tests+branch%3Amain)
@@ -14,15 +14,62 @@ This repo can be used to scaffold a Laravel package. Follow these steps to get s
 4. If you need help creating a package, consider picking up our <a href="https://laravelpackage.training">Laravel Package Training</a> video course.
 ---
 <!--/delete-->
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
 
-## Support us
+This package is a port of [mjml](https://mjml.io/) to laravel blade. The goal is to have a running mjml version purely in php and blade, without the need for node.
 
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/:package_name.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/:package_name)
+You can just use the original mjml xml as blade view.
 
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
+```bladehtml
+<!-- mjml-example.blade.php -->
+<mjml>
+    <mj-body>
+        <mj-section>
+            <mj-column>
+                <mj-image width="100px" src="https://mjml.io/assets/img/logo-small.png"></mj-image>
+                <mj-divider border-color="#F45E43"></mj-divider>
+                <mj-text font-size="20px" color="#F45E43" font-family="helvetica">Hello World</mj-text>
+            </mj-column>
+        </mj-section>
+    </mj-body>
+</mjml>
+```
 
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+Use this package to render the mjml:
+
+```php
+return view('mjml-example.blade.php');
+```
+
+
+## Limitations
+
+* No support for raw components yet -> Dont know how to implement this yet, because we do not control the childs and cannot check if they are raw or not.
+* Cannot extract font families, must use mj-font for this.
+* mj-html-attributes not supported yet.
+
+* mj-raw attribute `position="file-start"` is not supported yet.
+
+## Open Issues
+
+* [] Support for mj-attributes
+
+## Good to know
+
+The original mjml implementation works differently than the blade compiler. MJML renders recursively, which means that a parent component calls the render function of all its childern and can provide a context or wrap them.
+The blade compiler works differently. First it compiles the blade view into a php file, then it "just" runs the php file. We cannot provide a context programmatically, because the blade compiler does not know about the context of the parent component.
+
+(Blade do not really know that it is working with html. It does not care, it does not do any html analysis or anything like that)
+
+This is the biggest challenge of this package. This is why we keep a context stack and a global context.
+
+For example we need to wrap the child components of a column into a table, which in mjml is done in the mj-column component.
+Also calculating the current width and providing it to the child components was a challenge.
+
+Another challenge was to find out how many siblings a colum has. In the component we don't have any access to the parent html or whatsoever.
+Now this package "precompiles" the mjml and sets the siblings as an attribute. 
+
+The precompilation also changes <mj-*> tp <x-mj-*> so that the blade compiler can handle it correctly.
+
 
 ## Installation
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace VendorName\Skeleton\Database\Factories;
+namespace colq2\BladeMjml\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 

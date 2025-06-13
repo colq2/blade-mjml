@@ -1,19 +1,12 @@
 # Blade Mjml
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/:vendor_slug/:package_slug.svg?style=flat-square)](https://packagist.org/packages/:vendor_slug/:package_slug)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/:vendor_slug/:package_slug/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/:vendor_slug/:package_slug/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/:vendor_slug/:package_slug/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/:vendor_slug/:package_slug/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/:vendor_slug/:package_slug.svg?style=flat-square)](https://packagist.org/packages/:vendor_slug/:package_slug)
-<!--delete-->
----
-This repo can be used to scaffold a Laravel package. Follow these steps to get started:
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/colq2/blade-mjml.svg?style=flat-square)](https://packagist.org/packages/colq2/blade-mjml)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/colq2/blade-mjml/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/colq2/blade-mjml/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/colq2/blade-mjml/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/colq2/blade-mjml/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
+[![Total Downloads](https://img.shields.io/packagist/dt/colq2/blade-mjml.svg?style=flat-square)](https://packagist.org/packages/:vendor_slug/:package_slug)
 
-1. Press the "Use this template" button at the top of this repo to create a new repo with the contents of this skeleton.
-2. Run "php ./configure.php" to run a script that will replace all placeholders throughout all the files.
-3. Have fun creating your package.
-4. If you need help creating a package, consider picking up our <a href="https://laravelpackage.training">Laravel Package Training</a> video course.
----
-<!--/delete-->
+> [!CAUTION]
+> Currently in experimental state.
 
 This package is a port of [mjml](https://mjml.io/) to laravel blade. The goal is to have a running mjml version purely in php and blade, without the need for node.
 
@@ -73,36 +66,23 @@ The precompilation also changes <mj-*> tp <x-mj-*> so that the blade compiler ca
 
 ## Installation
 
-You can install the package via composer:
+Currently this package is not installable with composer and packagist. You could add this for testing purposes:
 
-```bash
-composer require :vendor_slug/:package_slug
+```json
+{
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/colq2/blade-mjml"
+    }
+  ]
+}
 ```
 
-You can publish and run the migrations with:
+Install the package via composer:
 
 ```bash
-php artisan vendor:publish --tag=":package_slug-migrations"
-php artisan migrate
-```
-
-You can publish the config file with:
-
-```bash
-php artisan vendor:publish --tag=":package_slug-config"
-```
-
-This is the contents of the published config file:
-
-```php
-return [
-];
-```
-
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag=":package_slug-views"
+composer require colq2/blade-mjml:dev-main
 ```
 
 ## Usage
@@ -122,9 +102,6 @@ composer test
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
 
-## Contributing
-
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ## Security Vulnerabilities
 
@@ -132,7 +109,7 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 ## Credits
 
-- [:author_name](https://github.com/:author_username)
+- [colq2](https://github.com/colq2)
 - [All Contributors](../../contributors)
 
 ## License

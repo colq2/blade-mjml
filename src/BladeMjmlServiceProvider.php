@@ -3,6 +3,7 @@
 namespace colq2\BladeMjml;
 
 use colq2\BladeMjml\Components\MjBody;
+use colq2\BladeMjml\Components\MjButton;
 use colq2\BladeMjml\Components\MjColumn;
 use colq2\BladeMjml\Components\MjDivider;
 use colq2\BladeMjml\Components\MjHead;
@@ -98,5 +99,6 @@ class BladeMjmlServiceProvider extends PackageServiceProvider
         Blade::component(MjText::class, 'mj-text');
         Blade::component(MjRaw::class, 'mj-raw');
         Blade::component(MjDivider::class, 'mj-divider');
+        Blade::component(MjButton::class, 'mj-button');
     }
 }

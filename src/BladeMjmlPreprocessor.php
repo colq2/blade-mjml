@@ -37,6 +37,7 @@ class BladeMjmlPreprocessor
         'mj-text',
         'mj-image',
         'mj-divider',
+        'mj-button',
     ];
 
     /**

@@ -4,8 +4,6 @@ use colq2\BladeMjml\Tests\TestCase;
 use Illuminate\Testing\TestView;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 
-require_once __DIR__.'/../src/functions.php';
-
 uses(TestCase::class, \Illuminate\Foundation\Testing\Concerns\InteractsWithViews::class)->in(__DIR__);
 
 function blade(string $template, array $data = []): TestView

@@ -13,6 +13,7 @@ use colq2\BladeMjml\Components\MjHeadFont;
 use colq2\BladeMjml\Components\MjHeadPreview;
 use colq2\BladeMjml\Components\MjHeadStyle;
 use colq2\BladeMjml\Components\MjHeadTitle;
+use colq2\BladeMjml\Components\MjHero;
 use colq2\BladeMjml\Components\Mjml;
 use colq2\BladeMjml\Components\MjRaw;
 use colq2\BladeMjml\Components\MjSection;
@@ -100,5 +101,6 @@ class BladeMjmlServiceProvider extends PackageServiceProvider
         Blade::component(MjRaw::class, 'mj-raw');
         Blade::component(MjDivider::class, 'mj-divider');
         Blade::component(MjButton::class, 'mj-button');
+        Blade::component(MjHero::class, 'mj-hero');
     }
 }

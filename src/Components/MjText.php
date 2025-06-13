@@ -117,17 +117,18 @@ class MjText extends MjmlBodyComponent
 
     protected function renderContent(): string
     {
-        return $this->innerColumnWrap('
+        return '
           <div
             '.$this->htmlAttributes([
             'style' => 'text',
         ]).'
           >{{ $slot }}</div>
-        ');
+        ';
     }
 
     public function renderMjml(array $data): View|string
     {
+
         $height = $this->getAttribute('height');
 
         if ($height) {

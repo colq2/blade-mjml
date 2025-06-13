@@ -22,6 +22,11 @@ class MjRaw extends MjmlBodyComponent
         return 'mj-raw';
     }
 
+    public function isRawElement(): bool
+    {
+        return true;
+    }
+
     public function allowedAttributes(): array
     {
         return [

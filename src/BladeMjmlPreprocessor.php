@@ -38,6 +38,7 @@ class BladeMjmlPreprocessor
         'mj-image',
         'mj-divider',
         'mj-button',
+        'mj-hero',
     ];
 
     /**

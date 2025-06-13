@@ -7,6 +7,7 @@ use colq2\BladeMjml\BladeMjmlGlobalContext;
 use colq2\BladeMjml\Helpers\FormatAttributes;
 use colq2\BladeMjml\Helpers\HtmlAttributesHelper;
 use colq2\BladeMjml\Helpers\ShorthandParser;
+use colq2\BladeMjml\Helpers\WidthParser;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -31,6 +32,11 @@ abstract class MjmlBodyComponent extends MjmlComponent
     abstract public function getComponentName(): string;
 
     abstract public function allowedAttributes(): array;
+
+    public function isRawElement(): bool
+    {
+        return false;
+    }
 
     protected function gatherAttributes(): array
     {
@@ -77,6 +83,23 @@ abstract class MjmlBodyComponent extends MjmlComponent
         return $this->bladeMjmlContext->read();
     }
 
+    public function wrap(string $content): string
+    {
+        if($this->isRawElement()){
+            return $content;
+        }
+
+        $context = $this->context();
+
+        $wrapperFn = Arr::get($context, 'wrapperFn');
+
+        if(!$wrapperFn){
+            return $content;
+        }
+
+        return $wrapperFn($content, $this);
+    }
+
     public function getChildContext(): array
     {
         return array_merge([$this->bladeMjmlContext->read()]);
@@ -94,12 +117,13 @@ abstract class MjmlBodyComponent extends MjmlComponent
         $this->bladeMjmlContext->push($this->getChildContext());
 
         return function (array $data) {
-            $view = $this->renderMjml($data);
-
             // pop context
             $this->bladeMjmlContext->pop();
 
-            return $view;
+            $view = $this->renderMjml($data);
+
+            // wrapping after pop, because else we have the child context.
+            return $this->wrap($view);
         };
     }
 

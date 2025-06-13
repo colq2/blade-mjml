@@ -183,7 +183,7 @@ class MjButton extends MjmlBodyComponent
     {
         $tag = $this->getAttribute('href') ? 'a' : 'p';
 
-        return $this->innerColumnWrap('
+        return '
       <table
         '.$this->htmlAttributes([
             'border' => '0',
@@ -220,6 +220,6 @@ class MjButton extends MjmlBodyComponent
           </tr>
         </tbody>
       </table>
-      ');
+      ';
     }
 }

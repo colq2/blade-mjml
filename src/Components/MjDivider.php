@@ -129,13 +129,13 @@ class MjDivider extends MjmlBodyComponent
 
     public function renderMjml(array $data): View|string
     {
-        return $this->innerColumnWrap('
+        return '
           <p
             '.$this->htmlAttributes([
             'style' => 'p',
         ]).'
           ></p>
           '.$this->renderAfter().'
-        ');
+        ';
     }
 }

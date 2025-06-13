@@ -63,7 +63,7 @@ Body Components:
 * [x] mj-column
 * [x] mj-divider
 * [ ] mj-group
-* [ ] mj-hero
+* [x] mj-hero
 * [ ] mj-image
 * [ ] mj-navbar
 * [x] mj-raw

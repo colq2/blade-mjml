@@ -17,6 +17,7 @@ use colq2\BladeMjml\Components\MjHero;
 use colq2\BladeMjml\Components\Mjml;
 use colq2\BladeMjml\Components\MjRaw;
 use colq2\BladeMjml\Components\MjSection;
+use colq2\BladeMjml\Components\MjSpacer;
 use colq2\BladeMjml\Components\MjText;
 use colq2\BladeMjml\Helpers\OutlookConditionals;
 use Illuminate\Support\Facades\Blade;
@@ -102,5 +103,6 @@ class BladeMjmlServiceProvider extends PackageServiceProvider
         Blade::component(MjDivider::class, 'mj-divider');
         Blade::component(MjButton::class, 'mj-button');
         Blade::component(MjHero::class, 'mj-hero');
+        Blade::component(MjSpacer::class, 'mj-spacer');
     }
 }

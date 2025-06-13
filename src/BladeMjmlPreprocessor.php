@@ -39,6 +39,7 @@ class BladeMjmlPreprocessor
         'mj-divider',
         'mj-button',
         'mj-hero',
+        'mj-spacer',
     ];
 
     /**

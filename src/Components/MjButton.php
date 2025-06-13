@@ -162,7 +162,7 @@ class MjButton extends MjmlBodyComponent
 
     protected function calculateAWidth($width)
     {
-        if (!$width) {
+        if (! $width) {
             return null;
         }
         if (str_ends_with($width, '%')) {
@@ -174,8 +174,10 @@ class MjButton extends MjmlBodyComponent
             $innerPaddings =
                 $this->getShorthandAttrValue('inner-padding', 'left') +
                 $this->getShorthandAttrValue('inner-padding', 'right');
-            return ($parsedWidth - $innerPaddings - $borders) . 'px';
+
+            return ($parsedWidth - $innerPaddings - $borders).'px';
         }
+
         return null;
     }
 
@@ -197,22 +199,22 @@ class MjButton extends MjmlBodyComponent
           <tr>
             <td
               '.$this->htmlAttributes([
-                  'align' => 'center',
-                  'bgcolor' => $this->getAttribute('background-color') === 'none' ? null : $this->getAttribute('background-color'),
-                  'role' => 'presentation',
-                  'style' => 'td',
-                  'valign' => $this->getAttribute('vertical-align'),
-              ]).'
+            'align' => 'center',
+            'bgcolor' => $this->getAttribute('background-color') === 'none' ? null : $this->getAttribute('background-color'),
+            'role' => 'presentation',
+            'style' => 'td',
+            'valign' => $this->getAttribute('vertical-align'),
+        ]).'
             >
               <'.$tag.'
                 '.$this->htmlAttributes([
-                    'href' => $this->getAttribute('href'),
-                    'name' => $this->getAttribute('name'),
-                    'rel' => $this->getAttribute('rel'),
-                    'title' => $this->getAttribute('title'),
-                    'style' => 'content',
-                    'target' => $tag === 'a' ? $this->getAttribute('target') : null,
-                ]).'
+            'href' => $this->getAttribute('href'),
+            'name' => $this->getAttribute('name'),
+            'rel' => $this->getAttribute('rel'),
+            'title' => $this->getAttribute('title'),
+            'style' => 'content',
+            'target' => $tag === 'a' ? $this->getAttribute('target') : null,
+        ]).'
               >
                 {{ $slot }}
               </'.$tag.'>

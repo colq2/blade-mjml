@@ -13,32 +13,31 @@ class MjColumn extends MjmlBodyComponent
      */
     public function __construct(
         public BladeMjmlGlobalContext $bladeMjmlContext,
-        public string                 $backgroundColor = '',
-        public string                 $border = '',
-        public string                 $borderBottom = '',
-        public string                 $borderLeft = '',
-        public string                 $borderRadius = '',
-        public string                 $borderRight = '',
-        public string                 $borderTop = '',
-        public string                 $direction = 'ltr',
-        public string                 $innerBackgroundColor = '',
-        public string                 $paddingBottom = '',
-        public string                 $paddingLeft = '',
-        public string                 $paddingRight = '',
-        public string                 $paddingTop = '',
-        public string                 $innerBorder = '',
-        public string                 $innerBorderBottom = '',
-        public string                 $innerBorderLeft = '',
-        public string                 $innerBorderRadius = '',
-        public string                 $innerBorderRight = '',
-        public string                 $innerBorderTop = '',
-        public string                 $padding = '',
-        public string                 $verticalAlign = 'top',
-        public string                 $width = '',
-        public string                 $cssClass = '',
-        public int                    $nonRawSiblings = 1,
-    )
-    {
+        public string $backgroundColor = '',
+        public string $border = '',
+        public string $borderBottom = '',
+        public string $borderLeft = '',
+        public string $borderRadius = '',
+        public string $borderRight = '',
+        public string $borderTop = '',
+        public string $direction = 'ltr',
+        public string $innerBackgroundColor = '',
+        public string $paddingBottom = '',
+        public string $paddingLeft = '',
+        public string $paddingRight = '',
+        public string $paddingTop = '',
+        public string $innerBorder = '',
+        public string $innerBorderBottom = '',
+        public string $innerBorderLeft = '',
+        public string $innerBorderRadius = '',
+        public string $innerBorderRight = '',
+        public string $innerBorderTop = '',
+        public string $padding = '',
+        public string $verticalAlign = 'top',
+        public string $width = '',
+        public string $cssClass = '',
+        public int $nonRawSiblings = 1,
+    ) {
         parent::__construct($bladeMjmlContext);
     }
 
@@ -100,9 +99,9 @@ class MjColumn extends MjmlBodyComponent
         $unit = $widthParserResult['unit'];
 
         if ($unit === '%') {
-            $containerWidth = (floatval($parentWidth) * $parsedWidth / 100 - $allPaddings) . 'px';
+            $containerWidth = (floatval($parentWidth) * $parsedWidth / 100 - $allPaddings).'px';
         } else {
-            $containerWidth = ($parsedWidth - $allPaddings) . 'px';
+            $containerWidth = ($parsedWidth - $allPaddings).'px';
         }
 
         return array_merge($this->context(), [
@@ -111,25 +110,25 @@ class MjColumn extends MjmlBodyComponent
                 return '
                     <tr>
                       <td
-                        ' . $component->htmlAttributes([
-                        'align' => $component->getAttribute('align'),
-                        'class' => $component->getAttribute('css-class'),
-                        'style' => [
-                            'background' => $component->getAttribute('container-background-color'),
-                            'font-size' => '0px',
-                            'padding' => $component->getAttribute('padding'),
-                            'padding-top' => $component->getAttribute('padding-top'),
-                            'padding-right' => $component->getAttribute('padding-right'),
-                            'padding-bottom' => $component->getAttribute('padding-bottom'),
-                            'padding-left' => $component->getAttribute('padding-left'),
-                            'word-break' => 'break-word',
-                        ],
-                    ]) . '
-                      >' . $content . '
+                        '.$component->htmlAttributes([
+                    'align' => $component->getAttribute('align'),
+                    'class' => $component->getAttribute('css-class'),
+                    'style' => [
+                        'background' => $component->getAttribute('container-background-color'),
+                        'font-size' => '0px',
+                        'padding' => $component->getAttribute('padding'),
+                        'padding-top' => $component->getAttribute('padding-top'),
+                        'padding-right' => $component->getAttribute('padding-right'),
+                        'padding-bottom' => $component->getAttribute('padding-bottom'),
+                        'padding-left' => $component->getAttribute('padding-left'),
+                        'word-break' => 'break-word',
+                    ],
+                ]).'
+                      >'.$content.'
                       </td>
                     </tr>
                     ';
-            }
+            },
         ]);
     }
 
@@ -189,18 +188,18 @@ class MjColumn extends MjmlBodyComponent
         }
 
         if (empty($width)) {
-            return (100 / $this->nonRawSiblings) . '%';
+            return (100 / $this->nonRawSiblings).'%';
         }
 
         if (preg_match('/^(\d*\.?\d+)(px|%)$/', $width, $matches)) {
-            $parsedWidth = (float)$matches[1];
+            $parsedWidth = (float) $matches[1];
             $unit = $matches[2];
 
             if ($unit === '%') {
                 return $width;
             }
 
-            return ($parsedWidth / (int)$containerWidth * 100) . '%';
+            return ($parsedWidth / (int) $containerWidth * 100).'%';
         }
 
         return $width;
@@ -208,18 +207,18 @@ class MjColumn extends MjmlBodyComponent
 
     protected function getWidthAsPixel(): string
     {
-        $containerWidth = (float)($this->context()['containerWidth'] ?? 600);
+        $containerWidth = (float) ($this->context()['containerWidth'] ?? 600);
         $width = $this->getParsedWidth(true);
 
         if (preg_match('/^(\d*\.?\d+)(px|%)$/', $width, $matches)) {
-            $parsedWidth = (float)$matches[1];
+            $parsedWidth = (float) $matches[1];
             $unit = $matches[2];
 
             if ($unit === '%') {
-                return ($containerWidth * $parsedWidth / 100) . 'px';
+                return ($containerWidth * $parsedWidth / 100).'px';
             }
 
-            return $parsedWidth . 'px';
+            return $parsedWidth.'px';
         }
 
         return $width;
@@ -227,17 +226,17 @@ class MjColumn extends MjmlBodyComponent
 
     protected function getParsedWidth(bool $toString = false): string|array
     {
-        $width = $this->getAttribute('width') ?? (100 / $this->nonRawSiblings) . '%';
+        $width = $this->getAttribute('width') ?? (100 / $this->nonRawSiblings).'%';
         $parsedWidth = 0;
         $unit = 'px';
 
         if (preg_match('/^(\d*\.?\d+)(px|%)$/', $width, $matches)) {
-            $parsedWidth = (float)$matches[1];
+            $parsedWidth = (float) $matches[1];
             $unit = $matches[2];
         }
 
         if ($toString) {
-            return $parsedWidth . $unit;
+            return $parsedWidth.$unit;
         }
 
         return [
@@ -252,7 +251,7 @@ class MjColumn extends MjmlBodyComponent
         $parsedWidth = $parsed['parsedWidth'];
         $unit = $parsed['unit'];
 
-        $formattedClassNb = str_replace('.', '-', (string)$parsedWidth);
+        $formattedClassNb = str_replace('.', '-', (string) $parsedWidth);
 
         switch ($unit) {
             case '%':
@@ -290,18 +289,18 @@ class MjColumn extends MjmlBodyComponent
     {
         return '
       <table
-        ' . $this->htmlAttributes([
-                'border' => '0',
-                'cellpadding' => '0',
-                'cellspacing' => '0',
-                'role' => 'presentation',
-                'width' => '100%',
-            ]) . '
+        '.$this->htmlAttributes([
+            'border' => '0',
+            'cellpadding' => '0',
+            'cellspacing' => '0',
+            'role' => 'presentation',
+            'width' => '100%',
+        ]).'
       >
         <tbody>
           <tr>
-            <td ' . $this->htmlAttributes(['style' => 'gutter']) . '>
-              ' . $this->renderColumn() . '
+            <td '.$this->htmlAttributes(['style' => 'gutter']).'>
+              '.$this->renderColumn().'
             </td>
           </tr>
         </tbody>
@@ -313,14 +312,14 @@ class MjColumn extends MjmlBodyComponent
     {
         return '
       <table
-        ' . $this->htmlAttributes([
-                'border' => '0',
-                'cellpadding' => '0',
-                'cellspacing' => '0',
-                'role' => 'presentation',
-                'style' => 'table',
-                'width' => '100%',
-            ]) . '
+        '.$this->htmlAttributes([
+            'border' => '0',
+            'cellpadding' => '0',
+            'cellspacing' => '0',
+            'role' => 'presentation',
+            'style' => 'table',
+            'width' => '100%',
+        ]).'
       >
         <tbody>
           {{ $slot }}
@@ -331,11 +330,11 @@ class MjColumn extends MjmlBodyComponent
 
     public function renderMjml(array $data): View|string
     {
-        $classesName = $this->getColumnClass() . ' mj-outlook-group-fix';
+        $classesName = $this->getColumnClass().' mj-outlook-group-fix';
 
         $cssClass = $this->getAttribute('css-class');
         if ($cssClass) {
-            $classesName .= ' ' . $cssClass;
+            $classesName .= ' '.$cssClass;
         }
 
         $inner =
@@ -344,20 +343,20 @@ class MjColumn extends MjmlBodyComponent
                 : $this->renderColumn();
 
         return '<!--[if mso | IE]>
-        <td ' . $this->htmlAttributes([
-                'align' => $this->getAttribute('align'),
-                'class' => $this->getAttribute('css-class'),
-                'style' => 'tdOutlook',
-            ]) . '
+        <td '.$this->htmlAttributes([
+            'align' => $this->getAttribute('align'),
+            'class' => $this->getAttribute('css-class'),
+            'style' => 'tdOutlook',
+        ]).'
         >
         <![endif]-->
       <div
-        ' . $this->htmlAttributes([
-                'class' => $classesName,
-                'style' => 'div',
-            ]) . '
+        '.$this->htmlAttributes([
+            'class' => $classesName,
+            'style' => 'div',
+        ]).'
       >
-        ' . $inner . '
+        '.$inner.'
       </div>
       
       <!--[if mso | IE]>

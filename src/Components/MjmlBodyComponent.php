@@ -7,7 +7,6 @@ use colq2\BladeMjml\BladeMjmlGlobalContext;
 use colq2\BladeMjml\Helpers\FormatAttributes;
 use colq2\BladeMjml\Helpers\HtmlAttributesHelper;
 use colq2\BladeMjml\Helpers\ShorthandParser;
-use colq2\BladeMjml\Helpers\WidthParser;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -85,7 +84,7 @@ abstract class MjmlBodyComponent extends MjmlComponent
 
     public function wrap(string $content): string
     {
-        if($this->isRawElement()){
+        if ($this->isRawElement()) {
             return $content;
         }
 
@@ -93,7 +92,7 @@ abstract class MjmlBodyComponent extends MjmlComponent
 
         $wrapperFn = Arr::get($context, 'wrapperFn');
 
-        if(!$wrapperFn){
+        if (! $wrapperFn) {
             return $content;
         }
 

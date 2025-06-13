@@ -12,17 +12,15 @@ class MjBody extends MjmlBodyComponent
      */
     public function __construct(
         public BladeMjmlGlobalContext $bladeMjmlContext,
-        public string                 $backgroundColor = '',
-        public string                 $cssClass = '',
-        public string                 $width = '600px',
-    )
-    {
+        public string $backgroundColor = '',
+        public string $cssClass = '',
+        public string $width = '600px',
+    ) {
         parent::__construct($bladeMjmlContext);
 
         $this->bladeMjmlContext->setBackgroundColor($this->backgroundColor);
         $this->bladeMjmlContext->setContainerWidth($this->width);
     }
-
 
     public function getComponentName(): string
     {
@@ -37,12 +35,12 @@ class MjBody extends MjmlBodyComponent
         ];
     }
 
-//    public function renderMjml(array $data): View|string
-//    {
-//        return view('blade-mjml::components.mj-body', [
-//            'title' => $this->bladeMjmlContext->title,
-//        ]);
-//    }
+    //    public function renderMjml(array $data): View|string
+    //    {
+    //        return view('blade-mjml::components.mj-body', [
+    //            'title' => $this->bladeMjmlContext->title,
+    //        ]);
+    //    }
 
     public function getStyles(): array
     {
@@ -61,13 +59,12 @@ class MjBody extends MjmlBodyComponent
 
         return '
       <div
-        ' . $this->htmlAttributes([
-                'class' => $class,
-                'style' => 'body',
-                'lang' => $this->bladeMjmlContext->lang,
-                'dir' => $this->bladeMjmlContext->dir,
-            ]) . '
+        '.$this->htmlAttributes([
+            'class' => $class,
+            'style' => 'body',
+            'lang' => $this->bladeMjmlContext->lang,
+            'dir' => $this->bladeMjmlContext->dir,
+        ]).'
       >{{ $slot }}</div>';
     }
-
 }

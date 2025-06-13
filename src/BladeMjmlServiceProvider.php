@@ -3,18 +3,18 @@
 namespace colq2\BladeMjml;
 
 use colq2\BladeMjml\Components\MjBody;
+use colq2\BladeMjml\Components\MjColumn;
 use colq2\BladeMjml\Components\MjDivider;
+use colq2\BladeMjml\Components\MjHead;
 use colq2\BladeMjml\Components\MjHeadAttributes;
 use colq2\BladeMjml\Components\MjHeadBreakpoint;
-use colq2\BladeMjml\Components\MjColumn;
 use colq2\BladeMjml\Components\MjHeadFont;
-use colq2\BladeMjml\Components\MjHead;
-use colq2\BladeMjml\Components\Mjml;
 use colq2\BladeMjml\Components\MjHeadPreview;
-use colq2\BladeMjml\Components\MjRaw;
-use colq2\BladeMjml\Components\MjSection;
 use colq2\BladeMjml\Components\MjHeadStyle;
 use colq2\BladeMjml\Components\MjHeadTitle;
+use colq2\BladeMjml\Components\Mjml;
+use colq2\BladeMjml\Components\MjRaw;
+use colq2\BladeMjml\Components\MjSection;
 use colq2\BladeMjml\Components\MjText;
 use colq2\BladeMjml\Helpers\OutlookConditionals;
 use Illuminate\Support\Facades\Blade;
@@ -34,11 +34,10 @@ class BladeMjmlServiceProvider extends PackageServiceProvider
         $package
             ->name('blade-mjml')
             ->hasConfigFile();
-//            ->hasViewComponents('blade-mjml', [
-//                Mjml::class
-//            ]);
+        //            ->hasViewComponents('blade-mjml', [
+        //                Mjml::class
+        //            ]);
     }
-
 
     public function registeringPackage()
     {
@@ -60,13 +59,13 @@ class BladeMjmlServiceProvider extends PackageServiceProvider
         parent::boot();
 
         // Get all mjml components and get their names
-        Blade::prepareStringsForCompilationUsing(function ($string){
+        Blade::prepareStringsForCompilationUsing(function ($string) {
             // only preprocess if the string starts with <mjml
-            if(!Str::startsWith($string, '<mjml')){
+            if (! Str::startsWith($string, '<mjml')) {
                 return $string;
             }
 
-            $preprocessor = new BladeMjmlPreprocessor();
+            $preprocessor = new BladeMjmlPreprocessor;
 
             $prepared = $preprocessor->preprocess($string);
 

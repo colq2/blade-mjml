@@ -4,8 +4,8 @@ namespace colq2\BladeMjml;
 
 use Illuminate\Support\Arr;
 
-class BladeMjmlGlobalContext {
-
+class BladeMjmlGlobalContext
+{
     public string $backgroundColor = '';
 
     public string $beforeDoctype = '';
@@ -13,8 +13,11 @@ class BladeMjmlGlobalContext {
     public string $breakpoint = '480px';
 
     public array $classes = [];
+
     public array $classesDefault = [];
+
     public array $defaultAttributes = [];
+
     public array $htmlAttributes = [];
 
     public array $fonts = [
@@ -28,8 +31,11 @@ class BladeMjmlGlobalContext {
     public array $usedFonts = [];
 
     public array $inlineStyle = [];
+
     public array $headStyle = [];
+
     public array $componentsHeadStyle = [];
+
     public array $headRaw = [];
 
     public array $mediaQueries = [];
@@ -60,10 +66,7 @@ class BladeMjmlGlobalContext {
         return app()->make(static::class);
     }
 
-    public function __construct()
-    {
-
-    }
+    public function __construct() {}
 
     // handle context
     public function push($data)
@@ -84,7 +87,7 @@ class BladeMjmlGlobalContext {
     public function setDir(string $dir): static
     {
         // validate $dir
-        if (!in_array($dir, ['ltr', 'rtl', 'auto'])) {
+        if (! in_array($dir, ['ltr', 'rtl', 'auto'])) {
             throw new \InvalidArgumentException('Invalid dir value. Allowed values are: ltr, rtl, auto.');
         }
 
@@ -92,7 +95,7 @@ class BladeMjmlGlobalContext {
 
         return $this;
     }
-    
+
     public function title(string $title): static
     {
         $this->title = $title;
@@ -106,7 +109,7 @@ class BladeMjmlGlobalContext {
 
         return $this;
     }
-    
+
     public function setBackgroundColor(string $backgroundColor): static
     {
         $this->backgroundColor = $backgroundColor;
@@ -124,9 +127,8 @@ class BladeMjmlGlobalContext {
     /**
      * Adds a media query for a class
      *
-     * @param string $className The class name
-     * @param array $options Options for the media query
-     * @return void
+     * @param  string  $className  The class name
+     * @param  array  $options  Options for the media query
      */
     public function addMediaQuery(string $className, array $options): void
     {
@@ -140,8 +142,8 @@ class BladeMjmlGlobalContext {
     public function addFontUsage(string $fontName): void
     {
 
-        $fontString = 'style="font-family:' . $fontName . ';"';
-        if (!in_array($fontString, $this->usedFonts)) {
+        $fontString = 'style="font-family:'.$fontName.';"';
+        if (! in_array($fontString, $this->usedFonts)) {
             $this->usedFonts[] = $fontString;
         }
     }
@@ -149,7 +151,7 @@ class BladeMjmlGlobalContext {
     /**
      * Generates the media query tags
      *
-     * @param array $options Optional settings for the media queries
+     * @param  array  $options  Optional settings for the media queries
      * @return string The generated media query CSS tags
      */
     public function generateMediaQueries(array $options = []): string

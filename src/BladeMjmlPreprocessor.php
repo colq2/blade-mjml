@@ -3,9 +3,9 @@
 namespace colq2\BladeMjml;
 
 use DOMDocument;
-use DOMXPath;
 use DOMElement;
 use DOMNode;
+use DOMXPath;
 
 class BladeMjmlPreprocessor
 {
@@ -36,7 +36,7 @@ class BladeMjmlPreprocessor
         'mj-column',
         'mj-text',
         'mj-image',
-        'mj-divider'
+        'mj-divider',
     ];
 
     /**
@@ -78,7 +78,6 @@ class BladeMjmlPreprocessor
             $this->processColumnType($dom, $columnTag, $containerTags);
         }
 
-
         return $this->extractHtmlFromDom($dom);
     }
 
@@ -90,14 +89,14 @@ class BladeMjmlPreprocessor
         // Process both regular and x- prefixed tags if enabled
         $columnTags = [$columnTag];
         if ($this->processPrefixedTags) {
-            $columnTags[] = 'x-' . $columnTag;
+            $columnTags[] = 'x-'.$columnTag;
         }
 
         foreach ($columnTags as $currentColumnTag) {
             foreach ($containerTags as $containerTag) {
                 $currentContainerTag = $containerTag;
                 if ($this->processPrefixedTags && strpos($currentColumnTag, 'x-') === 0) {
-                    $currentContainerTag = 'x-' . $containerTag;
+                    $currentContainerTag = 'x-'.$containerTag;
                 }
 
                 $this->addSiblingCountsToColumns($dom, $currentColumnTag, $currentContainerTag);
@@ -150,7 +149,7 @@ class BladeMjmlPreprocessor
         libxml_use_internal_errors(true);
 
         // Wrap in a root element to handle fragments
-        $wrappedHtml = '<?xml encoding="UTF-8"><mjml-root>' . $html . '</mjml-root>';
+        $wrappedHtml = '<?xml encoding="UTF-8"><mjml-root>'.$html.'</mjml-root>';
         $dom->loadHTML($wrappedHtml, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         libxml_clear_errors();
 
@@ -210,6 +209,7 @@ class BladeMjmlPreprocessor
     public function setColumnContainerMap(array $map): self
     {
         $this->columnContainerMap = $map;
+
         return $this;
     }
 
@@ -219,6 +219,7 @@ class BladeMjmlPreprocessor
     public function addColumnContainerMapping(string $columnTag, array $containerTags): self
     {
         $this->columnContainerMap[$columnTag] = $containerTags;
+
         return $this;
     }
 
@@ -228,6 +229,7 @@ class BladeMjmlPreprocessor
     public function setSiblingCountAttribute(string $attribute): self
     {
         $this->siblingCountAttribute = $attribute;
+
         return $this;
     }
 
@@ -237,6 +239,7 @@ class BladeMjmlPreprocessor
     public function setProcessPrefixedTags(bool $process): self
     {
         $this->processPrefixedTags = $process;
+
         return $this;
     }
 }

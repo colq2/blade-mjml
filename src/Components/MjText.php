@@ -13,28 +13,27 @@ class MjText extends MjmlBodyComponent
      */
     public function __construct(
         public BladeMjmlGlobalContext $bladeMjmlContext,
-        public string                 $align = 'left',
-        public string                 $backgroundColor = '',
-        public string                 $color = '#000000',
-        public string                 $containerBackgroundColor = '',
-        public string                 $fontFamily = 'Ubuntu, Helvetica, Arial, sans-serif',
-        public string                 $fontSize = '13px',
-        public string                 $fontStyle = '',
-        public string                 $fontWeight = '',
-        public string                 $height = '',
-        public string                 $letterSpacing = '',
-        public string                 $lineHeight = '1',
-        public string                 $paddingBottom = '',
-        public string                 $paddingLeft = '',
-        public string                 $paddingRight = '',
-        public string                 $paddingTop = '',
-        public string                 $padding = '10px 25px',
-        public string                 $textDecoration = '',
-        public string                 $textTransform = '',
-        public string                 $verticalAlign = '',
-        public string                 $cssClass = '',
-    )
-    {
+        public string $align = 'left',
+        public string $backgroundColor = '',
+        public string $color = '#000000',
+        public string $containerBackgroundColor = '',
+        public string $fontFamily = 'Ubuntu, Helvetica, Arial, sans-serif',
+        public string $fontSize = '13px',
+        public string $fontStyle = '',
+        public string $fontWeight = '',
+        public string $height = '',
+        public string $letterSpacing = '',
+        public string $lineHeight = '1',
+        public string $paddingBottom = '',
+        public string $paddingLeft = '',
+        public string $paddingRight = '',
+        public string $paddingTop = '',
+        public string $padding = '10px 25px',
+        public string $textDecoration = '',
+        public string $textTransform = '',
+        public string $verticalAlign = '',
+        public string $cssClass = '',
+    ) {
         parent::__construct($bladeMjmlContext);
 
         // register font
@@ -120,9 +119,9 @@ class MjText extends MjmlBodyComponent
     {
         return $this->innerColumnWrap('
           <div
-            ' . $this->htmlAttributes([
-                'style' => 'text',
-            ]) . '
+            '.$this->htmlAttributes([
+            'style' => 'text',
+        ]).'
           >{{ $slot }}</div>
         ');
     }
@@ -132,16 +131,16 @@ class MjText extends MjmlBodyComponent
         $height = $this->getAttribute('height');
 
         if ($height) {
-            $conditionalContent = '<table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td height="' . $height . '" style="vertical-align:top;height:' . $height . ';">';
+            $conditionalContent = '<table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td height="'.$height.'" style="vertical-align:top;height:'.$height.';">';
 
             return ConditionalTag::conditionalTag($conditionalContent)
-                . '
+                .'
                 '
-                . $this->renderContent()
-                . '
+                .$this->renderContent()
+                .'
                 '
-                . ConditionalTag::conditionalTag('</td></tr></table>')
-                . '
+                .ConditionalTag::conditionalTag('</td></tr></table>')
+                .'
                 ';
         }
 

@@ -21,17 +21,16 @@ abstract class MjmlBodyComponent extends MjmlComponent
      */
     public function __construct(
         public BladeMjmlGlobalContext $bladeMjmlContext,
-    )
-    {
+    ) {
         $this->_attributes = FormatAttributes::formatAttributes(
             attributes: $this->gatherAttributes(),
             allowedAttributes: $this->allowedAttributes()
         );
     }
 
-    public abstract function getComponentName(): string;
+    abstract public function getComponentName(): string;
 
-    public abstract function allowedAttributes(): array;
+    abstract public function allowedAttributes(): array;
 
     protected function gatherAttributes(): array
     {
@@ -40,7 +39,7 @@ abstract class MjmlBodyComponent extends MjmlComponent
             $camelCaseAttrName = Str::camel($attrName);
             if (isset($this->$camelCaseAttrName)) {
                 return [
-                    $attrName => $this->$camelCaseAttrName
+                    $attrName => $this->$camelCaseAttrName,
                 ];
             }
 
@@ -48,12 +47,12 @@ abstract class MjmlBodyComponent extends MjmlComponent
         })->toArray();
 
         $additionalAttributes = [];
-        if(isset($this->cssClass)) {
+        if (isset($this->cssClass)) {
             $additionalAttributes['css-class'] = $this->cssClass;
         }
 
         // TODO: we will also add global attributes
-//        $globalAttributes = $this->bladeMjmlContext->getGlobalAttributes();
+        //        $globalAttributes = $this->bladeMjmlContext->getGlobalAttributes();
         $globalAttributes = [];
 
         return array_merge(
@@ -65,8 +64,8 @@ abstract class MjmlBodyComponent extends MjmlComponent
 
     public function getAttribute(string $name)
     {
-        $value =  Arr::get($this->_attributes, $name);
-        if(empty($value)) {
+        $value = Arr::get($this->_attributes, $name);
+        if (empty($value)) {
             return null;
         }
 
@@ -83,7 +82,7 @@ abstract class MjmlBodyComponent extends MjmlComponent
         return array_merge([$this->bladeMjmlContext->read()]);
     }
 
-    public abstract function renderMjml(array $data): View|string;
+    abstract public function renderMjml(array $data): View|string;
 
     /**
      * This is a wrapper render function to provide context
@@ -106,8 +105,6 @@ abstract class MjmlBodyComponent extends MjmlComponent
 
     /**
      * Get component styles.
-     *
-     * @return array
      */
     public function getStyles(): array
     {
@@ -117,8 +114,8 @@ abstract class MjmlBodyComponent extends MjmlComponent
     /**
      * Get shorthand attribute value for a specific direction.
      *
-     * @param string $attribute The attribute name.
-     * @param string $direction The direction (top, right, bottom, left).
+     * @param  string  $attribute  The attribute name.
+     * @param  string  $direction  The direction (top, right, bottom, left).
      * @return int The attribute value.
      */
     public function getShorthandAttrValue(string $attribute, string $direction): int
@@ -140,8 +137,8 @@ abstract class MjmlBodyComponent extends MjmlComponent
     /**
      * Get shorthand border value for a specific direction.
      *
-     * @param string|null $direction The direction (top, right, bottom, left).
-     * @param string $attribute The border attribute name.
+     * @param  string|null  $direction  The direction (top, right, bottom, left).
+     * @param  string  $attribute  The border attribute name.
      * @return int The border width value.
      */
     public function getShorthandBorderValue(?string $direction, string $attribute = 'border'): int
@@ -182,7 +179,7 @@ abstract class MjmlBodyComponent extends MjmlComponent
     /**
      * Generate HTML attributes string.
      *
-     * @param array $attributes The attributes to format.
+     * @param  array  $attributes  The attributes to format.
      * @return string The formatted HTML attributes string.
      */
     public function htmlAttributes(array $attributes): string
@@ -210,7 +207,7 @@ abstract class MjmlBodyComponent extends MjmlComponent
     /**
      * Format CSS styles.
      *
-     * @param array|string|null $styles The styles to format.
+     * @param  array|string|null  $styles  The styles to format.
      * @return string The formatted CSS styles string.
      */
     public function styles($styles): string
@@ -225,13 +222,13 @@ abstract class MjmlBodyComponent extends MjmlComponent
             }
         }
 
-        if (!is_array($stylesObject)) {
+        if (! is_array($stylesObject)) {
             return '';
         }
 
         $output = '';
         foreach ($stylesObject as $name => $value) {
-            if (!HtmlAttributesHelper::isNil($value)) {
+            if (! HtmlAttributesHelper::isNil($value)) {
                 $output .= "{$name}:{$value};";
             }
         }
@@ -242,29 +239,27 @@ abstract class MjmlBodyComponent extends MjmlComponent
     /**
      * In the original mjml implementation this is called in the column component it self, because it renders the children itself.
      * So the column wraps every child in this. We need to call this in the child component itself, because the blade compiler works differently.
-     * @param string $content
-     * @return string
      */
     public function innerColumnWrap(string $content): string
     {
         return '
         <tr>
           <td
-            ' . $this->htmlAttributes([
-                'align' => $this->getAttribute('align'),
-                'class' => $this->getAttribute('css-class'),
-                'style' => [
-                    'background' => $this->getAttribute('container-background-color'),
-                    'font-size' => '0px',
-                    'padding' => $this->getAttribute('padding'),
-                    'padding-top' => $this->getAttribute('padding-top'),
-                    'padding-right' => $this->getAttribute('padding-right'),
-                    'padding-bottom' => $this->getAttribute('padding-bottom'),
-                    'padding-left' => $this->getAttribute('padding-left'),
-                    'word-break' => 'break-word',
-                ]
-            ]) . '
-          >' . $content . '
+            '.$this->htmlAttributes([
+            'align' => $this->getAttribute('align'),
+            'class' => $this->getAttribute('css-class'),
+            'style' => [
+                'background' => $this->getAttribute('container-background-color'),
+                'font-size' => '0px',
+                'padding' => $this->getAttribute('padding'),
+                'padding-top' => $this->getAttribute('padding-top'),
+                'padding-right' => $this->getAttribute('padding-right'),
+                'padding-bottom' => $this->getAttribute('padding-bottom'),
+                'padding-left' => $this->getAttribute('padding-left'),
+                'word-break' => 'break-word',
+            ],
+        ]).'
+          >'.$content.'
           </td>
         </tr>
         ';

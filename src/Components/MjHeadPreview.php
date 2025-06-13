@@ -7,14 +7,11 @@ use Illuminate\Contracts\View\View;
 
 class MjHeadPreview extends MjmlHeadComponent
 {
-  
     public function __construct(
         public BladeMjmlGlobalContext $bladeMjmlContext
-    )
-    {
+    ) {
         parent::__construct($bladeMjmlContext);
     }
-
 
     public function getComponentName(): string
     {

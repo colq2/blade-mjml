@@ -9,6 +9,7 @@ namespace colq2\BladeMjml\Types;
 class TypeRegistry
 {
     protected static array $types = [];
+
     protected static array $typeConstructors = [
         BooleanType::class,
         ColorType::class,
@@ -33,11 +34,11 @@ class TypeRegistry
             if (preg_match($typeClass::$typeChecker, $typeConfig)) {
                 // Spezieller Fall für Enum und Unit, die zusätzliche Parameter benötigen
                 if ($typeClass === EnumType::class || $typeClass === UnitType::class) {
-                    static::$types[$typeConfig] = function($value) use ($typeClass, $typeConfig) {
+                    static::$types[$typeConfig] = function ($value) use ($typeClass, $typeConfig) {
                         return new $typeClass($value, $typeConfig);
                     };
                 } else {
-                    static::$types[$typeConfig] = function($value) use ($typeClass) {
+                    static::$types[$typeConfig] = function ($value) use ($typeClass) {
                         return new $typeClass($value);
                     };
                 }

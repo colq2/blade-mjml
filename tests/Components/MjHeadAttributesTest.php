@@ -1,9 +1,8 @@
 <?php
 
-use function PHPUnit\Framework\assertStringContainsString;
 use function PHPUnit\Framework\assertStringNotContainsString;
 
-it('does not render inner node', function() {
+it('does not render inner node', function () {
     $template = <<<'HTML'
     <mjml>
       <mj-head>
@@ -27,7 +26,7 @@ it('does not render inner node', function() {
     HTML;
 
     $view = blade($template);
-    $viewString = (string)$view;
+    $viewString = (string) $view;
 
     assertStringNotContainsString('mj-text', $viewString);
     assertStringNotContainsString('mj-class', $viewString);

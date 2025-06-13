@@ -7,8 +7,8 @@ class ShorthandParser
     /**
      * Parse CSS shorthand values like margin or padding.
      *
-     * @param string $cssValue The CSS shorthand value.
-     * @param string $direction The direction (top, right, bottom, left).
+     * @param  string  $cssValue  The CSS shorthand value.
+     * @param  string  $direction  The direction (top, right, bottom, left).
      * @return int The parsed value.
      */
     public static function parse(string $cssValue, string $direction): int
@@ -42,7 +42,7 @@ class ShorthandParser
     /**
      * Parse border shorthand values.
      *
-     * @param string $border The border shorthand value.
+     * @param  string  $border  The border shorthand value.
      * @return int The parsed border width.
      */
     public static function parseBorder(string $border): int

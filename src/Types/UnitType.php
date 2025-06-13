@@ -5,8 +5,11 @@ namespace colq2\BladeMjml\Types;
 class UnitType extends Type
 {
     public static string $typeChecker = '/^(unit|unitWithNegative)\(.*\)/i';
+
     protected string $errorMessage = 'has invalid value: $value for type Unit, only accepts ($units) units and $args value(s)';
+
     protected array $units = [];
+
     protected array $args = [];
 
     public function __construct($value, string $typeConfig)
@@ -21,7 +24,9 @@ class UnitType extends Type
 
             // Überprüfen, ob "auto" in den Einheiten enthalten ist
             $allowAuto = in_array('auto', $this->units) ? '|auto' : '';
-            $filteredUnits = array_filter($this->units, function($u) { return $u !== 'auto'; });
+            $filteredUnits = array_filter($this->units, function ($u) {
+                return $u !== 'auto';
+            });
 
             // Extrahieren der Argumente aus dem Format {1} oder {1,2}
             $argsMatch = [];
@@ -32,13 +37,13 @@ class UnitType extends Type
             }
 
             // Erstellen der regulären Ausdrücke
-            $unitsPattern = implode('|', array_map(function($unit) {
+            $unitsPattern = implode('|', array_map(function ($unit) {
                 return preg_quote($unit, '/');
             }, $filteredUnits));
 
-            $pattern = '^((('. $allowNeg . '\d|,|\.){1,}(' . $unitsPattern . ')|0' . $allowAuto . ')( )?){' . implode(',', $this->args) . '}$';
+            $pattern = '^((('.$allowNeg.'\d|,|\.){1,}('.$unitsPattern.')|0'.$allowAuto.')( )?){'.implode(',', $this->args).'}$';
             $this->matchers = [
-                '/' . $pattern . '/',
+                '/'.$pattern.'/',
             ];
         }
     }
@@ -51,6 +56,7 @@ class UnitType extends Type
 
         $message = str_replace('$value', $this->value, $this->errorMessage);
         $message = str_replace('$units', implode(', ', $this->units), $message);
+
         return str_replace('$args', implode(' to ', $this->args), $message);
     }
 }

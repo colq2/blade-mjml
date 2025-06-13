@@ -10,7 +10,7 @@ class ColorType extends Type
     {
         parent::__construct($value);
 
-        $colorNames = require __DIR__ . '/../Helpers/colors.php';
+        $colorNames = require __DIR__.'/../Helpers/colors.php';
         $colorsList = implode('|', $colorNames);
 
         $this->matchers = [
@@ -25,7 +25,7 @@ class ColorType extends Type
     {
         // Konvertierung von Shorthand-Hex (#abc) zu vollständigem Hex (#aabbcc)
         if (is_string($this->value) && preg_match('/^#\w{3}$/', $this->value)) {
-            return preg_replace_callback('/^#(\w)(\w)(\w)$/', function($matches) {
+            return preg_replace_callback('/^#(\w)(\w)(\w)$/', function ($matches) {
                 return "#{$matches[1]}{$matches[1]}{$matches[2]}{$matches[2]}{$matches[3]}{$matches[3]}";
             }, $this->value);
         }

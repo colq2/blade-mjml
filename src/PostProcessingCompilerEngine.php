@@ -2,8 +2,8 @@
 
 namespace colq2\BladeMjml;
 
-use Illuminate\View\Engines\CompilerEngine;
 use Closure;
+use Illuminate\View\Engines\CompilerEngine;
 
 class PostProcessingCompilerEngine extends CompilerEngine
 {
@@ -24,7 +24,7 @@ class PostProcessingCompilerEngine extends CompilerEngine
     {
         $contents = parent::get($path, $data);
 
-        if (static::$enabled && !empty(static::$postProcessors)) {
+        if (static::$enabled && ! empty(static::$postProcessors)) {
             $contents = $this->applyPostProcessors($contents, $path, $data);
         }
 

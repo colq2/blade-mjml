@@ -7,16 +7,13 @@ use Illuminate\Contracts\View\View;
 
 class MjHeadBreakpoint extends MjmlHeadComponent
 {
-
     public function __construct(
         public BladeMjmlGlobalContext $bladeMjmlContext,
         public string $width = '',
 
-    )
-    {
+    ) {
         parent::__construct($bladeMjmlContext);
     }
-
 
     public function getComponentName(): string
     {

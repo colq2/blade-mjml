@@ -22,11 +22,11 @@ expect()->extend('toEqualHtml', function (string $expectedHtml) {
 
     $domAreEqual = areDomsEqual($actual, $expected);
 
-    if (!$domAreEqual) {
+    if (! $domAreEqual) {
         throw new \PHPUnit\Framework\ExpectationFailedException(
-            "HTML documents do not match.\n\n" .
-            "Actual:\n" . $parsedActual . "\n\n" .
-            "Expected:\n" . $parsedExpected
+            "HTML documents do not match.\n\n".
+            "Actual:\n".$parsedActual."\n\n".
+            "Expected:\n".$parsedExpected
         );
     }
 
@@ -72,7 +72,7 @@ function normalizeWhitespace(DOMNode $node): void
         if (trim($node->nodeValue) === '') {
             // Remove whitespace-only text nodes between block elements
             $parent = $node->parentNode;
-            if ($parent && !isInlineElement($parent)) {
+            if ($parent && ! isInlineElement($parent)) {
                 $node->nodeValue = '';
             }
         }
@@ -94,6 +94,7 @@ function isInlineElement(DOMNode $node): bool
     }
 
     $inlineElements = ['span', 'a', 'em', 'strong', 'b', 'i', 'u', 'code', 'small'];
+
     return in_array(strtolower($node->nodeName), $inlineElements);
 }
 
@@ -135,7 +136,7 @@ function areNodesEqual(DOMNode $node1, DOMNode $node2): bool
 
     // Compare attributes
     if ($node1->nodeType === XML_ELEMENT_NODE) {
-        if (!areAttributesEqual($node1, $node2)) {
+        if (! areAttributesEqual($node1, $node2)) {
             return false;
         }
     }
@@ -145,13 +146,15 @@ function areNodesEqual(DOMNode $node1, DOMNode $node2): bool
     $children2 = getSignificantChildren($node2);
 
     if (count($children1) !== count($children2)) {
-        dump('Node children count mismatch: ' . count($children1) . ' vs ' . count($children2) . ' for node ' . $node1->nodeName);
+        dump('Node children count mismatch: '.count($children1).' vs '.count($children2).' for node '.$node1->nodeName);
+
         return false;
     }
 
     for ($i = 0; $i < count($children1); $i++) {
-        if (!areNodesEqual($children1[$i], $children2[$i])) {
-            dump('Node mismatch at index ' . $i . ' for node ' . $node1->nodeName);
+        if (! areNodesEqual($children1[$i], $children2[$i])) {
+            dump('Node mismatch at index '.$i.' for node '.$node1->nodeName);
+
             return false;
         }
     }
@@ -188,7 +191,7 @@ function getSignificantChildren(DOMNode $node): array
  */
 function areAttributesEqual(DOMNode $elem1, DOMNode $elem2): bool
 {
-    if (!$elem1->hasAttributes() && !$elem2->hasAttributes()) {
+    if (! $elem1->hasAttributes() && ! $elem2->hasAttributes()) {
         return true;
     }
 
@@ -242,7 +245,7 @@ function convertMjml(string $mjmlTemplate, array $options = []): string
     ];
 
     // Create the process
-    $workingDirectory = __DIR__ . '/../';
+    $workingDirectory = __DIR__.'/../';
 
     $process = new Symfony\Component\Process\Process($command, $workingDirectory);
     $process->setTimeout(30);
@@ -251,7 +254,7 @@ function convertMjml(string $mjmlTemplate, array $options = []): string
     $process->run();
 
     // Check if successful
-    if (!$process->isSuccessful()) {
+    if (! $process->isSuccessful()) {
         throw new ProcessFailedException($process);
     }
 
@@ -261,5 +264,6 @@ function convertMjml(string $mjmlTemplate, array $options = []): string
     $lastLine = end($lines);
 
     $result = json_decode(base64_decode($lastLine), true);
+
     return $result['html'];
 }

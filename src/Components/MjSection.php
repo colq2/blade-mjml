@@ -13,31 +13,30 @@ class MjSection extends MjmlBodyComponent
      */
     public function __construct(
         public BladeMjmlGlobalContext $bladeMjmlContext,
-        public string                 $backgroundColor = '',
-        public string                 $backgroundUrl = '',
-        public string                 $backgroundRepeat = 'repeat',
-        public string                 $backgroundSize = 'auto',
-        public string                 $backgroundPosition = 'top center',
-        public string                 $backgroundPositionX = '',
-        public string                 $backgroundPositionY = '',
-        public string                 $border = '',
-        public string                 $borderBottom = '',
-        public string                 $borderLeft = '',
-        public string                 $borderRadius = '',
-        public string                 $borderRight = '',
-        public string                 $borderTop = '',
-        public string                 $direction = 'ltr',
-        public string|bool            $fullWidth = false,
-        public string                 $padding = '20px 0',
-        public string                 $paddingTop = '',
-        public string                 $paddingBottom = '',
-        public string                 $paddingLeft = '',
-        public string                 $paddingRight = '',
-        public string                 $textAlign = 'center',
-        public string                 $textPadding = '4px 4px 4px 0',
-        public string                 $cssClass = '',
-    )
-    {
+        public string $backgroundColor = '',
+        public string $backgroundUrl = '',
+        public string $backgroundRepeat = 'repeat',
+        public string $backgroundSize = 'auto',
+        public string $backgroundPosition = 'top center',
+        public string $backgroundPositionX = '',
+        public string $backgroundPositionY = '',
+        public string $border = '',
+        public string $borderBottom = '',
+        public string $borderLeft = '',
+        public string $borderRadius = '',
+        public string $borderRight = '',
+        public string $borderTop = '',
+        public string $direction = 'ltr',
+        public string|bool $fullWidth = false,
+        public string $padding = '20px 0',
+        public string $paddingTop = '',
+        public string $paddingBottom = '',
+        public string $paddingLeft = '',
+        public string $paddingRight = '',
+        public string $textAlign = 'center',
+        public string $textPadding = '4px 4px 4px 0',
+        public string $cssClass = '',
+    ) {
         parent::__construct($bladeMjmlContext);
     }
 
@@ -84,18 +83,19 @@ class MjSection extends MjmlBodyComponent
     protected function hasBackground(): bool
     {
 
-        return !empty($this->getAttribute('background-url'));
+        return ! empty($this->getAttribute('background-url'));
     }
 
     protected function isFullWidth(): bool
     {
         $fullWidth = $this->getAttribute('full-width');
+
         return $fullWidth === 'full-width' || $fullWidth === true;
     }
 
     protected function makeBackgroundString(array $parts): string
     {
-        return implode(' ', array_filter($parts, fn($part) => !empty($part)));
+        return implode(' ', array_filter($parts, fn ($part) => ! empty($part)));
     }
 
     protected function getBackground(): string
@@ -107,7 +107,7 @@ class MjSection extends MjmlBodyComponent
                 "url('{$this->getAttribute('background-url')}')",
                 $this->getBackgroundString(),
                 "/ {$this->getAttribute('background-size')}",
-                $this->getAttribute('background-repeat')
+                $this->getAttribute('background-repeat'),
             ]);
         }
 
@@ -117,6 +117,7 @@ class MjSection extends MjmlBodyComponent
     protected function getBackgroundString(): string
     {
         $position = $this->getBackgroundPosition();
+
         return "{$position['posX']} {$position['posY']}";
     }
 
@@ -125,8 +126,8 @@ class MjSection extends MjmlBodyComponent
         $parsed = $this->parseBackgroundPosition();
 
         return [
-            'posX' => !empty($this->getAttribute('background-position-x')) ? $this->getAttribute('background-position-x') : $parsed['x'],
-            'posY' => !empty($this->getAttribute('background-position-y')) ? $this->getAttribute('background-position-y') : $parsed['y']
+            'posX' => ! empty($this->getAttribute('background-position-x')) ? $this->getAttribute('background-position-x') : $parsed['x'],
+            'posY' => ! empty($this->getAttribute('background-position-y')) ? $this->getAttribute('background-position-y') : $parsed['y'],
         ];
     }
 
@@ -140,13 +141,13 @@ class MjSection extends MjmlBodyComponent
             if (in_array($val, ['top', 'bottom'])) {
                 return [
                     'x' => 'center',
-                    'y' => $val
+                    'y' => $val,
                 ];
             }
 
             return [
                 'x' => $val,
-                'y' => 'center'
+                'y' => 'center',
             ];
         }
 
@@ -158,13 +159,13 @@ class MjSection extends MjmlBodyComponent
                 ($val1 === 'center' && in_array($val2, ['left', 'right']))) {
                 return [
                     'x' => $val2,
-                    'y' => $val1
+                    'y' => $val1,
                 ];
             }
 
             return [
                 'x' => $val1,
-                'y' => $val2
+                'y' => $val2,
             ];
         }
 
@@ -236,23 +237,23 @@ class MjSection extends MjmlBodyComponent
     protected function renderBefore(): string
     {
         $containerWidth = Arr::get($this->context(), 'containerWidth', $this->bladeMjmlContext->containerWidth);
-        $bgcolorAttr = !empty($this->getAttribute('background-color')) ? ['bgcolor' => $this->getAttribute('background-color')] : [];
+        $bgcolorAttr = ! empty($this->getAttribute('background-color')) ? ['bgcolor' => $this->getAttribute('background-color')] : [];
         $cssClass = $this->getAttribute('css-class');
 
         return '
       <!--[if mso | IE]>
       <table
-        ' . $this->htmlAttributes([
-                'align' => 'center',
-                'border' => '0',
-                'cellpadding' => '0',
-                'cellspacing' => '0',
-                'class' => $cssClass ? $cssClass . '-outlook' : null,
-                'role' => 'presentation',
-                'style' => ['width' => $containerWidth],
-                'width' => (int)$containerWidth,
-                ...$bgcolorAttr,
-            ]) . '
+        '.$this->htmlAttributes([
+            'align' => 'center',
+            'border' => '0',
+            'cellpadding' => '0',
+            'cellspacing' => '0',
+            'class' => $cssClass ? $cssClass.'-outlook' : null,
+            'role' => 'presentation',
+            'style' => ['width' => $containerWidth],
+            'width' => (int) $containerWidth,
+            ...$bgcolorAttr,
+        ]).'
       >
         <tr>
           <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
@@ -309,7 +310,7 @@ class MjSection extends MjmlBodyComponent
                 $bgPosX = '100%';
                 break;
             default:
-                if (!$isPercentage($bgPosX)) {
+                if (! $isPercentage($bgPosX)) {
                     $bgPosX = '50%';
                 }
                 break;
@@ -326,7 +327,7 @@ class MjSection extends MjmlBodyComponent
                 $bgPosY = '100%';
                 break;
             default:
-                if (!$isPercentage($bgPosY)) {
+                if (! $isPercentage($bgPosY)) {
                     $bgPosY = '0%';
                 }
                 break;
@@ -343,7 +344,7 @@ class MjSection extends MjmlBodyComponent
 
         if ($isPercentage($bgPosX)) {
             preg_match('/^(\d+(\.\d+)?)%$/', $bgPosX, $matches);
-            $decimal = (int)$matches[1] / 100;
+            $decimal = (int) $matches[1] / 100;
 
             if ($bgRepeat) {
                 $vOriginX = $decimal;
@@ -352,7 +353,7 @@ class MjSection extends MjmlBodyComponent
                 $vOriginX = (-50 + $decimal * 100) / 100;
                 $vPosX = (-50 + $decimal * 100) / 100;
             }
-        } else if (!$bgRepeat) {
+        } elseif (! $bgRepeat) {
             $vOriginX = '0';
             $vPosX = '0';
         }
@@ -360,7 +361,7 @@ class MjSection extends MjmlBodyComponent
         // Process Y coordinate
         if ($isPercentage($bgPosY)) {
             preg_match('/^(\d+(\.\d+)?)%$/', $bgPosY, $matches);
-            $decimal = (int)$matches[1] / 100;
+            $decimal = (int) $matches[1] / 100;
 
             if ($bgRepeat) {
                 $vOriginY = $decimal;
@@ -369,7 +370,7 @@ class MjSection extends MjmlBodyComponent
                 $vOriginY = (-50 + $decimal * 100) / 100;
                 $vPosY = (-50 + $decimal * 100) / 100;
             }
-        } else if ($bgRepeat) {
+        } elseif ($bgRepeat) {
             $vOriginY = '0';
             $vPosY = '0';
         } else {
@@ -386,7 +387,7 @@ class MjSection extends MjmlBodyComponent
                 'size' => '1,1',
                 'aspect' => $backgroundSize === 'cover' ? 'atleast' : 'atmost',
             ];
-        } else if ($backgroundSize !== 'auto') {
+        } elseif ($backgroundSize !== 'auto') {
             $bgSplit = explode(' ', $backgroundSize);
 
             if (count($bgSplit) === 1) {
@@ -414,23 +415,23 @@ class MjSection extends MjmlBodyComponent
 
         return '
       <!--[if mso | IE]>
-        <v:rect ' . $this->htmlAttributes([
-                'style' => $fullWidth ? ['mso-width-percent' => '1000'] : ['width' => $containerWidth],
-                'xmlns:v' => 'urn:schemas-microsoft-com:vml',
-                'fill' => 'true',
-                'stroke' => 'false',
-            ]) . '>
-        <v:fill ' . $this->htmlAttributes([
-                'origin' => "{$vOriginX}, {$vOriginY}",
-                'position' => "{$vPosX}, {$vPosY}",
-                'src' => $this->getAttribute('background-url'),
-                'color' => $this->getAttribute('background-color'),
-                'type' => $vmlType,
-                ...$vSizeAttributes,
-            ]) . ' />
+        <v:rect '.$this->htmlAttributes([
+            'style' => $fullWidth ? ['mso-width-percent' => '1000'] : ['width' => $containerWidth],
+            'xmlns:v' => 'urn:schemas-microsoft-com:vml',
+            'fill' => 'true',
+            'stroke' => 'false',
+        ]).'>
+        <v:fill '.$this->htmlAttributes([
+            'origin' => "{$vOriginX}, {$vOriginY}",
+            'position' => "{$vPosX}, {$vPosY}",
+            'src' => $this->getAttribute('background-url'),
+            'color' => $this->getAttribute('background-color'),
+            'type' => $vmlType,
+            ...$vSizeAttributes,
+        ]).' />
         <v:textbox style="mso-fit-shape-to-text:true" inset="0,0,0,0">
       <![endif]-->
-          ' . $content . '
+          '.$content.'
         <!--[if mso | IE]>
         </v:textbox>
       </v:rect>
@@ -444,33 +445,33 @@ class MjSection extends MjmlBodyComponent
 
         $cssClass = $this->isFullWidth() ? null : $this->getAttribute('css-class');
         if ($this->attributes->has('class')) {
-            $cssClass = $cssClass ? $cssClass . ' ' . $this->attributes->get('class') : $this->attributes->get('class');
+            $cssClass = $cssClass ? $cssClass.' '.$this->attributes->get('class') : $this->attributes->get('class');
         }
 
         return '
-      <div ' . $this->htmlAttributes([
-                'class' => $cssClass,
-                'style' => 'div',
-            ]) . '>
-        ' . ($hasBackground ? '<div ' . $this->htmlAttributes(['style' => 'innerDiv']) . '>' : '') . '
-        <table ' . $this->htmlAttributes([
-                'align' => 'center',
-                'background' => $this->isFullWidth() ? null : $this->getAttribute('background-url'),
-                'border' => '0',
-                'cellpadding' => '0',
-                'cellspacing' => '0',
-                'role' => 'presentation',
-                'style' => 'table',
-            ]) . '>
+      <div '.$this->htmlAttributes([
+            'class' => $cssClass,
+            'style' => 'div',
+        ]).'>
+        '.($hasBackground ? '<div '.$this->htmlAttributes(['style' => 'innerDiv']).'>' : '').'
+        <table '.$this->htmlAttributes([
+            'align' => 'center',
+            'background' => $this->isFullWidth() ? null : $this->getAttribute('background-url'),
+            'border' => '0',
+            'cellpadding' => '0',
+            'cellspacing' => '0',
+            'role' => 'presentation',
+            'style' => 'table',
+        ]).'>
           <tbody>
             <tr>
-              <td ' . $this->htmlAttributes([
-                'style' => 'td',
-            ]) . '>
+              <td '.$this->htmlAttributes([
+            'style' => 'td',
+        ]).'>
                 <!--[if mso | IE]>
                   <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                 <![endif]-->
-                  ' . $this->renderWrappedChildren() . '
+                  '.$this->renderWrappedChildren().'
                 <!--[if mso | IE]>
                   </table>
                 <![endif]-->
@@ -478,7 +479,7 @@ class MjSection extends MjmlBodyComponent
             </tr>
           </tbody>
         </table>
-        ' . ($hasBackground ? '</div>' : '') . '
+        '.($hasBackground ? '</div>' : '').'
       </div>
     ';
     }
@@ -488,37 +489,36 @@ class MjSection extends MjmlBodyComponent
 
         $content = $this->hasBackground()
             ? $this->renderWithBackground('
-                ' . $this->renderBefore() . '
-                ' . $this->renderSection() . '
-                ' . $this->renderAfter() . '
+                '.$this->renderBefore().'
+                '.$this->renderSection().'
+                '.$this->renderAfter().'
               ')
             : '
-                ' . $this->renderBefore() . '
-                ' . $this->renderSection() . '
-                ' . $this->renderAfter() . '
+                '.$this->renderBefore().'
+                '.$this->renderSection().'
+                '.$this->renderAfter().'
               ';
 
         $cssClass = $this->getAttribute('css-class');
         if ($this->attributes->has('class')) {
-            $cssClass = $cssClass ? $cssClass . ' ' . $this->attributes->get('class') : $this->attributes->get('class');
+            $cssClass = $cssClass ? $cssClass.' '.$this->attributes->get('class') : $this->attributes->get('class');
         }
 
-
         return '
-      <table ' . $this->htmlAttributes([
-                'align' => 'center',
-                'class' => $cssClass,
-                'background' => $this->getAttribute('background-url'),
-                'border' => '0',
-                'cellpadding' => '0',
-                'cellspacing' => '0',
-                'role' => 'presentation',
-                'style' => 'tableFullwidth',
-            ]) . '>
+      <table '.$this->htmlAttributes([
+            'align' => 'center',
+            'class' => $cssClass,
+            'background' => $this->getAttribute('background-url'),
+            'border' => '0',
+            'cellpadding' => '0',
+            'cellspacing' => '0',
+            'role' => 'presentation',
+            'style' => 'tableFullwidth',
+        ]).'>
         <tbody>
           <tr>
             <td>
-              ' . $content . '
+              '.$content.'
             </td>
           </tr>
         </tbody>
@@ -531,8 +531,8 @@ class MjSection extends MjmlBodyComponent
         $section = $this->renderSection();
 
         return $this->renderBefore()
-            . ($this->hasBackground() ? $this->renderWithBackground($section) : $section)
-            . $this->renderAfter();
+            .($this->hasBackground() ? $this->renderWithBackground($section) : $section)
+            .$this->renderAfter();
     }
 
     public function renderMjml(array $data): View|string

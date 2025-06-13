@@ -12,7 +12,7 @@ HTML;
 
     // We do not compare the full HTML output here, because mjml fails without head and body tags
     // But we want to ensure that the view is rendered correctly.
-    expect((string)$view)->toBeString()
+    expect((string) $view)->toBeString()
         ->toContain('<html')
         ->not->toContain('<mjml>');
 });

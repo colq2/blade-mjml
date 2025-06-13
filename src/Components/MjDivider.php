@@ -13,19 +13,18 @@ class MjDivider extends MjmlBodyComponent
      */
     public function __construct(
         public BladeMjmlGlobalContext $bladeMjmlContext,
-        public string|null            $borderColor = '#000000',
-        public string|null            $borderStyle = 'solid',
-        public string|null            $borderWidth = '4px',
-        public string|null            $containerBackgroundColor = null,
-        public string|null            $padding = '10px 25px',
-        public string|null            $paddingBottom = null,
-        public string|null            $paddingLeft = null,
-        public string|null            $paddingRight = null,
-        public string|null            $paddingTop = null,
-        public string|null            $width = '100%',
-        public string|null            $align = 'center',
-    )
-    {
+        public ?string $borderColor = '#000000',
+        public ?string $borderStyle = 'solid',
+        public ?string $borderWidth = '4px',
+        public ?string $containerBackgroundColor = null,
+        public ?string $padding = '10px 25px',
+        public ?string $paddingBottom = null,
+        public ?string $paddingLeft = null,
+        public ?string $paddingRight = null,
+        public ?string $paddingTop = null,
+        public ?string $width = '100%',
+        public ?string $align = 'center',
+    ) {
         parent::__construct($bladeMjmlContext);
     }
 
@@ -94,11 +93,12 @@ class MjDivider extends MjmlBodyComponent
             case '%':
                 $effectiveWidth = $containerWidth - $paddingSize;
                 $percentMultiplier = floatval($parsedWidth) / 100;
-                return ($effectiveWidth * $percentMultiplier) . 'px';
+
+                return ($effectiveWidth * $percentMultiplier).'px';
             case 'px':
                 return $width;
             default:
-                return ($containerWidth - $paddingSize) . 'px';
+                return ($containerWidth - $paddingSize).'px';
         }
     }
 
@@ -108,14 +108,14 @@ class MjDivider extends MjmlBodyComponent
           <!--[if mso | IE]>
             <table
               '.$this->htmlAttributes([
-                'align' => $this->getAttribute('align'),
-                'border' => '0',
-                'cellpadding' => '0',
-                'cellspacing' => '0',
-                'style' => 'outlook',
-                'role' => 'presentation',
-                'width' => $this->getOutlookWidth(),
-            ]).'
+            'align' => $this->getAttribute('align'),
+            'border' => '0',
+            'cellpadding' => '0',
+            'cellspacing' => '0',
+            'style' => 'outlook',
+            'role' => 'presentation',
+            'width' => $this->getOutlookWidth(),
+        ]).'
             >
               <tr>
                 <td style="height:0;line-height:0;">
@@ -132,8 +132,8 @@ class MjDivider extends MjmlBodyComponent
         return $this->innerColumnWrap('
           <p
             '.$this->htmlAttributes([
-                'style' => 'p',
-            ]).'
+            'style' => 'p',
+        ]).'
           ></p>
           '.$this->renderAfter().'
         ');

@@ -7,15 +7,12 @@ use Illuminate\Contracts\View\View;
 
 class MjHeadStyle extends MjmlHeadComponent
 {
-
     public function __construct(
         public BladeMjmlGlobalContext $bladeMjmlContext,
         public string $inline = '',
-    )
-    {
+    ) {
         parent::__construct($bladeMjmlContext);
     }
-
 
     public function getComponentName(): string
     {

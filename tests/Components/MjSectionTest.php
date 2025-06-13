@@ -13,7 +13,7 @@ it('can set background color', closure: function () {
 HTML;
 
     $view = blade($template);
-    $viewString = (string)$view;
+    $viewString = (string) $view;
 
     $view->assertSee('background-color:#000000', escape: false);
 
@@ -38,7 +38,7 @@ HTML;
     $view = blade($template);
     $view->assertSee('class="test-class"', escape: false);
 
-    expect((string)$view)->toEqualMjmlHtml($template);
+    expect((string) $view)->toEqualMjmlHtml($template);
 });
 
 it('can render with full-width', function () {
@@ -52,7 +52,7 @@ it('can render with full-width', function () {
 HTML;
 
     $view = blade($template);
-    $viewString = (string)$view;
+    $viewString = (string) $view;
 
     assertMatchesRegularExpression(
         pattern: '/<table[^>]*align="center"[^>]*>/',
@@ -73,7 +73,7 @@ it('can set background image', function () {
 HTML;
 
     $view = blade($template);
-    $viewString = (string)$view;
+    $viewString = (string) $view;
 
     assertMatchesRegularExpression(
         pattern: '/background:[^;]*url\(\'https:\/\/example\.com\/image\.jpg\'\)/',

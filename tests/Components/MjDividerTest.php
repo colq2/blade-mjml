@@ -1,8 +1,5 @@
 <?php
 
-use function PHPUnit\Framework\assertStringContainsString;
-use function PHPUnit\Framework\assertMatchesRegularExpression;
-
 it('renders divider with default attributes', function () {
     $template = <<<'HTML'
 <mjml>
@@ -98,4 +95,3 @@ HTML;
 
     expect((string) blade($template))->toEqualMjmlHtml($template);
 });
-

@@ -7,16 +7,13 @@ use Illuminate\Contracts\View\View;
 
 class MjHeadFont extends MjmlHeadComponent
 {
-
     public function __construct(
         public BladeMjmlGlobalContext $bladeMjmlContext,
         public string $name = '',
         public string $href = '',
-    )
-    {
+    ) {
         parent::__construct($bladeMjmlContext);
     }
-
 
     public function getComponentName(): string
     {

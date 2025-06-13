@@ -21,8 +21,7 @@ abstract class MjmlHeadComponent extends MjmlComponent
      */
     public function __construct(
         public BladeMjmlGlobalContext $bladeMjmlContext,
-    )
-    {
+    ) {
         $this->_attributes = FormatAttributes::formatAttributes(
             attributes: $this->gatherAttributes(),
             allowedAttributes: $this->allowedAttributes()
@@ -55,14 +54,14 @@ abstract class MjmlHeadComponent extends MjmlComponent
             }
         } else {
             throw new \Exception(
-                "A mj-head element adds an unknown head attribute: {$attr} with parameters " . implode('', $params)
+                "A mj-head element adds an unknown head attribute: {$attr} with parameters ".implode('', $params)
             );
         }
     }
 
-    public abstract function getComponentName(): string;
+    abstract public function getComponentName(): string;
 
-    public abstract function allowedAttributes(): array;
+    abstract public function allowedAttributes(): array;
 
     protected function gatherAttributes(): array
     {
@@ -71,7 +70,7 @@ abstract class MjmlHeadComponent extends MjmlComponent
             $camelCaseAttrName = Str::camel($attrName);
             if (isset($this->$camelCaseAttrName)) {
                 return [
-                    $attrName => $this->$camelCaseAttrName
+                    $attrName => $this->$camelCaseAttrName,
                 ];
             }
 
@@ -79,12 +78,12 @@ abstract class MjmlHeadComponent extends MjmlComponent
         })->toArray();
 
         $additionalAttributes = [];
-        if(isset($this->cssClass)) {
+        if (isset($this->cssClass)) {
             $additionalAttributes['css-class'] = $this->cssClass;
         }
 
         // TODO: we will also add global attributes
-//        $globalAttributes = $this->bladeMjmlContext->getGlobalAttributes();
+        //        $globalAttributes = $this->bladeMjmlContext->getGlobalAttributes();
         $globalAttributes = [];
 
         return array_merge(
@@ -109,7 +108,7 @@ abstract class MjmlHeadComponent extends MjmlComponent
         return array_merge([$this->bladeMjmlContext->read()]);
     }
 
-    public abstract function renderMjml(array $data): View|string;
+    abstract public function renderMjml(array $data): View|string;
 
     /**
      * This is a wrapper render function to provide context
@@ -132,8 +131,6 @@ abstract class MjmlHeadComponent extends MjmlComponent
 
     /**
      * Get component styles.
-     *
-     * @return array
      */
     public function getStyles(): array
     {
@@ -143,8 +140,8 @@ abstract class MjmlHeadComponent extends MjmlComponent
     /**
      * Get shorthand attribute value for a specific direction.
      *
-     * @param string $attribute The attribute name.
-     * @param string $direction The direction (top, right, bottom, left).
+     * @param  string  $attribute  The attribute name.
+     * @param  string  $direction  The direction (top, right, bottom, left).
      * @return int The attribute value.
      */
     public function getShorthandAttrValue(string $attribute, string $direction): int
@@ -166,8 +163,8 @@ abstract class MjmlHeadComponent extends MjmlComponent
     /**
      * Get shorthand border value for a specific direction.
      *
-     * @param string|null $direction The direction (top, right, bottom, left).
-     * @param string $attribute The border attribute name.
+     * @param  string|null  $direction  The direction (top, right, bottom, left).
+     * @param  string  $attribute  The border attribute name.
      * @return int The border width value.
      */
     public function getShorthandBorderValue(?string $direction, string $attribute = 'border'): int
@@ -208,7 +205,7 @@ abstract class MjmlHeadComponent extends MjmlComponent
     /**
      * Generate HTML attributes string.
      *
-     * @param array $attributes The attributes to format.
+     * @param  array  $attributes  The attributes to format.
      * @return string The formatted HTML attributes string.
      */
     public function htmlAttributes(array $attributes): string
@@ -236,7 +233,7 @@ abstract class MjmlHeadComponent extends MjmlComponent
     /**
      * Format CSS styles.
      *
-     * @param array|string|null $styles The styles to format.
+     * @param  array|string|null  $styles  The styles to format.
      * @return string The formatted CSS styles string.
      */
     public function styles($styles): string
@@ -251,13 +248,13 @@ abstract class MjmlHeadComponent extends MjmlComponent
             }
         }
 
-        if (!is_array($stylesObject)) {
+        if (! is_array($stylesObject)) {
             return '';
         }
 
         $output = '';
         foreach ($stylesObject as $name => $value) {
-            if (!HtmlAttributesHelper::isNil($value)) {
+            if (! HtmlAttributesHelper::isNil($value)) {
                 $output .= "{$name}:{$value};";
             }
         }

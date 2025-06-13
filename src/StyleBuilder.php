@@ -4,8 +4,7 @@ namespace colq2\BladeMjml;
 
 class StyleBuilder
 {
-
-    public static function build(array $styles, string $lineSeparator = ""): string
+    public static function build(array $styles, string $lineSeparator = ''): string
     {
         $style = '';
         foreach ($styles as $key => $value) {
@@ -17,7 +16,7 @@ class StyleBuilder
             if (is_array($value)) {
                 $style .= static::build($value);
             } else {
-                $style .= "$key:$value;" . $lineSeparator;
+                $style .= "$key:$value;".$lineSeparator;
             }
         }
 

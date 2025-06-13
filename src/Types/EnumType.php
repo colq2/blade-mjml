@@ -5,7 +5,9 @@ namespace colq2\BladeMjml\Types;
 class EnumType extends Type
 {
     public static string $typeChecker = '/^enum/i';
+
     protected string $errorMessage = 'has invalid value: $value for type Enum, only accepts $validValues';
+
     protected array $validValues = [];
 
     public function __construct($value, string $typeConfig)
@@ -17,8 +19,8 @@ class EnumType extends Type
             $this->validValues = explode(',', $matches[1]);
 
             // Erstellen der regulären Ausdrücke für jeden gültigen Wert
-            $this->matchers = array_map(function($value) {
-                return '/^' . preg_quote($value, '/') . '$/';
+            $this->matchers = array_map(function ($value) {
+                return '/^'.preg_quote($value, '/').'$/';
             }, $this->validValues);
         }
     }
@@ -30,6 +32,7 @@ class EnumType extends Type
         }
 
         $message = str_replace('$value', $this->value, $this->errorMessage);
+
         return str_replace('$validValues', implode(', ', $this->validValues), $message);
     }
 }

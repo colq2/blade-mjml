@@ -21,18 +21,17 @@ class Mjml extends MjmlComponent
     {
         // create a new BladeMjml instance and bind it to the container
         app()->singleton(BladeMjmlGlobalContext::class, function () {
-            return new BladeMjmlGlobalContext();
+            return new BladeMjmlGlobalContext;
         });
 
         $this->bladeMjml = app(BladeMjmlGlobalContext::class);
     }
 
-
     public function bodyStyle(): string
     {
         return StyleBuilder::build([
             'word-spacing' => 'normal',
-            'background-color' => $this->bladeMjml->backgroundColor
+            'background-color' => $this->bladeMjml->backgroundColor,
         ]);
     }
 
@@ -79,8 +78,6 @@ class Mjml extends MjmlComponent
                 ),
                 // todo: raw head
             ]);
-
-
 
             // pop context
             $this->bladeMjml->pop();

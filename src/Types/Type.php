@@ -5,6 +5,7 @@ namespace colq2\BladeMjml\Types;
 abstract class Type
 {
     protected $value;
+
     protected array $matchers = [];
 
     public function __construct($value)
@@ -29,7 +30,7 @@ abstract class Type
             return null;
         }
 
-        $errorMessage = $this->errorMessage ?? "has invalid value: {$this->value} for type " . get_class($this);
+        $errorMessage = $this->errorMessage ?? "has invalid value: {$this->value} for type ".get_class($this);
 
         return str_replace('$value', $this->value, $errorMessage);
     }

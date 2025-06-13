@@ -19,7 +19,7 @@ it('renders text with default styling', function () {
 HTML;
 
     $view = blade($template);
-    $viewString = (string)$view;
+    $viewString = (string) $view;
 
     // Überprüft, ob der Text gerendert wurde
     assertStringContainsString('Hello world', $viewString);
@@ -50,7 +50,7 @@ it('applies custom text alignment', function () {
 HTML;
 
     $view = blade($template);
-    $viewString = (string)$view;
+    $viewString = (string) $view;
 
     assertStringContainsString('text-align:center', $viewString);
 
@@ -73,7 +73,7 @@ it('applies custom font family', function () {
 HTML;
 
     $view = blade($template);
-    $viewString = (string)$view;
+    $viewString = (string) $view;
 
     assertStringContainsString('font-family:Arial, sans-serif', $viewString);
 
@@ -96,7 +96,7 @@ it('applies custom font size', function () {
 HTML;
 
     $view = blade($template);
-    $viewString = (string)$view;
+    $viewString = (string) $view;
 
     assertStringContainsString('font-size:18px', $viewString);
 
@@ -119,7 +119,7 @@ it('applies custom line height', function () {
 HTML;
 
     $view = blade($template);
-    $viewString = (string)$view;
+    $viewString = (string) $view;
 
     assertStringContainsString('line-height:1.5', $viewString);
     expect($viewString)->toEqualMjmlHtml($template);
@@ -141,7 +141,7 @@ it('applies custom color', function () {
 HTML;
 
     $view = blade($template);
-    $viewString = (string)$view;
+    $viewString = (string) $view;
 
     assertStringContainsString('color:#FF0000', $viewString);
 
@@ -164,7 +164,7 @@ it('applies custom text decoration', function () {
 HTML;
 
     $view = blade($template);
-    $viewString = (string)$view;
+    $viewString = (string) $view;
 
     assertStringContainsString('text-decoration:underline', $viewString);
     expect($viewString)->toEqualMjmlHtml($template);
@@ -186,7 +186,7 @@ it('applies custom text transform', function () {
 HTML;
 
     $view = blade($template);
-    $viewString = (string)$view;
+    $viewString = (string) $view;
 
     assertStringContainsString('text-transform:uppercase', $viewString);
 
@@ -209,7 +209,7 @@ it('applies custom padding', function () {
 HTML;
 
     $view = blade($template);
-    $viewString = (string)$view;
+    $viewString = (string) $view;
 
     assertStringContainsString('padding:20px 15px', $viewString);
 
@@ -232,7 +232,7 @@ it('applies directional padding', function () {
 HTML;
 
     $view = blade($template);
-    $viewString = (string)$view;
+    $viewString = (string) $view;
 
     assertStringContainsString('padding-top:20px', $viewString);
     assertStringContainsString('padding-left:10px', $viewString);
@@ -256,7 +256,7 @@ it('applies custom background color', function () {
 HTML;
 
     $view = blade($template);
-    $viewString = (string)$view;
+    $viewString = (string) $view;
 
     expect($viewString)->toEqualMjmlHtml($template);
 });
@@ -277,7 +277,7 @@ it('applies custom container background color', function () {
 HTML;
 
     $view = blade($template);
-    $viewString = (string)$view;
+    $viewString = (string) $view;
 
     assertStringContainsString('background:#E0E0E0', $viewString);
 
@@ -300,7 +300,7 @@ it('applies font style', function () {
 HTML;
 
     $view = blade($template);
-    $viewString = (string)$view;
+    $viewString = (string) $view;
 
     assertStringContainsString('font-style:italic', $viewString);
 
@@ -323,7 +323,7 @@ it('applies font weight', function () {
 HTML;
 
     $view = blade($template);
-    $viewString = (string)$view;
+    $viewString = (string) $view;
 
     assertStringContainsString('font-weight:bold', $viewString);
 
@@ -346,7 +346,7 @@ it('applies letter spacing', function () {
 HTML;
 
     $view = blade($template);
-    $viewString = (string)$view;
+    $viewString = (string) $view;
 
     assertStringContainsString('letter-spacing:2px', $viewString);
 
@@ -370,7 +370,7 @@ it('handles html content correctly', function () {
 HTML;
 
     $view = blade($template);
-    $viewString = (string)$view;
+    $viewString = (string) $view;
 
     assertStringContainsString('<h1>Heading</h1>', $viewString);
     assertStringContainsString('<p>Paragraph <a href="https://example.com">with a link</a></p>', $viewString);
@@ -394,7 +394,7 @@ it('adds height attribute with outlook fallback when specified', function () {
 HTML;
 
     $view = blade($template);
-    $viewString = (string)$view;
+    $viewString = (string) $view;
 
     // Text sollte mit height-Attribut gerendert werden
     assertStringContainsString('height:200px', $viewString);
@@ -424,7 +424,7 @@ it('renders css class when provided', function () {
 HTML;
 
     $view = blade($template);
-    $viewString = (string)$view;
+    $viewString = (string) $view;
 
     assertStringContainsString('custom-text-class', $viewString);
 

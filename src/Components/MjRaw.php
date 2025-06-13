@@ -12,9 +12,8 @@ class MjRaw extends MjmlBodyComponent
      */
     public function __construct(
         public BladeMjmlGlobalContext $bladeMjmlContext,
-        public string|null            $position = null,
-    )
-    {
+        public ?string $position = null,
+    ) {
         parent::__construct($bladeMjmlContext);
     }
 

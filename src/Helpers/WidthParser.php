@@ -14,14 +14,14 @@ class WidthParser
 
         $widthStr = is_object($width) && method_exists($width, 'toString')
             ? $width->toString()
-            : (string)$width;
+            : (string) $width;
 
         $matches = [];
         preg_match(static::$unitRegex, $widthStr, $matches);
         $widthUnit = $matches[1] ?? '';
 
-        $parseInt = fn($v) => (int) $v;
-        $parseFloat = fn($v) => (float) $v;
+        $parseInt = fn ($v) => (int) $v;
+        $parseFloat = fn ($v) => (float) $v;
         $parser = match ($widthUnit) {
             'px' => $parseInt,
             '%' => $parseFloatToInt ? $parseInt : $parseFloat,

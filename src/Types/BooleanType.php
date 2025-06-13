@@ -12,7 +12,7 @@ class BooleanType extends Type
 
         $this->matchers = [
             '/^true$/i',
-            '/^false$/i'
+            '/^false$/i',
         ];
     }
 

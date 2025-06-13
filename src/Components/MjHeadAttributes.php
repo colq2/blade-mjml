@@ -4,18 +4,14 @@ namespace colq2\BladeMjml\Components;
 
 use colq2\BladeMjml\BladeMjmlGlobalContext;
 use Illuminate\Contracts\View\View;
-use Illuminate\View\Compilers\BladeCompiler;
 
 class MjHeadAttributes extends MjmlHeadComponent
 {
-
     public function __construct(
         public BladeMjmlGlobalContext $bladeMjmlContext,
-    )
-    {
+    ) {
         parent::__construct($bladeMjmlContext);
     }
-
 
     public function getComponentName(): string
     {

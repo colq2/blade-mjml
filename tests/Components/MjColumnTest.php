@@ -14,7 +14,7 @@ it('can set background color', closure: function () {
 HTML;
 
     $view = blade($template);
-    $viewString = (string)$view;
+    $viewString = (string) $view;
 
     $view->assertSee('background-color:#000000', escape: false);
 
@@ -37,7 +37,7 @@ it('can set css class', function () {
 HTML;
 
     $view = blade($template);
-    $viewString = (string)$view;
+    $viewString = (string) $view;
 
     $view->assertSee('class="test-class"', escape: false);
 
@@ -55,7 +55,7 @@ it('can render with full-width', function () {
 HTML;
 
     $view = blade($template);
-    $viewString = (string)$view;
+    $viewString = (string) $view;
 
     assertMatchesRegularExpression(
         pattern: '/<table[^>]*align="center"[^>]*>/',
@@ -76,7 +76,7 @@ it('can set background image', function () {
 HTML;
 
     $view = blade($template);
-    $viewString = (string)$view;
+    $viewString = (string) $view;
 
     assertMatchesRegularExpression(
         pattern: '/background:[^;]*url\(\'https:\/\/example\.com\/image\.jpg\'\)/',
@@ -96,7 +96,7 @@ HTML;
     expect($viewString)->toEqualMjmlHtml($template);
 });
 
-it('can render one column', function(){
+it('can render one column', function () {
     $template = <<<'HTML'
 <mjml>
     <mj-body>
@@ -110,10 +110,10 @@ HTML;
 
     $view = blade($template);
 
-    expect((string)$view)->toEqualMjmlHtml($template);
+    expect((string) $view)->toEqualMjmlHtml($template);
 });
 
-it('can render multiple columns', function(){
+it('can render multiple columns', function () {
     $template = <<<'HTML'
 <mjml>
     <mj-body>
@@ -127,7 +127,7 @@ HTML;
 
     $view = blade($template);
 
-    expect((string)$view)->toEqualMjmlHtml($template);
+    expect((string) $view)->toEqualMjmlHtml($template);
 });
 
 it('can set background color in column', closure: function () {
@@ -143,7 +143,7 @@ it('can set background color in column', closure: function () {
 HTML;
 
     $view = blade($template);
-    $viewString = (string)$view;
+    $viewString = (string) $view;
 
     $view->assertSee('background-color:#0000FF', escape: false);
     expect($viewString)->toEqualMjmlHtml($template);
@@ -162,7 +162,7 @@ it('can set css class on column', function () {
 HTML;
 
     $view = blade($template);
-    $viewString = (string)$view;
+    $viewString = (string) $view;
 
     assertStringContainsString('custom-column-class', $viewString);
     expect($viewString)->toEqualMjmlHtml($template);
@@ -181,7 +181,7 @@ it('creates proper responsive classes for percentage width', function () {
 HTML;
 
     $view = blade($template);
-    $viewString = (string)$view;
+    $viewString = (string) $view;
 
     assertMatchesRegularExpression(
         pattern: '/class="mj-column-per-50/',
@@ -216,7 +216,7 @@ it('creates proper responsive classes for pixel width', function () {
 HTML;
 
     $view = blade($template);
-    $viewString = (string)$view;
+    $viewString = (string) $view;
 
     assertMatchesRegularExpression(
         pattern: '/class="mj-column-px-300/',
@@ -245,7 +245,7 @@ it('adds outlook-group-fix class for outlook compatibility', function () {
 HTML;
 
     $view = blade($template);
-    $viewString = (string)$view;
+    $viewString = (string) $view;
 
     assertStringContainsString('mj-outlook-group-fix', $viewString);
     expect($viewString)->toEqualMjmlHtml($template);
@@ -264,7 +264,7 @@ it('applies padding attributes correctly', function () {
 HTML;
 
     $view = blade($template);
-    $viewString = (string)$view;
+    $viewString = (string) $view;
 
     assertStringContainsString('padding:10px 20px', $viewString);
     expect($viewString)->toEqualMjmlHtml($template);
@@ -283,7 +283,7 @@ it('applies direction attribute correctly', function () {
 HTML;
 
     $view = blade($template);
-    $viewString = (string)$view;
+    $viewString = (string) $view;
 
     assertStringContainsString('direction:rtl', $viewString);
     expect($viewString)->toEqualMjmlHtml($template);
@@ -302,7 +302,7 @@ it('applies vertical-align attribute correctly', function () {
 HTML;
 
     $view = blade($template);
-    $viewString = (string)$view;
+    $viewString = (string) $view;
 
     assertStringContainsString('vertical-align:bottom', $viewString);
     expect($viewString)->toEqualMjmlHtml($template);
@@ -321,7 +321,7 @@ it('applies inner-border attributes correctly', function () {
 HTML;
 
     $view = blade($template);
-    $viewString = (string)$view;
+    $viewString = (string) $view;
 
     assertStringContainsString('border:2px solid blue', $viewString);
     expect($viewString)->toEqualMjmlHtml($template);
@@ -340,7 +340,7 @@ it('uses default width when none specified', function () {
 HTML;
 
     $view = blade($template);
-    $viewString = (string)$view;
+    $viewString = (string) $view;
 
     // Stellen sicher, dass die Klasse für 100% Breite verwendet wird
     assertMatchesRegularExpression(
@@ -367,7 +367,7 @@ it('renders child content correctly', function () {
 HTML;
 
     $view = blade($template);
-    $viewString = (string)$view;
+    $viewString = (string) $view;
 
     assertStringContainsString('<div>Test Child Content</div>', $viewString);
 

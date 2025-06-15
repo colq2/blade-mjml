@@ -21,7 +21,6 @@ HTML;
     expect((string) blade($template))->toEqualMjmlHtml($template);
 });
 
-
 it('ignores unused font', function () {
     $template = <<<'HTML'
 <mjml>

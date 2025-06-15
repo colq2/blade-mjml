@@ -154,7 +154,6 @@ HTML;
     expect((string) blade($template))->toEqualMjmlHtml($template);
 });
 
-
 it('can use set defaults for mj-button', function () {
     $template = <<<'HTML'
 <mjml>

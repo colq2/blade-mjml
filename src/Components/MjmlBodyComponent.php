@@ -23,8 +23,7 @@ abstract class MjmlBodyComponent extends MjmlComponent
     public function __construct(
         public BladeMjmlGlobalContext $bladeMjmlContext,
         public ?string $mjClass = null,
-    ) {
-    }
+    ) {}
 
     abstract public function getComponentName(): string;
 
@@ -45,13 +44,14 @@ abstract class MjmlBodyComponent extends MjmlComponent
         $reflection = new ReflectionClass($this);
 
         /** @var static $defaultInstance */
-        $defaultInstance = $reflection->newInstanceArgs([new BladeMjmlGlobalContext()]);
+        $defaultInstance = $reflection->newInstanceArgs([new BladeMjmlGlobalContext]);
 
         $defaults = [];
         foreach ($this->allowedAttributes() as $attr => $_) {
             $camel = Str::camel($attr);
             $defaults[$attr] = $defaultInstance->$camel ?? null;
         }
+
         return $defaults;
     }
 

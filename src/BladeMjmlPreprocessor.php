@@ -189,7 +189,8 @@ class BladeMjmlPreprocessor
             // Replace only the tag names, not the content
             $openTag = preg_replace('/<mj-attributes\b/', '<x-mj-attributes', $matches[1]);
             $closeTag = str_replace('</mj-attributes>', '</x-mj-attributes>', $matches[3]);
-            return $openTag . $matches[2] . $closeTag;
+
+            return $openTag.$matches[2].$closeTag;
         }, $mjml);
 
         // Now replace all other MJML tags outside of <mj-attributes> blocks
@@ -198,7 +199,7 @@ class BladeMjmlPreprocessor
 
         foreach ($parts as $i => $part) {
             // Only convert parts that are NOT <x-mj-attributes> blocks
-            if (!preg_match($pattern, $part)) {
+            if (! preg_match($pattern, $part)) {
                 foreach ($this->mjmlTags as $tag) {
                     if ($tag === 'mj-attributes') {
                         continue; // Already handled

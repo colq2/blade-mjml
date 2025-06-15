@@ -24,12 +24,11 @@ HTML;
     expect((string) blade($template))->toEqualMjmlHtml($template);
 });
 
-
 // Tests failing, need to be fixed to support inline styles
 
-//it('supports inline mj-style head component', function () {
+// it('supports inline mj-style head component', function () {
 //    $template = <<<'HTML'
-//<mjml>
+// <mjml>
 //  <mj-head>
 //    <mj-style inline="inline">
 //      .red-text div {
@@ -45,15 +44,15 @@ HTML;
 //      </mj-column>
 //    </mj-section>
 //  </mj-body>
-//</mjml>
-//HTML;
+// </mjml>
+// HTML;
 //
 //    expect((string) blade($template))->toEqualMjmlHtml($template);
-//});
+// });
 //
-//it('renders mj-style example correctly', function () {
+// it('renders mj-style example correctly', function () {
 //    $template = <<<'HTML'
-//<mjml>
+// <mjml>
 //  <mj-head>
 //    <mj-attributes>
 //      <mj-class name="mjclass" color="green" font-size="30px" />
@@ -79,8 +78,8 @@ HTML;
 //      </mj-column>
 //    </mj-section>
 //  </mj-body>
-//</mjml>
-//HTML;
+// </mjml>
+// HTML;
 //
 //    expect((string) blade($template))->toEqualMjmlHtml($template);
-//});
+// });

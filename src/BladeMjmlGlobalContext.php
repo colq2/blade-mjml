@@ -137,7 +137,6 @@ class BladeMjmlGlobalContext
         );
     }
 
-
     /**
      * Generates the media query tags
      *

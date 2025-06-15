@@ -29,9 +29,9 @@ class MjHeadStyle extends MjmlHeadComponent
     public function renderMjml(array $data): View|string
     {
         if ($this->getAttribute('inline') === 'inline') {
-            $this->bladeMjmlContext->inlineStyle[] = $data['slot'];
+            $this->bladeMjmlContext->inlineStyle[] = (string) $data['slot'];
         } else {
-            $this->bladeMjmlContext->style[] = $data['slot'];
+            $this->bladeMjmlContext->style[] = (string) $data['slot'];
         }
 
         return '';

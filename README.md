@@ -36,14 +36,14 @@ return view('mjml-example.blade.php');
 
 ## Limitations
 
-* No support for raw components yet -> Dont know how to implement this yet, because we do not control the childs and cannot check if they are raw or not.
-* Cannot extract font families, must use mj-font for this.
 * mj-html-attributes not supported yet.
 
 * mj-raw attribute `position="file-start"` is not supported yet.
 
 * mj-include is not supported. Use `@include` instead.
 * Including other blade files probably not working yet, because we need to prepare the mjml templates first. THis is only done when the file starts with `<mjml>`.
+
+* Inline mj-style not working yet.
 
 ## Component overview
 

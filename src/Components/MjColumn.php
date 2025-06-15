@@ -13,6 +13,7 @@ class MjColumn extends MjmlBodyComponent
      */
     public function __construct(
         public BladeMjmlGlobalContext $bladeMjmlContext,
+        public ?string $mjClass = null,
         public string $backgroundColor = '',
         public string $border = '',
         public string $borderBottom = '',
@@ -38,7 +39,7 @@ class MjColumn extends MjmlBodyComponent
         public string $cssClass = '',
         public int $nonRawSiblings = 1,
     ) {
-        parent::__construct($bladeMjmlContext);
+        parent::__construct($bladeMjmlContext, $mjClass);
     }
 
     public function getComponentName(): string

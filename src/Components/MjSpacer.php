@@ -12,6 +12,7 @@ class MjSpacer extends MjmlBodyComponent
      */
     public function __construct(
         public BladeMjmlGlobalContext $bladeMjmlContext,
+        public ?string $mjClass = null,
         public string $border = '',
         public string $borderBottom = '',
         public string $borderLeft = '',
@@ -26,7 +27,7 @@ class MjSpacer extends MjmlBodyComponent
         public string $height = '20px',
         public string $cssClass = '',
     ) {
-        parent::__construct($bladeMjmlContext);
+        parent::__construct($bladeMjmlContext, $mjClass);
     }
 
     public function getComponentName(): string

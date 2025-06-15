@@ -13,6 +13,7 @@ class MjText extends MjmlBodyComponent
      */
     public function __construct(
         public BladeMjmlGlobalContext $bladeMjmlContext,
+        public ?string $mjClass = null,
         public string $align = 'left',
         public string $backgroundColor = '',
         public string $color = '#000000',
@@ -34,10 +35,7 @@ class MjText extends MjmlBodyComponent
         public string $verticalAlign = '',
         public string $cssClass = '',
     ) {
-        parent::__construct($bladeMjmlContext);
-
-        // register font
-        $this->bladeMjmlContext->addFontUsage($this->fontFamily);
+        parent::__construct($bladeMjmlContext, $mjClass);
     }
 
     public function getComponentName(): string
@@ -128,7 +126,6 @@ class MjText extends MjmlBodyComponent
 
     public function renderMjml(array $data): View|string
     {
-
         $height = $this->getAttribute('height');
 
         if ($height) {

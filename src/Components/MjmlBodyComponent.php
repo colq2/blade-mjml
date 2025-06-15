@@ -10,6 +10,7 @@ use colq2\BladeMjml\Helpers\ShorthandParser;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use ReflectionClass;
 
 abstract class MjmlBodyComponent extends MjmlComponent
 {
@@ -21,11 +22,8 @@ abstract class MjmlBodyComponent extends MjmlComponent
      */
     public function __construct(
         public BladeMjmlGlobalContext $bladeMjmlContext,
+        public ?string $mjClass = null,
     ) {
-        $this->_attributes = FormatAttributes::formatAttributes(
-            attributes: $this->gatherAttributes(),
-            allowedAttributes: $this->allowedAttributes()
-        );
     }
 
     abstract public function getComponentName(): string;
@@ -37,40 +35,101 @@ abstract class MjmlBodyComponent extends MjmlComponent
         return false;
     }
 
+    /**
+     * Returns the default attributes for this component.
+     *
+     * @return array<string, mixed>
+     */
+    protected function defaultAttributes(): array
+    {
+        $reflection = new ReflectionClass($this);
+
+        /** @var static $defaultInstance */
+        $defaultInstance = $reflection->newInstanceArgs([new BladeMjmlGlobalContext()]);
+
+        $defaults = [];
+        foreach ($this->allowedAttributes() as $attr => $_) {
+            $camel = Str::camel($attr);
+            $defaults[$attr] = $defaultInstance->$camel ?? null;
+        }
+        return $defaults;
+    }
+
+    /**
+     * Gathers the attributes that differ from the defaults.
+     *
+     * @return array<string, mixed>
+     */
     protected function gatherAttributes(): array
     {
-        $allowedAttributes = collect($this->allowedAttributes())->mapWithKeys(function ($type, $attrName) {
-            // attribute name is kebab-case we need to check for camelCase
-            $camelCaseAttrName = Str::camel($attrName);
-            if (isset($this->$camelCaseAttrName)) {
-                return [
-                    $attrName => $this->$camelCaseAttrName,
-                ];
+        $defaults = $this->defaultAttributes();
+
+        $attributes = [];
+        foreach ($this->allowedAttributes() as $attr => $_) {
+            $camel = Str::camel($attr);
+            if (in_array($camel, ['bladeMjmlContext', 'mjClass'], true)) {
+                continue;
             }
-
-            return [];
-        })->toArray();
-
-        $additionalAttributes = [];
-        if (isset($this->cssClass)) {
-            $additionalAttributes['css-class'] = $this->cssClass;
+            $current = $this->$camel ?? null;
+            if ($current !== $defaults[$attr]) {
+                $attributes[$attr] = $current;
+            }
         }
 
-        // TODO: we will also add global attributes
-        //        $globalAttributes = $this->bladeMjmlContext->getGlobalAttributes();
-        $globalAttributes = [];
+        if (isset($this->cssClass)) {
+            $attributes['css-class'] = $this->cssClass;
+        }
+
+        // Merge with mj-class, tag, and global attributes as before
+        $mjClassAttributes = [];
+        if (isset($this->mjClass)) {
+            $classes = explode(' ', $this->mjClass);
+            foreach ($classes as $class) {
+                $class = trim($class);
+                if ($class !== '') {
+                    $attributesFromClass = Arr::get($this->bladeMjmlContext->classesDefault, $class, []);
+                    $mjClassAttributes = array_merge($mjClassAttributes, $attributesFromClass);
+                }
+            }
+        }
+
+        $tagAttributes = Arr::get($this->bladeMjmlContext->defaultAttributes, $this->getComponentName(), []);
+        $globalAttributes = Arr::get($this->bladeMjmlContext->defaultAttributes, 'mj-all', []);
 
         return array_merge(
+            $defaults,
             $globalAttributes,
-            $allowedAttributes,
-            $additionalAttributes
+            $mjClassAttributes,
+            $tagAttributes,
+            $attributes
         );
+    }
+
+    /**
+     * Lazily get formatted attributes.
+     *
+     * @return array<string, mixed>
+     */
+    public function getAttributes(): array
+    {
+        if (empty($this->_attributes)) {
+            $this->_attributes = FormatAttributes::formatAttributes(
+                attributes: $this->gatherAttributes(),
+                allowedAttributes: $this->allowedAttributes()
+            );
+
+            // First time we access the attributes, we add the font usage
+            $this->bladeMjmlContext->addFontUsage($this->getAttribute('font-family') ?? '');
+        }
+
+        return $this->_attributes;
     }
 
     public function getAttribute(string $name)
     {
-        $value = Arr::get($this->_attributes, $name);
-        if (empty($value)) {
+        $value = Arr::get($this->getAttributes(), $name);
+
+        if (is_null($value) || $value === '') {
             return null;
         }
 
@@ -257,34 +316,5 @@ abstract class MjmlBodyComponent extends MjmlComponent
         }
 
         return $output;
-    }
-
-    /**
-     * In the original mjml implementation this is called in the column component it self, because it renders the children itself.
-     * So the column wraps every child in this. We need to call this in the child component itself, because the blade compiler works differently.
-     */
-    public function innerColumnWrap(string $content): string
-    {
-        return '
-        <tr>
-          <td
-            '.$this->htmlAttributes([
-            'align' => $this->getAttribute('align'),
-            'class' => $this->getAttribute('css-class'),
-            'style' => [
-                'background' => $this->getAttribute('container-background-color'),
-                'font-size' => '0px',
-                'padding' => $this->getAttribute('padding'),
-                'padding-top' => $this->getAttribute('padding-top'),
-                'padding-right' => $this->getAttribute('padding-right'),
-                'padding-bottom' => $this->getAttribute('padding-bottom'),
-                'padding-left' => $this->getAttribute('padding-left'),
-                'word-break' => 'break-word',
-            ],
-        ]).'
-          >'.$content.'
-          </td>
-        </tr>
-        ';
     }
 }

@@ -12,6 +12,7 @@ class MjHero extends MjmlBodyComponent
      */
     public function __construct(
         public BladeMjmlGlobalContext $bladeMjmlContext,
+        public ?string $mjClass = null,
         public string $mode = 'fixed-height',
         public string $height = '0px',
         public string $backgroundUrl = '',
@@ -37,7 +38,7 @@ class MjHero extends MjmlBodyComponent
         public string $cssClass = '',
         public string $align = '',
     ) {
-        parent::__construct($bladeMjmlContext);
+        parent::__construct($bladeMjmlContext, $mjClass);
     }
 
     public function getComponentName(): string

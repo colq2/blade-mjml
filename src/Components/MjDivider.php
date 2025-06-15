@@ -13,6 +13,7 @@ class MjDivider extends MjmlBodyComponent
      */
     public function __construct(
         public BladeMjmlGlobalContext $bladeMjmlContext,
+        public ?string $mjClass = null,
         public ?string $borderColor = '#000000',
         public ?string $borderStyle = 'solid',
         public ?string $borderWidth = '4px',
@@ -25,7 +26,7 @@ class MjDivider extends MjmlBodyComponent
         public ?string $width = '100%',
         public ?string $align = 'center',
     ) {
-        parent::__construct($bladeMjmlContext);
+        parent::__construct($bladeMjmlContext, $mjClass);
     }
 
     public function getComponentName(): string

@@ -42,13 +42,13 @@ return view('mjml-example.blade.php');
 
 * mj-raw attribute `position="file-start"` is not supported yet.
 
-* mj-include is not supported.
+* mj-include is not supported. Use `@include` instead.
 * Including other blade files probably not working yet, because we need to prepare the mjml templates first. THis is only done when the file starts with `<mjml>`.
 
 ## Component overview
 
 Head Components:
-* [ ] mj-attributes
+* [x] mj-attributes
 * [x] mj-breakpoint
 * [x] mj-font
 * [ ] mj-html-attributes

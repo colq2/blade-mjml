@@ -12,6 +12,7 @@ class MjButton extends MjmlBodyComponent
      */
     public function __construct(
         public BladeMjmlGlobalContext $bladeMjmlContext,
+        public ?string $mjClass = null,
         public string $align = 'center',
         public string $backgroundColor = '#414141',
         public string $border = 'none',
@@ -47,7 +48,7 @@ class MjButton extends MjmlBodyComponent
         public string $width = '',
         public string $cssClass = '',
     ) {
-        parent::__construct($bladeMjmlContext);
+        parent::__construct($bladeMjmlContext, $mjClass);
 
         $this->bladeMjmlContext->addFontUsage($this->fontFamily);
     }

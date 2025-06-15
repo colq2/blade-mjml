@@ -13,6 +13,7 @@ class MjSection extends MjmlBodyComponent
      */
     public function __construct(
         public BladeMjmlGlobalContext $bladeMjmlContext,
+        public ?string $mjClass = null,
         public string $backgroundColor = '',
         public string $backgroundUrl = '',
         public string $backgroundRepeat = 'repeat',
@@ -37,7 +38,7 @@ class MjSection extends MjmlBodyComponent
         public string $textPadding = '4px 4px 4px 0',
         public string $cssClass = '',
     ) {
-        parent::__construct($bladeMjmlContext);
+        parent::__construct($bladeMjmlContext, $mjClass);
     }
 
     public function getComponentName(): string

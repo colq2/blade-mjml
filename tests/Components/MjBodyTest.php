@@ -4,7 +4,7 @@ use function PHPUnit\Framework\assertMatchesRegularExpression;
 
 it('can set background color', closure: function () {
     $template = <<<'HTML'
-<mjml  somethign="test">
+<mjml>
     <mj-head>
         <mj-title>Test</mj-title>
     </mj-head>

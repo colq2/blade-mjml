@@ -12,11 +12,12 @@ class MjBody extends MjmlBodyComponent
      */
     public function __construct(
         public BladeMjmlGlobalContext $bladeMjmlContext,
+        public ?string $mjClass = null,
         public string $backgroundColor = '',
         public string $cssClass = '',
         public string $width = '600px',
     ) {
-        parent::__construct($bladeMjmlContext);
+        parent::__construct($bladeMjmlContext, $mjClass);
 
         $this->bladeMjmlContext->setBackgroundColor($this->backgroundColor);
         $this->bladeMjmlContext->setContainerWidth($this->width);
@@ -35,18 +36,11 @@ class MjBody extends MjmlBodyComponent
         ];
     }
 
-    //    public function renderMjml(array $data): View|string
-    //    {
-    //        return view('blade-mjml::components.mj-body', [
-    //            'title' => $this->bladeMjmlContext->title,
-    //        ]);
-    //    }
-
     public function getStyles(): array
     {
         return [
             'body' => [
-                'background-color' => $this->backgroundColor,
+                'background-color' => $this->getAttribute('background-color'),
             ],
         ];
     }

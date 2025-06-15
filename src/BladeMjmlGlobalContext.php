@@ -59,8 +59,6 @@ class BladeMjmlGlobalContext
 
     public bool $printerSupport = false;
 
-    public int $columnCount = 0;
-
     public static function make()
     {
         return app()->make(static::class);
@@ -139,14 +137,6 @@ class BladeMjmlGlobalContext
         );
     }
 
-    public function addFontUsage(string $fontName): void
-    {
-
-        $fontString = 'style="font-family:'.$fontName.';"';
-        if (! in_array($fontString, $this->usedFonts)) {
-            $this->usedFonts[] = $fontString;
-        }
-    }
 
     /**
      * Generates the media query tags
@@ -163,16 +153,38 @@ class BladeMjmlGlobalContext
         );
     }
 
-    public function increaseColumnCount()
+    public function addFontUsage(string $fontName): void
     {
-        $this->columnCount++;
+        $fontString = 'style="font-family:'.$fontName.';"';
+        if (! in_array($fontString, $this->usedFonts)) {
+            $this->usedFonts[] = $fontString;
+        }
+    }
+
+    public function addDefaultAttributes(string $tagName, array $attributes): static
+    {
+        if (! isset($this->defaultAttributes[$tagName])) {
+            $this->defaultAttributes[$tagName] = [];
+        }
+
+        $this->defaultAttributes[$tagName] = array_merge(
+            $this->defaultAttributes[$tagName],
+            $attributes
+        );
 
         return $this;
     }
 
-    public function resetColumnCount()
+    public function addDefaultClasses(string $className, array $classes): static
     {
-        $this->columnCount = 0;
+        if (! isset($this->classesDefault[$className])) {
+            $this->classesDefault[$className] = [];
+        }
+
+        $this->classesDefault[$className] = array_merge(
+            $this->classesDefault[$className],
+            $classes
+        );
 
         return $this;
     }

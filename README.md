@@ -68,7 +68,7 @@ Body Components:
 * [ ] mj-navbar
 * [x] mj-raw
 * [x] mj-section
-* [ ] mj-social
+* [x] mj-social
 * [x] mj-spacer
 * [ ] mj-table
 * [x] mj-text

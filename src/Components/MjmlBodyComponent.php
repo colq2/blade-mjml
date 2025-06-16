@@ -101,8 +101,12 @@ abstract class MjmlBodyComponent extends MjmlComponent
         $tagAttributes = Arr::get($this->bladeMjmlContext->defaultAttributes, $this->getComponentName(), []);
         $globalAttributes = Arr::get($this->bladeMjmlContext->defaultAttributes, 'mj-all', []);
 
+        // provided attributes
+        $providedAttributes = Arr::get($this->context(), 'attributes', []);
+
         return array_merge(
             $defaults,
+            $providedAttributes,
             $globalAttributes,
             $mjClassAttributes,
             $tagAttributes,
@@ -122,9 +126,6 @@ abstract class MjmlBodyComponent extends MjmlComponent
                 attributes: $this->gatherAttributes(),
                 allowedAttributes: $this->allowedAttributes()
             );
-
-            // First time we access the attributes, we add the font usage
-            $this->bladeMjmlContext->addFontUsage($this->getAttribute('font-family') ?? '');
         }
 
         return $this->_attributes;
@@ -133,6 +134,11 @@ abstract class MjmlBodyComponent extends MjmlComponent
     public function getAttribute(string $name)
     {
         $value = Arr::get($this->getAttributes(), $name);
+
+        if($name === 'font-family') {
+            // Register font usage
+            $this->bladeMjmlContext->addFontUsage($value ?? '');
+        }
 
         if (is_null($value) || $value === '') {
             return null;

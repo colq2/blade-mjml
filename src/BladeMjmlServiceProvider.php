@@ -18,6 +18,8 @@ use colq2\BladeMjml\Components\MjImage;
 use colq2\BladeMjml\Components\Mjml;
 use colq2\BladeMjml\Components\MjRaw;
 use colq2\BladeMjml\Components\MjSection;
+use colq2\BladeMjml\Components\MjSocial;
+use colq2\BladeMjml\Components\MjSocialElement;
 use colq2\BladeMjml\Components\MjSpacer;
 use colq2\BladeMjml\Components\MjText;
 use colq2\BladeMjml\Components\MjWrapper;
@@ -108,5 +110,7 @@ class BladeMjmlServiceProvider extends PackageServiceProvider
         Blade::component(MjSpacer::class, 'mj-spacer');
         Blade::component(MjWrapper::class, 'mj-wrapper');
         Blade::component(MjImage::class, 'mj-image');
+        Blade::component(MjSocial::class, 'mj-social');
+        Blade::component(MjSocialElement::class, 'mj-social-element');
     }
 }

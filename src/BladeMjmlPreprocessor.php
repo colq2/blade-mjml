@@ -42,6 +42,8 @@ class BladeMjmlPreprocessor
         'mj-spacer',
         'mj-wrapper',
         'mj-image',
+        'mj-social',
+        'mj-social-element',
     ];
 
     /**

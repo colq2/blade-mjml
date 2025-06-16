@@ -40,6 +40,7 @@ class BladeMjmlPreprocessor
         'mj-button',
         'mj-hero',
         'mj-spacer',
+        'mj-wrapper',
     ];
 
     /**

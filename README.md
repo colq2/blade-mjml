@@ -69,10 +69,10 @@ Body Components:
 * [x] mj-raw
 * [x] mj-section
 * [ ] mj-social
-* [ ] mj-spacer
+* [x] mj-spacer
 * [ ] mj-table
 * [x] mj-text
-* [ ] mj-wrapper
+* [x] mj-wrapper
 
 ## Good to know
 

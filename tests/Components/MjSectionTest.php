@@ -92,3 +92,19 @@ HTML;
 
     expect($viewString)->toEqualMjmlHtml($template);
 });
+
+it('can use padding', function () {
+    $template = <<<'HTML'
+<mjml>
+    <mj-body>
+        <mj-section padding="20px 10px">
+            <mj-column>
+                <mj-text>Test</mj-text>
+            </mj-column>    
+        </mj-section>
+    </mj-body>
+</mjml>
+HTML;
+
+    expect((string) blade($template))->toEqualMjmlHtml($template);
+});

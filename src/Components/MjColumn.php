@@ -79,9 +79,7 @@ class MjColumn extends MjmlBodyComponent
     {
         $parentWidth = $this->context()['containerWidth'] ?? null;
 
-        $boxWidths = $this->getBoxWidths();
-        $borders = $boxWidths['borders'];
-        $paddings = $boxWidths['paddings'];
+        ['borders' => $borders, 'paddings' => $paddings] = $this->getBoxWidths();
 
         $innerBorders =
             $this->getShorthandBorderValue('left', 'inner-border') +

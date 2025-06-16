@@ -171,7 +171,7 @@ class MjButton extends MjmlBodyComponent
         }
         if (preg_match('/^(\d+)(px)$/', $width, $matches)) {
             $parsedWidth = (int) $matches[1];
-            $borders = $this->getBoxWidths()['borders'];
+            ['borders' => $borders] = $this->getBoxWidths();
             $innerPaddings =
                 $this->getShorthandAttrValue('inner-padding', 'left') +
                 $this->getShorthandAttrValue('inner-padding', 'right');

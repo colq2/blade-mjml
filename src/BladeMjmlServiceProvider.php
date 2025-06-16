@@ -19,6 +19,7 @@ use colq2\BladeMjml\Components\MjRaw;
 use colq2\BladeMjml\Components\MjSection;
 use colq2\BladeMjml\Components\MjSpacer;
 use colq2\BladeMjml\Components\MjText;
+use colq2\BladeMjml\Components\MjWrapper;
 use colq2\BladeMjml\Helpers\OutlookConditionals;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Str;
@@ -104,5 +105,6 @@ class BladeMjmlServiceProvider extends PackageServiceProvider
         Blade::component(MjButton::class, 'mj-button');
         Blade::component(MjHero::class, 'mj-hero');
         Blade::component(MjSpacer::class, 'mj-spacer');
+        Blade::component(MjWrapper::class, 'mj-wrapper');
     }
 }

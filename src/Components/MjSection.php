@@ -76,8 +76,10 @@ class MjSection extends MjmlBodyComponent
 
     public function getChildContext(): array
     {
+        ['box' => $box] = $this->getBoxWidths();
+
         return array_merge($this->context(), [
-            'containerWidth' => $this->bladeMjmlContext->containerWidth,
+            'containerWidth' => "{$box}px",
         ]);
     }
 

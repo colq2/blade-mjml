@@ -6,7 +6,6 @@ use Illuminate\Support\Arr;
 
 class MjWrapper extends MjSection
 {
-
     public function getComponentName(): string
     {
         return 'mj-wrapper';
@@ -19,7 +18,7 @@ class MjWrapper extends MjSection
         return array_merge($this->context(), [
             'containerWidth' => "{$box}px",
             'wrapperFn' => function ($content, MjmlBodyComponent $component) {
-                if($component->isRawElement()) {
+                if ($component->isRawElement()) {
                     return $content;
                 }
 
@@ -28,10 +27,10 @@ class MjWrapper extends MjSection
                     <tr>
                       <td
                         '.$component->htmlAttributes([
-                        'align' => $component->getAttribute('align'),
-                        'class' => $component->getAttribute('css-class'),
-                        'width' => Arr::get($component->context(), 'containerWidth'),
-                    ]).'
+                    'align' => $component->getAttribute('align'),
+                    'class' => $component->getAttribute('css-class'),
+                    'width' => Arr::get($component->context(), 'containerWidth'),
+                ]).'
                       >
                       <![endif]-->
                       '.$content.'

@@ -93,6 +93,7 @@ class MjSocialElement extends MjmlBodyComponent
         foreach ($networks as $key => $val) {
             $networks["{$key}-noshare"] = array_merge($val, ['share-url' => '[[URL]]']);
         }
+
         return $networks;
     }
 
@@ -257,39 +258,39 @@ class MjSocialElement extends MjmlBodyComponent
             'icon-height' => $iconHeight,
         ] = $this->getSocialAttributes();
 
-        $hasLink = !empty($this->getAttribute('href'));
+        $hasLink = ! empty($this->getAttribute('href'));
         $iconPosition = $this->getAttribute('icon-position') ?? 'left';
 
         $iconTd = '
         <td '.$this->htmlAttributes(['style' => 'td']).'>
           <table
             '.$this->htmlAttributes([
-                'border' => '0',
-                'cellpadding' => '0',
-                'cellspacing' => '0',
-                'role' => 'presentation',
-                'style' => 'table',
-            ]).'
+            'border' => '0',
+            'cellpadding' => '0',
+            'cellspacing' => '0',
+            'role' => 'presentation',
+            'style' => 'table',
+        ]).'
           >
             <tbody>
               <tr>
                 <td '.$this->htmlAttributes(['style' => 'icon']).'>
                   '.($hasLink ? '<a '.$this->htmlAttributes([
-                        'href' => $href,
-                        'rel' => $this->getAttribute('rel'),
-                        'target' => $this->getAttribute('target'),
-                    ]).'>' : '').'
+            'href' => $href,
+            'rel' => $this->getAttribute('rel'),
+            'target' => $this->getAttribute('target'),
+        ]).'>' : '').'
                     <img
                       '.$this->htmlAttributes([
-                          'alt' => $this->getAttribute('alt'),
-                          'title' => $this->getAttribute('title'),
-                          'height' => (int) ($iconHeight ?: $iconSize),
-                          'src' => $src,
-                          'style' => 'img',
-                          'width' => (int) $iconSize,
-                          'sizes' => $sizes,
-                          'srcset' => $srcset,
-                      ], ['alt']).' />
+            'alt' => $this->getAttribute('alt'),
+            'title' => $this->getAttribute('title'),
+            'height' => (int) ($iconHeight ?: $iconSize),
+            'src' => $src,
+            'style' => 'img',
+            'width' => (int) $iconSize,
+            'sizes' => $sizes,
+            'srcset' => $srcset,
+        ], ['alt']).' />
                   '.($hasLink ? '</a>' : '').'
                 </td>
               </tr>
@@ -297,7 +298,6 @@ class MjSocialElement extends MjmlBodyComponent
           </table>
         </td>
         ';
-
 
         $slotContent = trim((string) $data['slot'] ?? '');
 
@@ -311,16 +311,15 @@ class MjSocialElement extends MjmlBodyComponent
                     'target' => $this->getAttribute('target'),
                 ]).'>'
                 : '<span '.$this->htmlAttributes(['style' => 'text']).'>'
-            ).'
+        ).'
               {{ $slot }}
             '.($hasLink ? '</a>' : '</span>').'
         </td>
         ' : '';
 
-
         $row = $iconPosition === 'left'
-            ? $iconTd . ' ' . $contentTd // render left
-            : $contentTd . ' ' . $iconTd; // render right
+            ? $iconTd.' '.$contentTd // render left
+            : $contentTd.' '.$iconTd; // render right
 
         return '
       <tr '.$this->htmlAttributes(['class' => $this->getAttribute('css-class')]).'>

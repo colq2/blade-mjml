@@ -76,7 +76,6 @@ HTML;
     expect((string) blade($template))->toEqualMjmlHtml($template);
 });
 
-
 it('renders social-element with icon on right', function () {
     $template = <<<'HTML'
 <mjml>

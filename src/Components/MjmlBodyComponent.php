@@ -5,7 +5,6 @@ namespace colq2\BladeMjml\Components;
 use Closure;
 use colq2\BladeMjml\BladeMjmlGlobalContext;
 use colq2\BladeMjml\Helpers\FormatAttributes;
-use colq2\BladeMjml\Helpers\HtmlAttributesHelper;
 use colq2\BladeMjml\Helpers\ShorthandParser;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Arr;
@@ -135,7 +134,7 @@ abstract class MjmlBodyComponent extends MjmlComponent
     {
         $value = Arr::get($this->getAttributes(), $name);
 
-        if($name === 'font-family') {
+        if ($name === 'font-family') {
             // Register font usage
             $this->bladeMjmlContext->addFontUsage($value ?? '');
         }

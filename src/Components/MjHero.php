@@ -125,7 +125,7 @@ class MjHero extends MjmlBodyComponent
     public function getStyles(): array
     {
         $containerWidth = $this->context()['containerWidth'] ?? 600;
-        if(str_contains($containerWidth, 'px')) {
+        if (str_contains($containerWidth, 'px')) {
             $containerWidth = intval(rtrim($containerWidth, 'px'));
         }
 

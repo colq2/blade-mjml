@@ -13,7 +13,7 @@ This package is a port of [mjml](https://mjml.io/) to laravel blade. The goal is
 You can just use the original mjml xml as blade view.
 
 ```bladehtml
-<!-- mjml-example.blade.php -->
+<!-- resources/views/mail/mjml-example.blade.php -->
 <mjml>
     <mj-body>
         <mj-section>
@@ -27,10 +27,15 @@ You can just use the original mjml xml as blade view.
 </mjml>
 ```
 
-Use this package to render the mjml:
+You can now use this view in your mails:
 
 ```php
-return view('mjml-example.blade.php');
+public function content(): Content
+{
+    return new Content(
+        view: 'mail.mjml-example',
+    );
+}
 ```
 
 

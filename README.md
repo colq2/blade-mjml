@@ -127,7 +127,7 @@ Relevant documentation for laravel and mjml:
 * [MJML Documentation](https://mjml.io/documentation/)
 
 ```bladehtml
-// resources/views/emails/example.blade.php
+// resources/views/mail/mjml-example.blade.php
 <mjml>
     <mj-body>
         <mj-section>
@@ -139,6 +139,17 @@ Relevant documentation for laravel and mjml:
         </mj-section>
     </mj-body>
 </mjml>
+```
+
+And use the view in your mail class:
+
+```php
+public function content(): Content
+{
+    return new Content(
+        view: 'mail.mjml-example',
+    );
+}
 ```
 
 ## Testing

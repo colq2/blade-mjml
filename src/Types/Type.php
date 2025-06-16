@@ -8,6 +8,8 @@ abstract class Type
 
     protected array $matchers = [];
 
+    public static string $typeChecker;
+
     public function __construct($value)
     {
         $this->value = $value;

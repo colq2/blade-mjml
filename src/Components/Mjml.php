@@ -90,4 +90,12 @@ class Mjml extends MjmlComponent
     {
         return 'mjml';
     }
+
+    /**
+     * Get component styles.
+     */
+    public function getStyles(): array
+    {
+        return [];
+    }
 }

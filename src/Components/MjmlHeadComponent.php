@@ -63,6 +63,11 @@ abstract class MjmlHeadComponent extends MjmlComponent
 
     abstract public function allowedAttributes(): array;
 
+    public function getStyles(): array
+    {
+        return [];
+    }
+
     protected function gatherAttributes(): array
     {
         $allowedAttributes = collect($this->allowedAttributes())->mapWithKeys(function ($type, $attrName) {
@@ -130,14 +135,6 @@ abstract class MjmlHeadComponent extends MjmlComponent
     }
 
     /**
-     * Get component styles.
-     */
-    public function getStyles(): array
-    {
-        return [];
-    }
-
-    /**
      * Get shorthand attribute value for a specific direction.
      *
      * @param  string  $attribute  The attribute name.
@@ -200,65 +197,5 @@ abstract class MjmlHeadComponent extends MjmlComponent
             'paddings' => $paddings,
             'box' => $parsedWidth - $paddings - $borders,
         ];
-    }
-
-    /**
-     * Generate HTML attributes string.
-     *
-     * @param  array  $attributes  The attributes to format.
-     * @return string The formatted HTML attributes string.
-     */
-    public function htmlAttributes(array $attributes): string
-    {
-        $specialAttributes = [
-            'style' => function ($v) {
-                return $this->styles($v);
-            },
-            'default' => [HtmlAttributesHelper::class, 'identity'],
-        ];
-
-        $filteredAttributes = HtmlAttributesHelper::omitNil($attributes);
-        $output = '';
-
-        foreach ($filteredAttributes as $name => $v) {
-            $handler = $specialAttributes[$name] ?? $specialAttributes['default'];
-            $value = is_callable($handler) ? call_user_func($handler, $v) : $v;
-
-            $output .= " {$name}=\"{$value}\"";
-        }
-
-        return $output;
-    }
-
-    /**
-     * Format CSS styles.
-     *
-     * @param  array|string|null  $styles  The styles to format.
-     * @return string The formatted CSS styles string.
-     */
-    public function styles($styles): string
-    {
-        $stylesObject = null;
-
-        if ($styles) {
-            if (is_string($styles)) {
-                $stylesObject = HtmlAttributesHelper::get($this->getStyles(), $styles);
-            } else {
-                $stylesObject = $styles;
-            }
-        }
-
-        if (! is_array($stylesObject)) {
-            return '';
-        }
-
-        $output = '';
-        foreach ($stylesObject as $name => $value) {
-            if (! HtmlAttributesHelper::isNil($value)) {
-                $output .= "{$name}:{$value};";
-            }
-        }
-
-        return $output;
     }
 }

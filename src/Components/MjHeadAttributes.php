@@ -26,7 +26,7 @@ class MjHeadAttributes extends MjmlHeadComponent
     public function renderMjml(array $data): View|string
     {
         // parse the inner HTML of the mj-attributes tag
-        $content = (string) $data['slot'] ?? '';
+        $content = (string) $data['slot'];
 
         // parse the content to dom and extract attributes
         // only the children nodes, ignore more nested tags
@@ -37,6 +37,7 @@ class MjHeadAttributes extends MjmlHeadComponent
         $nodes = $xpath->query('//div/*'); // Get all child elements of the div
         $attributes = [];
 
+        /** @var \DOMElement $node */
         foreach ($nodes as $node) {
             if ($node->nodeName === 'mj-class') {
                 // Handle mj-class tag separately

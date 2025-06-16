@@ -124,10 +124,14 @@ class MjHero extends MjmlBodyComponent
 
     public function getStyles(): array
     {
-        $containerWidth = (float) ($this->context()['containerWidth'] ?? 600);
+        $containerWidth = $this->context()['containerWidth'] ?? 600;
+        if(str_contains($containerWidth, 'px')) {
+            $containerWidth = intval(rtrim($containerWidth, 'px'));
+        }
+
         $backgroundWidth = (float) ($this->backgroundWidth ?: $containerWidth);
         $backgroundHeight = (float) ($this->backgroundHeight ?: $this->height);
-        $backgroundRatio = ($backgroundWidth && $backgroundHeight && is_numeric($backgroundWidth) && is_numeric($backgroundHeight))
+        $backgroundRatio = ($backgroundWidth && $backgroundHeight)
             ? round(($backgroundHeight / $backgroundWidth) * 100)
             : 0;
 

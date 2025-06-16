@@ -14,6 +14,7 @@ use colq2\BladeMjml\Components\MjHeadPreview;
 use colq2\BladeMjml\Components\MjHeadStyle;
 use colq2\BladeMjml\Components\MjHeadTitle;
 use colq2\BladeMjml\Components\MjHero;
+use colq2\BladeMjml\Components\MjImage;
 use colq2\BladeMjml\Components\Mjml;
 use colq2\BladeMjml\Components\MjRaw;
 use colq2\BladeMjml\Components\MjSection;
@@ -106,5 +107,6 @@ class BladeMjmlServiceProvider extends PackageServiceProvider
         Blade::component(MjHero::class, 'mj-hero');
         Blade::component(MjSpacer::class, 'mj-spacer');
         Blade::component(MjWrapper::class, 'mj-wrapper');
+        Blade::component(MjImage::class, 'mj-image');
     }
 }

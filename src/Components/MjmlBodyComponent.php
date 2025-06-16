@@ -23,7 +23,12 @@ abstract class MjmlBodyComponent extends MjmlComponent
     public function __construct(
         public BladeMjmlGlobalContext $bladeMjmlContext,
         public ?string $mjClass = null,
-    ) {}
+    ) {
+
+        if($headStyle = $this->headStyle()) {
+            $this->bladeMjmlContext->addHeadStyle($this->getComponentName(), $headStyle);
+        }
+    }
 
     abstract public function getComponentName(): string;
 
@@ -163,6 +168,11 @@ abstract class MjmlBodyComponent extends MjmlComponent
         return array_merge([$this->bladeMjmlContext->read()]);
     }
 
+    public function headStyle(): Closure|null
+    {
+        return null;
+    }
+
     abstract public function renderMjml(array $data): View|string;
 
     /**
@@ -264,7 +274,7 @@ abstract class MjmlBodyComponent extends MjmlComponent
      * @param  array  $attributes  The attributes to format.
      * @return string The formatted HTML attributes string.
      */
-    public function htmlAttributes(array $attributes): string
+    public function htmlAttributes(array $attributes, array $allowedNilAttributes = []): string
     {
         $specialAttributes = [
             'style' => function ($v) {
@@ -273,7 +283,7 @@ abstract class MjmlBodyComponent extends MjmlComponent
             'default' => [HtmlAttributesHelper::class, 'identity'],
         ];
 
-        $filteredAttributes = HtmlAttributesHelper::omitNil($attributes);
+        $filteredAttributes = HtmlAttributesHelper::omitNil($attributes, $allowedNilAttributes);
         $output = '';
 
         foreach ($filteredAttributes as $name => $v) {

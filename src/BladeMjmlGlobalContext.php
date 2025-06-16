@@ -187,4 +187,11 @@ class BladeMjmlGlobalContext
 
         return $this;
     }
+
+    public function addHeadStyle(string $name, \Closure $callback): static
+    {
+        $this->headStyle[$name] = $callback;
+
+        return $this;
+    }
 }

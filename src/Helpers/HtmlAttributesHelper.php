@@ -32,11 +32,15 @@ class HtmlAttributesHelper
      * @param  array  $array  The array to filter.
      * @return array The filtered array.
      */
-    public static function omitNil(array $array): array
+    public static function omitNil(array $array, array $allowedNilAttributes = []): array
     {
-        return array_filter($array, function ($value) {
+        return array_filter($array, function ($value, $key) use ($allowedNilAttributes) {
+            if( in_array($key, $allowedNilAttributes, true)) {
+                return true;
+            }
+
             return ! self::isNil($value);
-        });
+        }, ARRAY_FILTER_USE_BOTH);
     }
 
     /**

@@ -35,7 +35,7 @@ class HtmlAttributesHelper
     public static function omitNil(array $array, array $allowedNilAttributes = []): array
     {
         return array_filter($array, function ($value, $key) use ($allowedNilAttributes) {
-            if( in_array($key, $allowedNilAttributes, true)) {
+            if (in_array($key, $allowedNilAttributes, true)) {
                 return true;
             }
 

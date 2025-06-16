@@ -25,7 +25,7 @@ abstract class MjmlBodyComponent extends MjmlComponent
         public ?string $mjClass = null,
     ) {
 
-        if($headStyle = $this->headStyle()) {
+        if ($headStyle = $this->headStyle()) {
             $this->bladeMjmlContext->addHeadStyle($this->getComponentName(), $headStyle);
         }
     }
@@ -168,7 +168,7 @@ abstract class MjmlBodyComponent extends MjmlComponent
         return array_merge([$this->bladeMjmlContext->read()]);
     }
 
-    public function headStyle(): Closure|null
+    public function headStyle(): ?Closure
     {
         return null;
     }

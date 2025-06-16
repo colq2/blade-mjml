@@ -11,8 +11,8 @@ class WidthParser
     /**
      * Parses a width value and returns its numeric value and unit.
      *
-     * @param mixed $width The width value to parse (string, int, float, or object with toString()).
-     * @param array{parseFloatToInt?: bool} $options Options for parsing (default: ['parseFloatToInt' => true]).
+     * @param  mixed  $width  The width value to parse (string, int, float, or object with toString()).
+     * @param  array{parseFloatToInt?: bool}  $options  Options for parsing (default: ['parseFloatToInt' => true]).
      * @return array{parsedWidth: int|float, unit: string} The parsed width and its unit.
      */
     public static function widthParser(mixed $width, array $options = []): array

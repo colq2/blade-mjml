@@ -170,7 +170,7 @@ class MjImage extends MjmlBodyComponent
         return $img;
     }
 
-    public function headStyle(): Closure|null
+    public function headStyle(): ?Closure
     {
         return function ($breakpoint) {
             $maxWidth = MakeLowerBreakpoint::makeLowerBreakpoint($breakpoint);
@@ -199,9 +199,9 @@ class MjImage extends MjmlBodyComponent
         <tbody>
           <tr>
             <td '.$this->htmlAttributes([
-                'class' => $this->getAttribute('fluid-on-mobile') ? 'mj-full-width-mobile' : null,
-                'style' => 'td',
-            ]).'>
+            'class' => $this->getAttribute('fluid-on-mobile') ? 'mj-full-width-mobile' : null,
+            'style' => 'td',
+        ]).'>
               '.$this->renderImage().'
             </td>
           </tr>

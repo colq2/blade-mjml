@@ -41,7 +41,7 @@ class BladeMjmlPreprocessor
         'mj-hero',
         'mj-spacer',
         'mj-wrapper',
-        'mj-image'
+        'mj-image',
     ];
 
     /**

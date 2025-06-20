@@ -51,6 +51,10 @@ class BladeMjmlPreprocessor
         'mj-navbar',
         'mj-navbar-link',
         'mj-group',
+        'mj-accordion',
+        'mj-accordion-element',
+        'mj-accordion-title',
+        'mj-accordion-text',
     ];
 
     /**

@@ -46,9 +46,10 @@ public function content(): Content
 * mj-raw attribute `position="file-start"` is not supported yet.
 
 * mj-include is not supported. Use `@include` instead.
-* Including other blade files probably not working yet, because we need to prepare the mjml templates first. THis is only done when the file starts with `<mjml>`.
 
 * Inline mj-style not working yet.
+
+* mj-accordion does not handle missing children. You need to always provide mj-accordion-text and mj-accordion-title.
 
 ## Component overview
 
@@ -62,12 +63,12 @@ Head Components:
 * [x] mj-title
 
 Body Components:
-* [ ] mj-accordion
+* [x] mj-accordion
 * [x] mj-button
 * [x] mj-carousel
 * [x] mj-column
 * [x] mj-divider
-* [ ] mj-group
+* [x] mj-group
 * [x] mj-hero
 * [x] mj-image
 * [x] mj-navbar

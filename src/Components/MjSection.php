@@ -83,7 +83,7 @@ class MjSection extends MjmlBodyComponent
             'wrapperFn' => function ($content, MjmlBodyComponent $component) {
                 return '
                     <!--[if mso | IE]>
-                    <td '.$this->htmlAttributes([
+                    <td '.$component->htmlAttributes([
                     'align' => $component->getAttribute('align'),
                     'class' => $component->getAttribute('css-class'),
                     'style' => 'tdOutlook',

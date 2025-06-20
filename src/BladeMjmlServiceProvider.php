@@ -2,6 +2,10 @@
 
 namespace colq2\BladeMjml;
 
+use colq2\BladeMjml\Components\MjAccordion;
+use colq2\BladeMjml\Components\MjAccordionElement;
+use colq2\BladeMjml\Components\MjAccordionText;
+use colq2\BladeMjml\Components\MjAccordionTitle;
 use colq2\BladeMjml\Components\MjBody;
 use colq2\BladeMjml\Components\MjButton;
 use colq2\BladeMjml\Components\MjCarousel;
@@ -123,5 +127,9 @@ class BladeMjmlServiceProvider extends PackageServiceProvider
         Blade::component(MjNavbar::class, 'mj-navbar');
         Blade::component(MjNavbarLink::class, 'mj-navbar-link');
         Blade::component(MjGroup::class, 'mj-group');
+        Blade::component(MjAccordion::class, 'mj-accordion');
+        Blade::component(MjAccordionElement::class, 'mj-accordion-element');
+        Blade::component(MjAccordionTitle::class, 'mj-accordion-title');
+        Blade::component(MjAccordionText::class, 'mj-accordion-text');
     }
 }

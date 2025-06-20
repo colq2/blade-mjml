@@ -101,7 +101,7 @@ class MjCarousel extends MjmlBodyComponent
     touch-action: manipulation;
   }
 
-  " . implode(',', array_map(function ($i) use ($carouselId, $length) {
+  " . implode(',', array_map(function ($i) use ($carouselId) {
                     return ".mj-carousel-{$carouselId}-radio:checked " . str_repeat('+ * ', $i) . "+ .mj-carousel-content .mj-carousel-image";
                 }, range(0, $length - 1))) . " {
     display: none !important;

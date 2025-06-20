@@ -299,7 +299,7 @@ class MjSocialElement extends MjmlBodyComponent
         </td>
         ';
 
-        $slotContent = trim((string) $data['slot'] ?? '');
+        $slotContent = trim((string) $data['slot']);
 
         $contentTd = $slotContent !== '' ? '
         <td '.$this->htmlAttributes(['style' => 'tdText']).'>

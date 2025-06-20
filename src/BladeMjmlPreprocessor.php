@@ -47,6 +47,8 @@ class BladeMjmlPreprocessor
         'mj-table',
         'mj-carousel',
         'mj-carousel-image',
+        'mj-navbar',
+        'mj-navbar-link',
     ];
 
     /**

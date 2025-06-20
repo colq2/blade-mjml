@@ -3,6 +3,7 @@
 namespace colq2\BladeMjml;
 
 use Closure;
+use Illuminate\Support\Arr;
 use Illuminate\View\Engines\CompilerEngine;
 
 class PostProcessingCompilerEngine extends CompilerEngine
@@ -25,7 +26,12 @@ class PostProcessingCompilerEngine extends CompilerEngine
         $contents = parent::get($path, $data);
 
         if (static::$enabled && ! empty(static::$postProcessors)) {
-            $contents = $this->applyPostProcessors($contents, $path, $data);
+            // only apply post processors if data missing bladeMjmlContext
+            // We do this because it else post processes each child component,
+            // we only want post process main component
+            if(Arr::get($data, 'componentName') === 'mjml') {
+                $contents = $this->applyPostProcessors($contents, $path, $data);
+            }
         }
 
         return $contents;

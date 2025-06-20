@@ -18,6 +18,8 @@ use colq2\BladeMjml\Components\MjHeadTitle;
 use colq2\BladeMjml\Components\MjHero;
 use colq2\BladeMjml\Components\MjImage;
 use colq2\BladeMjml\Components\Mjml;
+use colq2\BladeMjml\Components\MjNavbar;
+use colq2\BladeMjml\Components\MjNavbarLink;
 use colq2\BladeMjml\Components\MjRaw;
 use colq2\BladeMjml\Components\MjSection;
 use colq2\BladeMjml\Components\MjSocial;
@@ -83,7 +85,6 @@ class BladeMjmlServiceProvider extends PackageServiceProvider
         });
 
         PostProcessingCompilerEngine::postProcess('example', function ($content) {
-            // Example: Remove HTML comments
             return OutlookConditionals::process($content);
         });
 
@@ -118,5 +119,7 @@ class BladeMjmlServiceProvider extends PackageServiceProvider
         Blade::component(MjTable::class, 'mj-table');
         Blade::component(MjCarousel::class, 'mj-carousel');
         Blade::component(MjCarouselImage::class, 'mj-carousel-image');
+        Blade::component(MjNavbar::class, 'mj-navbar');
+        Blade::component(MjNavbarLink::class, 'mj-navbar-link');
     }
 }

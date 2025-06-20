@@ -45,6 +45,8 @@ class BladeMjmlPreprocessor
         'mj-social',
         'mj-social-element',
         'mj-table',
+        'mj-carousel',
+        'mj-carousel-image',
     ];
 
     /**
@@ -56,6 +58,16 @@ class BladeMjmlPreprocessor
      * The attribute name to add for sibling count
      */
     protected string $siblingCountAttribute = 'non-raw-siblings';
+
+    /**
+     * The attribute name to add for child count
+     */
+    protected string $childCountAttribute = 'children-count';
+
+    /**
+     * The attribute name to add for index
+     */
+    protected string $indexAttribute = 'index';
 
     /**
      * Create a new preprocessor instance
@@ -124,10 +136,18 @@ class BladeMjmlPreprocessor
             $directColumns = $this->getDirectChildrenByTagName($container, $columnTag);
             $siblingCount = count($directColumns);
 
+            $i = 0;
             foreach ($directColumns as $column) {
                 if ($column instanceof DOMElement) {
                     $column->setAttribute($this->siblingCountAttribute, (string) $siblingCount);
+                    $column->setAttribute($this->indexAttribute, (string) $i);
+                    $i++;
                 }
+            }
+
+            // also add count to the container itself
+            if ($container instanceof DOMElement) {
+                $container->setAttribute($this->childCountAttribute, (string) $siblingCount);
             }
         }
     }

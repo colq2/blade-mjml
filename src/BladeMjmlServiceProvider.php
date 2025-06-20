@@ -4,6 +4,8 @@ namespace colq2\BladeMjml;
 
 use colq2\BladeMjml\Components\MjBody;
 use colq2\BladeMjml\Components\MjButton;
+use colq2\BladeMjml\Components\MjCarousel;
+use colq2\BladeMjml\Components\MjCarouselImage;
 use colq2\BladeMjml\Components\MjColumn;
 use colq2\BladeMjml\Components\MjDivider;
 use colq2\BladeMjml\Components\MjHead;
@@ -69,7 +71,7 @@ class BladeMjmlServiceProvider extends PackageServiceProvider
         // Get all mjml components and get their names
         Blade::prepareStringsForCompilationUsing(function ($string) {
             // only preprocess if the string starts with <mjml
-            if (! Str::startsWith($string, '<mjml')) {
+            if (!Str::startsWith($string, '<mjml')) {
                 return $string;
             }
 
@@ -85,7 +87,7 @@ class BladeMjmlServiceProvider extends PackageServiceProvider
             return OutlookConditionals::process($content);
         });
 
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'blade-mjml');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'blade-mjml');
 
         Blade::componentNamespace('colq2\\BladeMjml\\Views\\Components', 'blade-mjml');
 
@@ -114,5 +116,7 @@ class BladeMjmlServiceProvider extends PackageServiceProvider
         Blade::component(MjSocial::class, 'mj-social');
         Blade::component(MjSocialElement::class, 'mj-social-element');
         Blade::component(MjTable::class, 'mj-table');
+        Blade::component(MjCarousel::class, 'mj-carousel');
+        Blade::component(MjCarouselImage::class, 'mj-carousel-image');
     }
 }

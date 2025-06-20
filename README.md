@@ -64,7 +64,7 @@ Head Components:
 Body Components:
 * [ ] mj-accordion
 * [x] mj-button
-* [ ] mj-carousel
+* [x] mj-carousel
 * [x] mj-column
 * [x] mj-divider
 * [ ] mj-group

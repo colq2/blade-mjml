@@ -194,4 +194,11 @@ class BladeMjmlGlobalContext
 
         return $this;
     }
+
+    public function addComponentHeadStyle(string|\Closure $headStyle): static
+    {
+        $this->componentsHeadStyle[] = $headStyle;
+
+        return $this;
+    }
 }

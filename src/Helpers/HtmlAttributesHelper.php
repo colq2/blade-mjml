@@ -2,6 +2,8 @@
 
 namespace colq2\BladeMjml\Helpers;
 
+use Illuminate\Support\Arr;
+
 class HtmlAttributesHelper
 {
     /**
@@ -54,7 +56,7 @@ class HtmlAttributesHelper
     public static function get($object, string $path, $default = null): mixed
     {
         if (is_array($object)) {
-            return $object[$path] ?? $default;
+            return Arr::get($object, $path, $default);
         } elseif (is_object($object)) {
             return $object->{$path} ?? $default;
         }

@@ -14,6 +14,7 @@ class BladeMjmlPreprocessor
      */
     protected array $columnContainerMap = [
         'mj-column' => ['mj-section', 'mj-group', 'mj-hero'],
+        'mj-group' => ['mj-section'],
         'mj-navbar-link' => ['mj-navbar'],
         'mj-carousel-image' => ['mj-carousel'],
         'mj-accordion-element' => ['mj-accordion'],
@@ -49,6 +50,7 @@ class BladeMjmlPreprocessor
         'mj-carousel-image',
         'mj-navbar',
         'mj-navbar-link',
+        'mj-group',
     ];
 
     /**

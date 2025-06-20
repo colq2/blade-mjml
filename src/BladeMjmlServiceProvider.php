@@ -8,6 +8,7 @@ use colq2\BladeMjml\Components\MjCarousel;
 use colq2\BladeMjml\Components\MjCarouselImage;
 use colq2\BladeMjml\Components\MjColumn;
 use colq2\BladeMjml\Components\MjDivider;
+use colq2\BladeMjml\Components\MjGroup;
 use colq2\BladeMjml\Components\MjHead;
 use colq2\BladeMjml\Components\MjHeadAttributes;
 use colq2\BladeMjml\Components\MjHeadBreakpoint;
@@ -121,5 +122,6 @@ class BladeMjmlServiceProvider extends PackageServiceProvider
         Blade::component(MjCarouselImage::class, 'mj-carousel-image');
         Blade::component(MjNavbar::class, 'mj-navbar');
         Blade::component(MjNavbarLink::class, 'mj-navbar-link');
+        Blade::component(MjGroup::class, 'mj-group');
     }
 }

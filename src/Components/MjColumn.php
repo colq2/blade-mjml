@@ -37,6 +37,7 @@ class MjColumn extends MjmlBodyComponent
         public string $verticalAlign = 'top',
         public string $width = '',
         public string $cssClass = '',
+        public ?string $mobileWidth = null,
         public int $nonRawSiblings = 1,
     ) {
         parent::__construct($bladeMjmlContext, $mjClass);
@@ -180,7 +181,7 @@ class MjColumn extends MjmlBodyComponent
     {
         $containerWidth = $this->context()['containerWidth'] ?? 600;
         $width = $this->getAttribute('width');
-        $mobileWidth = $this->getAttribute('mobileWidth');
+        $mobileWidth = $this->getAttribute('mobile-width');
 
         if ($mobileWidth !== 'mobileWidth') {
             return '100%';
@@ -204,7 +205,7 @@ class MjColumn extends MjmlBodyComponent
         return $width;
     }
 
-    protected function getWidthAsPixel(): string
+    public function getWidthAsPixel(): string
     {
         $containerWidth = (float) ($this->context()['containerWidth'] ?? 600);
         $width = $this->getParsedWidth(true);
@@ -341,14 +342,7 @@ class MjColumn extends MjmlBodyComponent
                 ? $this->renderGutter()
                 : $this->renderColumn();
 
-        return '<!--[if mso | IE]>
-        <td '.$this->htmlAttributes([
-            'align' => $this->getAttribute('align'),
-            'class' => $this->getAttribute('css-class'),
-            'style' => 'tdOutlook',
-        ]).'
-        >
-        <![endif]-->
+        return '
       <div
         '.$this->htmlAttributes([
             'class' => $classesName,
@@ -357,10 +351,6 @@ class MjColumn extends MjmlBodyComponent
       >
         '.$inner.'
       </div>
-      
-      <!--[if mso | IE]>
-      </td>
-      <![endif]-->
     ';
     }
 }

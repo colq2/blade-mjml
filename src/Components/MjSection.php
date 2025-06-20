@@ -80,6 +80,22 @@ class MjSection extends MjmlBodyComponent
 
         return array_merge($this->context(), [
             'containerWidth' => "{$box}px",
+            'wrapperFn' => function ($content, MjmlBodyComponent $component) {
+                return '
+                    <!--[if mso | IE]>
+                    <td '.$this->htmlAttributes([
+                        'align' => $component->getAttribute('align'),
+                        'class' => $component->getAttribute('css-class'),
+                        'style' => 'tdOutlook',
+                    ]).'
+                    >
+                    <![endif]-->
+                    '.$content.'
+                    <!--[if mso | IE]>
+                    </td>
+                    <![endif]-->
+                    ';
+            },
         ]);
     }
 

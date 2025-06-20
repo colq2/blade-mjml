@@ -70,7 +70,7 @@ Body Components:
 * [ ] mj-group
 * [x] mj-hero
 * [x] mj-image
-* [ ] mj-navbar
+* [x] mj-navbar
 * [x] mj-raw
 * [x] mj-section
 * [x] mj-social

@@ -75,7 +75,7 @@ Body Components:
 * [x] mj-section
 * [x] mj-social
 * [x] mj-spacer
-* [ ] mj-table
+* [x] mj-table
 * [x] mj-text
 * [x] mj-wrapper
 

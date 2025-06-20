@@ -103,16 +103,16 @@ class MjNavbarLink extends MjmlBodyComponent
     {
         $href = $this->getAttribute('href');
         $navbarBaseUrl = $this->getAttribute('navbar-base-url');
-        $link = $navbarBaseUrl ? $navbarBaseUrl . $href : $href;
+        $link = $navbarBaseUrl ? $navbarBaseUrl.$href : $href;
 
         $cssClass = $this->getAttribute('css-class');
-        $class = 'mj-link' . ($cssClass ? ' ' . $cssClass : '');
+        $class = 'mj-link'.($cssClass ? ' '.$cssClass : '');
 
         $conditionalTd = ConditionalTag::conditionalTag('
             <td '.$this->htmlAttributes([
-                'style' => 'td',
-                'class' => SuffixCssClasses::suffixCssClasses($this->getAttribute('css-class') ?: '', 'outlook'),
-            ]).'>
+            'style' => 'td',
+            'class' => SuffixCssClasses::suffixCssClasses($this->getAttribute('css-class') ?: '', 'outlook'),
+        ]).'>
         ');
 
         $conditionalTdEnd = ConditionalTag::conditionalTag('</td>');
@@ -120,13 +120,13 @@ class MjNavbarLink extends MjmlBodyComponent
         return '
         '.$conditionalTd.'
             <a '.$this->htmlAttributes([
-                'class' => $class,
-                'href' => $link,
-                'rel' => $this->getAttribute('rel'),
-                'target' => $this->getAttribute('target'),
-                'name' => $this->getAttribute('name'),
-                'style' => 'a',
-            ]).'>
+            'class' => $class,
+            'href' => $link,
+            'rel' => $this->getAttribute('rel'),
+            'target' => $this->getAttribute('target'),
+            'name' => $this->getAttribute('name'),
+            'style' => 'a',
+        ]).'>
                 {{ $slot }}
             </a>
         '.$conditionalTdEnd.'

@@ -24,6 +24,7 @@ function extractNavbarId(string $input): ?string
     if (preg_match('/<input type="checkbox" id="([^"]+)" class="mj-menu-checkbox"/', $input, $matches)) {
         return $matches[1];
     }
+
     return null;
 }
 

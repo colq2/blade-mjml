@@ -15,34 +15,33 @@ class MjNavbar extends MjmlBodyComponent
 
     public function __construct(
         public BladeMjmlGlobalContext $bladeMjmlContext,
-        public ?string                $mjClass = null,
-        public string                 $align = 'center',
-        public ?string                $baseUrl = null,
-        public ?string                $hamburger = null,
-        public string                 $icoAlign = 'center',
-        public string                 $icoOpen = '&#9776;',
-        public string                 $icoClose = '&#8855;',
-        public string                 $icoColor = '#000000',
-        public string                 $icoFontSize = '30px',
-        public string                 $icoFontFamily = 'Ubuntu, Helvetica, Arial, sans-serif',
-        public string                 $icoTextTransform = 'uppercase',
-        public string                 $icoPadding = '10px',
-        public string                 $icoPaddingLeft = '',
-        public string                 $icoPaddingTop = '',
-        public string                 $icoPaddingRight = '',
-        public string                 $icoPaddingBottom = '',
-        public string                 $icoTextDecoration = 'none',
-        public string                 $icoLineHeight = '30px',
-        public string                 $padding = '',
-        public string                 $paddingLeft = '',
-        public string                 $paddingTop = '',
-        public string                 $paddingRight = '',
-        public string                 $paddingBottom = '',
-        public string                 $cssClass = '',
-    )
-    {
+        public ?string $mjClass = null,
+        public string $align = 'center',
+        public ?string $baseUrl = null,
+        public ?string $hamburger = null,
+        public string $icoAlign = 'center',
+        public string $icoOpen = '&#9776;',
+        public string $icoClose = '&#8855;',
+        public string $icoColor = '#000000',
+        public string $icoFontSize = '30px',
+        public string $icoFontFamily = 'Ubuntu, Helvetica, Arial, sans-serif',
+        public string $icoTextTransform = 'uppercase',
+        public string $icoPadding = '10px',
+        public string $icoPaddingLeft = '',
+        public string $icoPaddingTop = '',
+        public string $icoPaddingRight = '',
+        public string $icoPaddingBottom = '',
+        public string $icoTextDecoration = 'none',
+        public string $icoLineHeight = '30px',
+        public string $padding = '',
+        public string $paddingLeft = '',
+        public string $paddingTop = '',
+        public string $paddingRight = '',
+        public string $paddingBottom = '',
+        public string $cssClass = '',
+    ) {
         parent::__construct($bladeMjmlContext, $mjClass);
-        $this->labelKey = 'mj-navbar-' . Str::random(8);
+        $this->labelKey = 'mj-navbar-'.Str::random(8);
     }
 
     public function getComponentName(): string
@@ -104,7 +103,7 @@ class MjNavbar extends MjmlBodyComponent
             'wrapperFn' => null,
             'attributes' => [
                 'navbar-base-url' => $this->getAttribute('base-url'),
-            ]
+            ],
         ]);
     }
 
@@ -154,33 +153,33 @@ class MjNavbar extends MjmlBodyComponent
     {
         $labelKey = $this->labelKey;
         $conditionalInput = ConditionalTag::msoConditionalTag(
-            '<input type="checkbox" id="' . $labelKey . '" class="mj-menu-checkbox" style="display:none !important; max-height:0; visibility:hidden;" />',
+            '<input type="checkbox" id="'.$labelKey.'" class="mj-menu-checkbox" style="display:none !important; max-height:0; visibility:hidden;" />',
             true
         );
 
         return '
-        ' . $conditionalInput . '
-        <div ' . $this->htmlAttributes([
-                'class' => 'mj-menu-trigger',
-                'style' => 'trigger',
-            ]) . '>
-            <label ' . $this->htmlAttributes([
-                'for' => $labelKey,
-                'class' => 'mj-menu-label',
-                'style' => 'label',
-                'align' => $this->getAttribute('ico-align'),
-            ]) . '>
-                <span ' . $this->htmlAttributes([
-                'class' => 'mj-menu-icon-open',
-                'style' => 'icoOpen',
-            ]) . '>' .
-            $this->getAttribute('ico-open') . '
+        '.$conditionalInput.'
+        <div '.$this->htmlAttributes([
+            'class' => 'mj-menu-trigger',
+            'style' => 'trigger',
+        ]).'>
+            <label '.$this->htmlAttributes([
+            'for' => $labelKey,
+            'class' => 'mj-menu-label',
+            'style' => 'label',
+            'align' => $this->getAttribute('ico-align'),
+        ]).'>
+                <span '.$this->htmlAttributes([
+            'class' => 'mj-menu-icon-open',
+            'style' => 'icoOpen',
+        ]).'>'.
+            $this->getAttribute('ico-open').'
                 </span>
-                <span ' . $this->htmlAttributes([
+                <span '.$this->htmlAttributes([
                 'class' => 'mj-menu-icon-close',
                 'style' => 'icoClose',
-            ]) . '>' .
-            $this->getAttribute('ico-close') . '
+            ]).'>'.
+            $this->getAttribute('ico-close').'
                 </span>
             </label>
         </div>
@@ -195,21 +194,21 @@ class MjNavbar extends MjmlBodyComponent
         $cssClass = $this->getAttribute('css-class');
 
         $conditionalTableStart = ConditionalTag::conditionalTag(
-            '<table role="presentation" border="0" cellpadding="0" cellspacing="0" align="' . $align . '"><tr>'
+            '<table role="presentation" border="0" cellpadding="0" cellspacing="0" align="'.$align.'"><tr>'
         );
         $conditionalTableEnd = ConditionalTag::conditionalTag(
             '</tr></table>'
         );
 
         return '
-        ' . $hamburger . '
-        <div ' . $this->htmlAttributes([
-                'class' => 'mj-inline-links' . ($cssClass ? ' ' . $cssClass : ''),
-                'style' => '',
-            ], ['style']) . '>
-            ' . $conditionalTableStart . '
+        '.$hamburger.'
+        <div '.$this->htmlAttributes([
+            'class' => 'mj-inline-links'.($cssClass ? ' '.$cssClass : ''),
+            'style' => '',
+        ], ['style']).'>
+            '.$conditionalTableStart.'
                 {{ $slot }}
-            ' . $conditionalTableEnd . '
+            '.$conditionalTableEnd.'
         </div>
         ';
     }

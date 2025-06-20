@@ -29,7 +29,7 @@ class PostProcessingCompilerEngine extends CompilerEngine
             // only apply post processors if data missing bladeMjmlContext
             // We do this because it else post processes each child component,
             // we only want post process main component
-            if(Arr::get($data, 'componentName') === 'mjml') {
+            if (Arr::get($data, 'componentName') === 'mjml') {
                 $contents = $this->applyPostProcessors($contents, $path, $data);
             }
         }

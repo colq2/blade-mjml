@@ -74,7 +74,7 @@ class MjGroup extends MjmlBodyComponent
             ]);
 
             if ($unit === '%') {
-                return ((100 * $parsedWidth) / ((float) $groupWidth)) . 'px';
+                return ((100 * $parsedWidth) / ((float) $groupWidth)).'px';
             }
 
             return $parsedWidth.$unit;

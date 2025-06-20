@@ -105,7 +105,7 @@ HTML;
     expect((string) blade($template))->toEqualMjmlHtml($template);
 });
 
-it('renders mjml example', function(){
+it('renders mjml example', function () {
     $template = <<<'HTML'
 <mjml>
   <mj-body>

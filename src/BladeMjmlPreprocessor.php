@@ -44,7 +44,7 @@ class BladeMjmlPreprocessor
         'mj-image',
         'mj-social',
         'mj-social-element',
-        'mj-table'
+        'mj-table',
     ];
 
     /**

@@ -101,7 +101,7 @@ class MjTable extends MjmlBodyComponent
             'width' => $this->getWidth(),
             'border' => '0',
             'style' => 'table',
-        ]) .'>
+        ]).'>
             {{ $slot }}
         </table>';
 

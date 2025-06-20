@@ -62,9 +62,6 @@ class MjGroup extends MjmlBodyComponent
         $groupWidth = $containerWidth;
 
         $getElementWidth = function ($width) use ($contextContainerWidth, $groupWidth, $nonRawSiblings) {
-            // TODO
-
-            dump('getElementWidth called with width: '.$width);
             if (! $width) {
                 return ((int) $contextContainerWidth / (int) $nonRawSiblings).'px';
             }

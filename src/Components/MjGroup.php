@@ -44,7 +44,7 @@ class MjGroup extends MjmlBodyComponent
             $this->getShorthandAttrValue('padding', 'left') +
             $this->getShorthandAttrValue('padding', 'right');
 
-        $containerWidth = $this->getAttribute('width') ?: (floatval($parentWidth) / $nonRawSiblings) . 'px';
+        $containerWidth = $this->getAttribute('width') ?: (floatval($parentWidth) / $nonRawSiblings).'px';
 
         $widthParserResult = WidthParser::widthParser($containerWidth, [
             'parseFloatToInt' => false,
@@ -53,9 +53,9 @@ class MjGroup extends MjmlBodyComponent
         $unit = $widthParserResult['unit'];
 
         if ($unit === '%') {
-            $containerWidth = ((floatval($parentWidth) * $parsedWidth / 100) - $paddingSize) . 'px';
+            $containerWidth = ((floatval($parentWidth) * $parsedWidth / 100) - $paddingSize).'px';
         } else {
-            $containerWidth = ($parsedWidth - $paddingSize) . 'px';
+            $containerWidth = ($parsedWidth - $paddingSize).'px';
         }
 
         $contextContainerWidth = $this->context()['containerWidth'];
@@ -64,41 +64,41 @@ class MjGroup extends MjmlBodyComponent
         $getElementWidth = function ($width) use ($contextContainerWidth, $groupWidth, $nonRawSiblings) {
             // TODO
 
-            dump('getElementWidth called with width: ' . $width);
-            if(!$width) {
-                return ((int) $contextContainerWidth / (int) $nonRawSiblings) . 'px';
+            dump('getElementWidth called with width: '.$width);
+            if (! $width) {
+                return ((int) $contextContainerWidth / (int) $nonRawSiblings).'px';
             }
 
             ['unit' => $unit, 'parsedWidth' => $parsedWidth] = WidthParser::widthParser($width, [
                 'parseFloatToInt' => false,
             ]);
 
-            if($unit === '%') {
-                return ((100 * $parsedWidth) / $groupWidth) . 'px';
+            if ($unit === '%') {
+                return ((100 * $parsedWidth) / $groupWidth).'px';
             }
 
-            return $parsedWidth . $unit;
+            return $parsedWidth.$unit;
         };
 
         return array_merge($this->context(), [
             'containerWidth' => $containerWidth,
             'attributes' => [
-                'mobile-width' => 'mobileWidth'
+                'mobile-width' => 'mobileWidth',
             ],
             'wrapperFn' => function ($content, MjmlBodyComponent $component) use ($getElementWidth) {
                 return '
                     <!--[if mso | IE]>
                       <td
                         '.$component->htmlAttributes([
-                            'style' => [
-                                'align' => $component->getAttribute('align'),
-                                'vertical-align' => $component->getAttribute('vertical-align'),
-                                'width' => $getElementWidth(method_exists($component, 'getWidthAsPixel')
-                                    ? $component->getWidthAsPixel()
-                                    : $component->getAttribute('width'),
-                                ),
-                            ]
-                        ]).'
+                    'style' => [
+                        'align' => $component->getAttribute('align'),
+                        'vertical-align' => $component->getAttribute('vertical-align'),
+                        'width' => $getElementWidth(method_exists($component, 'getWidthAsPixel')
+                            ? $component->getWidthAsPixel()
+                            : $component->getAttribute('width'),
+                        ),
+                    ],
+                ]).'
                       >
                       <![endif]-->
                       '.$content.'
@@ -133,7 +133,7 @@ class MjGroup extends MjmlBodyComponent
     protected function getParsedWidth(bool $toString = false): string|array
     {
         $nonRawSiblings = $this->nonRawSiblings;
-        $width = $this->getAttribute('width') ?: (100 / $nonRawSiblings) . '%';
+        $width = $this->getAttribute('width') ?: (100 / $nonRawSiblings).'%';
 
         $widthParserResult = WidthParser::widthParser($width, [
             'parseFloatToInt' => false,
@@ -142,7 +142,7 @@ class MjGroup extends MjmlBodyComponent
         $unit = $widthParserResult['unit'];
 
         if ($toString) {
-            return $parsedWidth . $unit;
+            return $parsedWidth.$unit;
         }
 
         return [
@@ -157,9 +157,10 @@ class MjGroup extends MjmlBodyComponent
         ['parsedWidth' => $parsedWidth, 'unit' => $unit] = $this->getParsedWidth();
 
         if ($unit === '%') {
-            return ((float)$containerWidth * $parsedWidth / 100) . 'px';
+            return ((float) $containerWidth * $parsedWidth / 100).'px';
         }
-        return $parsedWidth . 'px';
+
+        return $parsedWidth.'px';
     }
 
     protected function getColumnClass(): string
@@ -190,28 +191,28 @@ class MjGroup extends MjmlBodyComponent
 
     public function renderMjml(array $data): View|string
     {
-        $classesName = $this->getColumnClass() . ' mj-outlook-group-fix';
+        $classesName = $this->getColumnClass().' mj-outlook-group-fix';
         $cssClass = $this->getAttribute('css-class');
         if ($cssClass) {
-            $classesName .= ' ' . $cssClass;
+            $classesName .= ' '.$cssClass;
         }
 
         return '
       <div
-        ' . $this->htmlAttributes([
+        '.$this->htmlAttributes([
             'class' => $classesName,
             'style' => 'div',
-        ]) . '
+        ]).'
       >
         <!--[if mso | IE]>
         <table
-          ' . $this->htmlAttributes([
+          '.$this->htmlAttributes([
             'bgcolor' => $this->getAttribute('background-color') === 'none' ? null : $this->getAttribute('background-color'),
             'border' => '0',
             'cellpadding' => '0',
             'cellspacing' => '0',
             'role' => 'presentation',
-        ]) . '
+        ]).'
         >
           <tr>
         <![endif]-->

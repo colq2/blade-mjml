@@ -84,10 +84,10 @@ class MjSection extends MjmlBodyComponent
                 return '
                     <!--[if mso | IE]>
                     <td '.$this->htmlAttributes([
-                        'align' => $component->getAttribute('align'),
-                        'class' => $component->getAttribute('css-class'),
-                        'style' => 'tdOutlook',
-                    ]).'
+                    'align' => $component->getAttribute('align'),
+                    'class' => $component->getAttribute('css-class'),
+                    'style' => 'tdOutlook',
+                ]).'
                     >
                     <![endif]-->
                     '.$content.'

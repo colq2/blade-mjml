@@ -13,7 +13,7 @@ class SuffixCssClasses
         }
 
         return Str::of($classes)->explode($classes)
-            ->map(fn($class) => $class . '-' . $suffix)
+            ->map(fn ($class) => $class.'-'.$suffix)
             ->implode(' ');
     }
 }

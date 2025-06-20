@@ -10,33 +10,31 @@ use Illuminate\Support\Str;
 
 class MjCarousel extends MjmlBodyComponent
 {
-
     public string $carouselId;
 
     public function __construct(
         public BladeMjmlGlobalContext $bladeMjmlContext,
-        public ?string                $mjClass = null,
-        public string                 $align = 'center',
-        public string                 $borderRadius = '6px',
-        public string                 $containerBackgroundColor = '',
-        public string                 $iconWidth = '44px',
-        public string                 $leftIcon = 'https://i.imgur.com/xTh3hln.png',
-        public string                 $padding = '',
-        public string                 $paddingTop = '',
-        public string                 $paddingBottom = '',
-        public string                 $paddingLeft = '',
-        public string                 $paddingRight = '',
-        public string                 $rightIcon = 'https://i.imgur.com/os7o9kz.png',
-        public string                 $thumbnails = 'visible',
-        public string                 $tbBorder = '2px solid transparent',
-        public string                 $tbBorderRadius = '6px',
-        public string                 $tbHoverBorderColor = '#fead0d',
-        public string                 $tbSelectedBorderColor = '#ccc',
-        public string                 $tbWidth = '',
-        public string                 $cssClass = '',
-        public int                    $childrenCount = 0,
-    )
-    {
+        public ?string $mjClass = null,
+        public string $align = 'center',
+        public string $borderRadius = '6px',
+        public string $containerBackgroundColor = '',
+        public string $iconWidth = '44px',
+        public string $leftIcon = 'https://i.imgur.com/xTh3hln.png',
+        public string $padding = '',
+        public string $paddingTop = '',
+        public string $paddingBottom = '',
+        public string $paddingLeft = '',
+        public string $paddingRight = '',
+        public string $rightIcon = 'https://i.imgur.com/os7o9kz.png',
+        public string $thumbnails = 'visible',
+        public string $tbBorder = '2px solid transparent',
+        public string $tbBorderRadius = '6px',
+        public string $tbHoverBorderColor = '#fead0d',
+        public string $tbSelectedBorderColor = '#ccc',
+        public string $tbWidth = '',
+        public string $cssClass = '',
+        public int $childrenCount = 0,
+    ) {
         $this->carouselId = Str::random();
         parent::__construct($bladeMjmlContext, $mjClass);
     }
@@ -75,7 +73,9 @@ class MjCarousel extends MjmlBodyComponent
         $carouselId = $this->carouselId;
 
         return function () use ($carouselId, $length) {
-            if (!$length) return '';
+            if (! $length) {
+                return '';
+            }
 
             $carouselCss = "
   .mj-carousel {
@@ -86,7 +86,7 @@ class MjCarousel extends MjmlBodyComponent
 
   .mj-carousel-{$carouselId}-icons-cell {
     display: table-cell !important;
-    width: " . $this->getAttribute('icon-width') . " !important;
+    width: ".$this->getAttribute('icon-width').' !important;
   }
 
   .mj-carousel-radio,
@@ -101,33 +101,33 @@ class MjCarousel extends MjmlBodyComponent
     touch-action: manipulation;
   }
 
-  " . implode(',', array_map(function ($i) use ($carouselId) {
-                    return ".mj-carousel-{$carouselId}-radio:checked " . str_repeat('+ * ', $i) . "+ .mj-carousel-content .mj-carousel-image";
-                }, range(0, $length - 1))) . " {
+  '.implode(',', array_map(function ($i) use ($carouselId) {
+                return ".mj-carousel-{$carouselId}-radio:checked ".str_repeat('+ * ', $i).'+ .mj-carousel-content .mj-carousel-image';
+            }, range(0, $length - 1))).' {
     display: none !important;
   }
 
-  " . implode(',', array_map(function ($i) use ($carouselId, $length) {
-                    return ".mj-carousel-{$carouselId}-radio-" . ($i + 1) . ":checked " . str_repeat('+ * ', $length - $i - 1) . "+ .mj-carousel-content .mj-carousel-image-" . ($i + 1);
-                }, range(0, $length - 1))) . " {
+  '.implode(',', array_map(function ($i) use ($carouselId, $length) {
+                return ".mj-carousel-{$carouselId}-radio-".($i + 1).':checked '.str_repeat('+ * ', $length - $i - 1).'+ .mj-carousel-content .mj-carousel-image-'.($i + 1);
+            }, range(0, $length - 1))).' {
     display: block !important;
   }
 
   .mj-carousel-previous-icons,
   .mj-carousel-next-icons,
-  " . implode(',', array_map(function ($i) use ($carouselId, $length) {
-                    return ".mj-carousel-{$carouselId}-radio-" . ($i + 1) . ":checked " . str_repeat('+ * ', $length - $i - 1) . "+ .mj-carousel-content .mj-carousel-next-" . ((($i + (1 % $length) + $length) % $length) + 1);
-                }, range(0, $length - 1))) . ",
-  " . implode(',', array_map(function ($i) use ($carouselId, $length) {
-                    return ".mj-carousel-{$carouselId}-radio-" . ($i + 1) . ":checked " . str_repeat('+ * ', $length - $i - 1) . "+ .mj-carousel-content .mj-carousel-previous-" . ((($i - (1 % $length) + $length) % $length) + 1);
-                }, range(0, $length - 1))) . " {
+  '.implode(',', array_map(function ($i) use ($carouselId, $length) {
+                return ".mj-carousel-{$carouselId}-radio-".($i + 1).':checked '.str_repeat('+ * ', $length - $i - 1).'+ .mj-carousel-content .mj-carousel-next-'.((($i + (1 % $length) + $length) % $length) + 1);
+            }, range(0, $length - 1))).',
+  '.implode(',', array_map(function ($i) use ($carouselId, $length) {
+                return ".mj-carousel-{$carouselId}-radio-".($i + 1).':checked '.str_repeat('+ * ', $length - $i - 1).'+ .mj-carousel-content .mj-carousel-previous-'.((($i - (1 % $length) + $length) % $length) + 1);
+            }, range(0, $length - 1))).' {
     display: block !important;
   }
 
-  " . implode(',', array_map(function ($i) use ($carouselId, $length) {
-                    return ".mj-carousel-{$carouselId}-radio-" . ($i + 1) . ":checked " . str_repeat('+ * ', $length - $i - 1) . "+ .mj-carousel-content .mj-carousel-{$carouselId}-thumbnail-" . ($i + 1);
-                }, range(0, $length - 1))) . " {
-    border-color: " . $this->getAttribute('tb-selected-border-color') . " !important;
+  '.implode(',', array_map(function ($i) use ($carouselId, $length) {
+                return ".mj-carousel-{$carouselId}-radio-".($i + 1).':checked '.str_repeat('+ * ', $length - $i - 1)."+ .mj-carousel-content .mj-carousel-{$carouselId}-thumbnail-".($i + 1);
+            }, range(0, $length - 1))).' {
+    border-color: '.$this->getAttribute('tb-selected-border-color').' !important;
   }
 
   .mj-carousel-image img + div,
@@ -135,22 +135,22 @@ class MjCarousel extends MjmlBodyComponent
     display: none !important;
   }
 
-  " . implode(',', array_map(function ($i) use ($carouselId, $length) {
-                    return ".mj-carousel-{$carouselId}-thumbnail:hover " . str_repeat('+ * ', $length - $i - 1) . "+ .mj-carousel-main .mj-carousel-image";
-                }, range(0, $length - 1))) . " {
+  '.implode(',', array_map(function ($i) use ($carouselId, $length) {
+                return ".mj-carousel-{$carouselId}-thumbnail:hover ".str_repeat('+ * ', $length - $i - 1).'+ .mj-carousel-main .mj-carousel-image';
+            }, range(0, $length - 1))).' {
     display: none !important;
   }
 
   .mj-carousel-thumbnail:hover {
-    border-color: " . $this->getAttribute('tb-hover-border-color') . " !important;
+    border-color: '.$this->getAttribute('tb-hover-border-color').' !important;
   }
 
-  " . implode(',', array_map(function ($i) use ($carouselId, $length) {
-                    return ".mj-carousel-{$carouselId}-thumbnail-" . ($i + 1) . ":hover " . str_repeat('+ * ', $length - $i - 1) . "+ .mj-carousel-main .mj-carousel-image-" . ($i + 1);
-                }, range(0, $length - 1))) . " {
+  '.implode(',', array_map(function ($i) use ($carouselId, $length) {
+                return ".mj-carousel-{$carouselId}-thumbnail-".($i + 1).':hover '.str_repeat('+ * ', $length - $i - 1).'+ .mj-carousel-main .mj-carousel-image-'.($i + 1);
+            }, range(0, $length - 1))).' {
     display: block !important;
   }
-  ";
+  ';
 
             $fallback = "
     .mj-carousel noinput { display:block !important; }
@@ -167,13 +167,13 @@ class MjCarousel extends MjmlBodyComponent
             display: none !important;
         }
 
-        .mj-carousel-{$carouselId}-radio-1:checked " . str_repeat('+ *', $length - 1) . "+ .mj-carousel-content .mj-carousel-{$carouselId}-thumbnail-1 {
+        .mj-carousel-{$carouselId}-radio-1:checked ".str_repeat('+ *', $length - 1)."+ .mj-carousel-content .mj-carousel-{$carouselId}-thumbnail-1 {
             border-color: transparent;
         }
     }
   ";
 
-            return $carouselCss . "\n" . $fallback;
+            return $carouselCss."\n".$fallback;
         };
 
     }
@@ -182,8 +182,7 @@ class MjCarousel extends MjmlBodyComponent
     {
         $length = count($this->bladeMjmlContext->contextStack);
 
-        Arr::set($this->bladeMjmlContext->contextStack, $length - 1 . '.childrenBucket', []);
-
+        Arr::set($this->bladeMjmlContext->contextStack, $length - 1 .'.childrenBucket', []);
 
         return array_merge($this->context(), [
             'carouselId' => $this->carouselId,
@@ -220,7 +219,7 @@ class MjCarousel extends MjmlBodyComponent
             'images' => [
                 'td' => [
                     'padding' => '0px',
-                ]
+                ],
             ],
             'controls' => [
                 'div' => [
@@ -237,7 +236,7 @@ class MjCarousel extends MjmlBodyComponent
                     'display' => 'none',
                     'mso-hide' => 'all',
                     'padding' => '0px',
-                ]
+                ],
             ],
             // from children
             'radio' => [
@@ -256,9 +255,9 @@ class MjCarousel extends MjmlBodyComponent
         }
 
         return $this->getAttribute('tb-width') ?: min(
-                Arr::get($this->context(), 'parentWidth', 600) / $this->childrenCount,
-                110
-            ) . 'px';
+            Arr::get($this->context(), 'parentWidth', 600) / $this->childrenCount,
+            110
+        ).'px';
     }
 
     public function imagesAttribute(): string
@@ -272,7 +271,7 @@ class MjCarousel extends MjmlBodyComponent
             ->map(function ($child) {
                 return $child['renderedRadio'];
             })
-            ->join(" ");
+            ->join(' ');
     }
 
     public function generateThumbnails(): string
@@ -281,47 +280,48 @@ class MjCarousel extends MjmlBodyComponent
             ->map(function ($child) {
                 return $child['renderedThumbnail'];
             })
-            ->join(" ");
+            ->join(' ');
     }
 
     public function generateControls(string $direction, string $icon): string
     {
         $inner = collect(range(0, $this->childrenCount - 1))
             ->map(function ($i) use ($direction, $icon) {
-                $next = $i+1;
+                $next = $i + 1;
+
                 return '
-                    <label ' .
+                    <label '.
                     $this->htmlAttributes([
                         'for' => "mj-carousel-{$this->carouselId}-radio-{$next}",
                         'class' => "mj-carousel-{$direction} mj-carousel-{$direction}-{$next}",
-                    ]) . '>
-                        <img ' .
+                    ]).'>
+                        <img '.
                     $this->htmlAttributes([
                         'src' => $icon,
                         'alt' => $direction,
                         'style' => 'controls.img',
-                        'width' => (int)$this->getAttribute('icon-width'),
-                    ], ['alt']) . '
+                        'width' => (int) $this->getAttribute('icon-width'),
+                    ], ['alt']).'
                         />
                     </label>
                 ';
             })
-            ->join(" ");
+            ->join(' ');
 
         return '
-            <td ' .
+            <td '.
             $this->htmlAttributes([
                 'class' => "mj-carousel-{$this->carouselId}-icons-cell",
                 'style' => 'controls.td',
-            ]) . '
+            ]).'
             >
-                <div ' .
+                <div '.
             $this->htmlAttributes([
                 'class' => "mj-carousel-{$direction}-icons",
                 'style' => 'controls.div',
-            ]) . '
+            ]).'
                 >
-                    ' . $inner . '
+                    '.$inner.'
                 </div>
             </td>
         ';
@@ -330,15 +330,15 @@ class MjCarousel extends MjmlBodyComponent
     public function generateImages(): string
     {
         return '
-            <td ' .
+            <td '.
             $this->htmlAttributes([
                 'style' => 'images.td',
-            ]) . '
+            ]).'
             >
-                <div ' .
+                <div '.
             $this->htmlAttributes([
-                'class' => 'mj-carousel-images'
-            ]) . '
+                'class' => 'mj-carousel-images',
+            ]).'
                 >
                     {{ $slot }}
                 </div>
@@ -349,7 +349,7 @@ class MjCarousel extends MjmlBodyComponent
     public function generateCarousel(): string
     {
         return '
-            <table ' .
+            <table '.
             $this->htmlAttributes([
                 'style' => 'carousel.table',
                 'border' => '0',
@@ -358,13 +358,13 @@ class MjCarousel extends MjmlBodyComponent
                 'width' => '100%',
                 'role' => 'presentation',
                 'class' => 'mj-carousel-main',
-            ]) . '
+            ]).'
             >
                 <tbody>
                     <tr>
-                        ' . $this->generateControls('previous', $this->getAttribute('left-icon')) . '
-                        ' . $this->generateImages() . '
-                        ' . $this->generateControls('next', $this->getAttribute('right-icon')) . '
+                        '.$this->generateControls('previous', $this->getAttribute('left-icon')).'
+                        '.$this->generateImages().'
+                        '.$this->generateControls('next', $this->getAttribute('right-icon')).'
                     </tr>
                 </tbody>
             </table>
@@ -385,24 +385,24 @@ class MjCarousel extends MjmlBodyComponent
     public function renderMjml(array $data): View|string
     {
         return ConditionalTag::msoConditionalTag('
-            <div ' .
+            <div '.
                 $this->htmlAttributes([
-                    'class' => 'mj-carousel'
-                ]) . '
+                    'class' => 'mj-carousel',
+                ]).'
             >
-            ' . $this->generateRadios() . '
-                <div ' .
+            '.$this->generateRadios().'
+                <div '.
                 $this->htmlAttributes([
                     'class' => "mj-carousel-content mj-carousel-{$this->carouselId}-content",
                     'style' => 'carousel.div',
-                ]) . '
+                ]).'
                 >
-                    ' . $this->generateThumbnails() . '
-                    ' . $this->generateCarousel() . '
+                    '.$this->generateThumbnails().'
+                    '.$this->generateCarousel().'
                 </div>
             </div>
         ', true)
-            . ' ' .
+            .' '.
             $this->renderFallback();
     }
 }

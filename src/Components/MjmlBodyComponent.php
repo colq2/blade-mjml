@@ -28,7 +28,7 @@ abstract class MjmlBodyComponent extends MjmlComponent
             $this->bladeMjmlContext->addHeadStyle($this->getComponentName(), $headStyle);
         }
 
-        if($componentHeadStyle = $this->componentHeadStyle()) {
+        if ($componentHeadStyle = $this->componentHeadStyle()) {
             $this->bladeMjmlContext->addComponentHeadStyle($componentHeadStyle);
         }
     }

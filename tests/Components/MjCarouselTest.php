@@ -5,6 +5,7 @@ function extractMjCarouselId(string $input): ?string
     if (preg_match('/\.mj-carousel-([a-zA-Z0-9]+)-icons-cell\s*\{/', $input, $matches)) {
         return $matches[1];
     }
+
     return null;
 }
 
@@ -13,12 +14,12 @@ function prepareMjCarouselHtml(string $mjmlTemplate): array
     $expectedHtml = convertMjml($mjmlTemplate);
     $expectedCarouselId = extractMjCarouselId($expectedHtml);
 
-    $generatedHtml = (string)blade($mjmlTemplate);
+    $generatedHtml = (string) blade($mjmlTemplate);
     $generatedCarouselId = extractMjCarouselId($generatedHtml);
 
     return [
         'expectedHtml' => $expectedHtml,
-        'generatedHtml' => str_replace($generatedCarouselId, $expectedCarouselId, $generatedHtml)
+        'generatedHtml' => str_replace($generatedCarouselId, $expectedCarouselId, $generatedHtml),
     ];
 }
 
@@ -39,8 +40,7 @@ it('renders carousel with default attributes', function () {
 </mjml>
 HTML;
 
-
-    ['expectedHtml' => $expectedHtml, 'generatedHtml' =>  $generatedHtml] = prepareMjCarouselHtml($template);
+    ['expectedHtml' => $expectedHtml, 'generatedHtml' => $generatedHtml] = prepareMjCarouselHtml($template);
 
     expect($generatedHtml)->toEqualHtml($expectedHtml);
 

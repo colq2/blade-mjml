@@ -71,7 +71,7 @@ class BladeMjmlServiceProvider extends PackageServiceProvider
         // Get all mjml components and get their names
         Blade::prepareStringsForCompilationUsing(function ($string) {
             // only preprocess if the string starts with <mjml
-            if (!Str::startsWith($string, '<mjml')) {
+            if (! Str::startsWith($string, '<mjml')) {
                 return $string;
             }
 
@@ -87,7 +87,7 @@ class BladeMjmlServiceProvider extends PackageServiceProvider
             return OutlookConditionals::process($content);
         });
 
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'blade-mjml');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'blade-mjml');
 
         Blade::componentNamespace('colq2\\BladeMjml\\Views\\Components', 'blade-mjml');
 

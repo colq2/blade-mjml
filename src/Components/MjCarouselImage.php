@@ -11,23 +11,22 @@ class MjCarouselImage extends MjmlBodyComponent
 {
     public function __construct(
         public BladeMjmlGlobalContext $bladeMjmlContext,
-        public ?string                $mjClass = null,
-        public string                 $alt = '',
-        public string                 $href = '',
-        public string                 $rel = '',
-        public string                 $target = '_blank',
-        public string                 $title = '',
-        public string                 $src = '',
-        public string                 $thumbnailsSrc = '',
-        public string                 $borderRadius = '',
-        public string                 $tbBorder = '',
-        public string                 $tbBorderRadius = '',
-        public string                 $tbWidth = '',
-        public string                 $cssClass = '',
-        public string                 $carouselId = '',
-        public int                    $index = 0,
-    )
-    {
+        public ?string $mjClass = null,
+        public string $alt = '',
+        public string $href = '',
+        public string $rel = '',
+        public string $target = '_blank',
+        public string $title = '',
+        public string $src = '',
+        public string $thumbnailsSrc = '',
+        public string $borderRadius = '',
+        public string $tbBorder = '',
+        public string $tbBorderRadius = '',
+        public string $tbWidth = '',
+        public string $cssClass = '',
+        public string $carouselId = '',
+        public int $index = 0,
+    ) {
         parent::__construct($bladeMjmlContext, $mjClass);
     }
 
@@ -68,13 +67,13 @@ class MjCarouselImage extends MjmlBodyComponent
                 'otherImageDiv' => [
                     'display' => 'none',
                     'mso-hide' => 'all',
-                ]
+                ],
             ],
             'radio' => [
                 'input' => [
                     'display' => 'none',
                     'mso-hide' => 'all',
-                ]
+                ],
             ],
             'thumbnails' => [
                 'a' => [
@@ -88,11 +87,10 @@ class MjCarouselImage extends MjmlBodyComponent
                     'display' => 'block',
                     'width' => '100%',
                     'height' => 'auto',
-                ]
+                ],
             ],
         ];
     }
-
 
     public function renderThumbnail(): string
     {
@@ -107,24 +105,24 @@ class MjCarouselImage extends MjmlBodyComponent
         $width = $this->getAttribute('tb-width');
 
         return '
-            <a ' . $this->htmlAttributes([
-                'style' => 'thumbnails.a',
-                'href' => '#' . $imgIndex,
-                'target' => $this->getAttribute('target'),
-                'class' => "mj-carousel-thumbnail mj-carousel-{$carouselId}-thumbnail mj-carousel-{$carouselId}-thumbnail-{$imgIndex} {$cssClass}"
-            ]) . '
+            <a '.$this->htmlAttributes([
+            'style' => 'thumbnails.a',
+            'href' => '#'.$imgIndex,
+            'target' => $this->getAttribute('target'),
+            'class' => "mj-carousel-thumbnail mj-carousel-{$carouselId}-thumbnail mj-carousel-{$carouselId}-thumbnail-{$imgIndex} {$cssClass}",
+        ]).'
             >
-                <label ' . $this->htmlAttributes([
-                'for' => "mj-carousel-{$carouselId}-radio-{$imgIndex}"
-            ]) . '>
-                    <img ' .
+                <label '.$this->htmlAttributes([
+            'for' => "mj-carousel-{$carouselId}-radio-{$imgIndex}",
+        ]).'>
+                    <img '.
             $this->htmlAttributes([
                 'style' => 'thumbnails.img',
                 'src' => $this->getAttribute('thumbnails-src') ?: $src,
                 'alt' => $alt,
-                'width' => (int)$width,
+                'width' => (int) $width,
             ], ['alt'])
-            . ' />
+            .' />
                 </label>
             </a>
         ';
@@ -135,57 +133,56 @@ class MjCarouselImage extends MjmlBodyComponent
         $carouselId = $this->context()['carouselId'];
         $index = $this->index;
         $next = $index + 1;
+
         return '
             <input
-                ' . $this->htmlAttributes([
-                    'class' => "mj-carousel-radio mj-carousel-{$carouselId}-radio mj-carousel-{$carouselId}-radio-{$next}",
-                    'checked' => $index === 0 ? 'checked' : null,
-                    'type' => 'radio',
-                    'name' => "mj-carousel-radio-{$carouselId}",
-                    'id' => "mj-carousel-{$carouselId}-radio-{$next}",
-                    'style' => 'radio.input'
-                ]) . '
+                '.$this->htmlAttributes([
+            'class' => "mj-carousel-radio mj-carousel-{$carouselId}-radio mj-carousel-{$carouselId}-radio-{$next}",
+            'checked' => $index === 0 ? 'checked' : null,
+            'type' => 'radio',
+            'name' => "mj-carousel-radio-{$carouselId}",
+            'id' => "mj-carousel-{$carouselId}-radio-{$next}",
+            'style' => 'radio.input',
+        ]).'
             />
         ';
     }
-
 
     public function renderMjml(array $data): View|string
     {
 
         // maybe we can set something for the parent?
-        $image = '<img ' .
+        $image = '<img '.
             $this->htmlAttributes([
                 'title' => $this->getAttribute('title'),
                 'src' => $this->getAttribute('src'),
                 'alt' => $this->getAttribute('alt'),
                 'style' => 'images.img',
-                'width' => (int)$this->context()['containerWidth'],
+                'width' => (int) $this->context()['containerWidth'],
                 'border' => '0',
-            ], ['alt']) . ' />
+            ], ['alt']).' />
         ';
 
         $cssClass = $this->getAttribute('css-class');
 
         if ($this->getAttribute('href')) {
-            $image = '<a ' . $this->htmlAttributes([
-                    'href' => $this->getAttribute('href'),
-                    'rel' => $this->getAttribute('rel'),
-                    'target' => $this->getAttribute('target'),
-                ]) . '>' . $image . '</a>';
+            $image = '<a '.$this->htmlAttributes([
+                'href' => $this->getAttribute('href'),
+                'rel' => $this->getAttribute('rel'),
+                'target' => $this->getAttribute('target'),
+            ]).'>'.$image.'</a>';
         }
-
 
         $index = $this->index;
         $nextIndex = $index + 1;
 
         $content = '
-            <div ' .
+            <div '.
                 $this->htmlAttributes([
                     'class' => "mj-carousel-image mj-carousel-image-{$nextIndex} {$cssClass}",
                     'style' => $index === 0 ? 'images.firstImageDiv' : 'images.otherImageDiv',
-                ]) . '>
-            ' . $image . '
+                ]).'>
+            '.$image.'
             </div>
         ';
 
@@ -194,7 +191,7 @@ class MjCarouselImage extends MjmlBodyComponent
         // set children context for parent, else it is not poossible currently
         $contextLength = count($this->bladeMjmlContext->contextStack);
         $childrenBucketLength = count($this->bladeMjmlContext->contextStack[$contextLength - 2]['childrenBucket'] ?? []);
-        Arr::set($this->bladeMjmlContext->contextStack, $contextLength - 2 . '.childrenBucket.' . $childrenBucketLength, [
+        Arr::set($this->bladeMjmlContext->contextStack, $contextLength - 2 .'.childrenBucket.'.$childrenBucketLength, [
             'css-class' => $this->getAttribute('css-class'),
 
             'renderedThumbnail' => $this->renderThumbnail(),

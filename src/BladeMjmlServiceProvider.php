@@ -33,9 +33,7 @@ use colq2\BladeMjml\Components\MjSpacer;
 use colq2\BladeMjml\Components\MjTable;
 use colq2\BladeMjml\Components\MjText;
 use colq2\BladeMjml\Components\MjWrapper;
-use colq2\BladeMjml\Helpers\OutlookConditionals;
 use Illuminate\Support\Facades\Blade;
-use Illuminate\Support\Str;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -64,7 +62,7 @@ class BladeMjmlServiceProvider extends PackageServiceProvider
             $resolver->register('blade', function () use ($app) {
                 $compiler = $app['blade.compiler'];
 
-                return new PostProcessingCompilerEngine($compiler, $app['files']);
+                return new BladeMjmlCompilerEngine($compiler, $app['files']);
             });
 
             return $resolver;
@@ -74,24 +72,6 @@ class BladeMjmlServiceProvider extends PackageServiceProvider
     public function boot()
     {
         parent::boot();
-
-        // Get all mjml components and get their names
-        Blade::prepareStringsForCompilationUsing(function ($string) {
-            // only preprocess if the string starts with <mjml
-            if (! Str::startsWith($string, '<mjml')) {
-                return $string;
-            }
-
-            $preprocessor = new BladeMjmlPreprocessor;
-
-            $prepared = $preprocessor->preprocess($string);
-
-            return $prepared;
-        });
-
-        PostProcessingCompilerEngine::postProcess('example', function ($content) {
-            return OutlookConditionals::process($content);
-        });
 
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'blade-mjml');
 

@@ -6,8 +6,8 @@ use Closure;
 use colq2\BladeMjml\BladeMjmlGlobalContext;
 use colq2\BladeMjml\Helpers\Fonts;
 use colq2\BladeMjml\Helpers\MediaQueries;
+use colq2\BladeMjml\Helpers\StyleBuilder;
 use colq2\BladeMjml\Helpers\Styles;
-use colq2\BladeMjml\StyleBuilder;
 use Illuminate\Contracts\View\View;
 
 class Mjml extends MjmlComponent

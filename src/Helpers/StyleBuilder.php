@@ -1,6 +1,6 @@
 <?php
 
-namespace colq2\BladeMjml;
+namespace colq2\BladeMjml\Helpers;
 
 class StyleBuilder
 {

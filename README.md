@@ -3,10 +3,7 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/colq2/blade-mjml.svg?style=flat-square)](https://packagist.org/packages/colq2/blade-mjml)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/colq2/blade-mjml/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/colq2/blade-mjml/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/colq2/blade-mjml/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/colq2/blade-mjml/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/colq2/blade-mjml.svg?style=flat-square)](https://packagist.org/packages/:vendor_slug/:package_slug)
-
-> [!CAUTION]
-> Currently in experimental state.
+[![Total Downloads](https://img.shields.io/packagist/dt/colq2/blade-mjml.svg?style=flat-square)](https://packagist.org/packages/colq2/blade-mjml)
 
 This package is a port of [mjml](https://mjml.io/) to laravel blade. The goal is to have a running mjml version purely in php and blade, without the need for node.
 
@@ -41,11 +38,11 @@ public function content(): Content
 
 ## Limitations
 
+* mj-include is not supported. Use `@include` instead.
+
 * mj-html-attributes not supported yet.
 
 * mj-raw attribute `position="file-start"` is not supported yet.
-
-* mj-include is not supported. Use `@include` instead.
 
 * Inline mj-style not working yet.
 
@@ -85,38 +82,23 @@ Body Components:
 The original mjml implementation works differently than the blade compiler. MJML renders recursively, which means that a parent component calls the render function of all its childern and can provide a context or wrap them.
 The blade compiler works differently. First it compiles the blade view into a php file, then it "just" runs the php file. We cannot provide a context programmatically, because the blade compiler does not know about the context of the parent component.
 
-(Blade do not really know that it is working with html. It does not care, it does not do any html analysis or anything like that)
+(Blade do not really know that it is working with html. It does not care, it does not do any html analysis or anything like that. It is just string manipulation.)
 
 This is the biggest challenge of this package. This is why we keep a context stack and a global context.
 
-For example we need to wrap the child components of a column into a table, which in mjml is done in the mj-column component.
-Also calculating the current width and providing it to the child components was a challenge.
+For example, we need to wrap the child components of a column into a table, which in mjml is done in the mj-column component.
 
 Another challenge was to find out how many siblings a colum has. In the component we don't have any access to the parent html or whatsoever.
 Now this package "precompiles" the mjml and sets the siblings as an attribute. 
 
 The precompilation also changes <mj-*> tp <x-mj-*> so that the blade compiler can handle it correctly.
 
-
 ## Installation
-
-Currently this package is not installable with composer and packagist. You could add this for testing purposes:
-
-```json
-{
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/colq2/blade-mjml"
-    }
-  ]
-}
-```
 
 Install the package via composer:
 
 ```bash
-composer require colq2/blade-mjml:dev-main
+composer require colq2/blade-mjml
 ```
 
 ## Usage
@@ -151,6 +133,14 @@ public function content(): Content
         view: 'mail.mjml-example',
     );
 }
+```
+
+Or render it directly as a view:
+
+```php
+Route::get('/mjml-example', function () {
+    return view('mail.mjml-example');
+});
 ```
 
 ## Testing

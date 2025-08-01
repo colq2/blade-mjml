@@ -1,6 +1,7 @@
 <?php
 
 use colq2\BladeMjml\Tests\TestCase;
+use Illuminate\Support\Facades\View as ViewFacade;
 use Illuminate\Testing\TestView;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 
@@ -8,7 +9,20 @@ uses(TestCase::class, \Illuminate\Foundation\Testing\Concerns\InteractsWithViews
 
 function blade(string $template, array $data = []): TestView
 {
-    return test()->blade($template, $data);
+    // this is copied from InteractsWithViews::blade(), because we need to change the extension to .mjml.blade.php
+    $tempDirectory = sys_get_temp_dir();
+
+    if (! in_array($tempDirectory, ViewFacade::getFinder()->getPaths())) {
+        ViewFacade::addLocation(sys_get_temp_dir());
+    }
+
+    $tempFileInfo = pathinfo(tempnam($tempDirectory, 'laravel-blade'));
+
+    $tempFile = $tempFileInfo['dirname'].'/'.$tempFileInfo['filename'].'.mjml.blade.php';
+
+    file_put_contents($tempFile, $template);
+
+    return new TestView(view($tempFileInfo['filename'], $data));
 }
 
 expect()->extend('toEqualHtml', function (string $expectedHtml) {

@@ -7,10 +7,12 @@
 
 This package is a port of [mjml](https://mjml.io/) to laravel blade. The goal is to have a running mjml version purely in php and blade, without the need for node.
 
-You can just use the original mjml xml as blade view.
+To compile mjml templates, place you mjml templates into `mjml.blade.php` files.
+
+Then you use the original mjml xml:
 
 ```bladehtml
-<!-- resources/views/mail/mjml-example.blade.php -->
+<!-- resources/views/mail/mjml-example.mjml.blade.php -->
 <mjml>
     <mj-body>
         <mj-section>
@@ -110,7 +112,7 @@ Relevant documentation for laravel and mjml:
 * [MJML Documentation](https://mjml.io/documentation/)
 
 ```bladehtml
-// resources/views/mail/mjml-example.blade.php
+// resources/views/mail/mjml-example.mjml.blade.php
 <mjml>
     <mj-body>
         <mj-section>

@@ -33,7 +33,9 @@ use colq2\BladeMjml\Components\MjSpacer;
 use colq2\BladeMjml\Components\MjTable;
 use colq2\BladeMjml\Components\MjText;
 use colq2\BladeMjml\Components\MjWrapper;
+use Illuminate\Container\Container;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\View;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -58,11 +60,23 @@ class BladeMjmlServiceProvider extends PackageServiceProvider
     {
         parent::registeringPackage();
 
-        $this->app->extend('view.engine.resolver', function ($resolver, $app) {
-            $resolver->register('blade', function () use ($app) {
-                $compiler = $app['blade.compiler'];
+        View::addExtension('mjml.blade.php', 'blade-mjml');
 
-                return new BladeMjmlCompilerEngine($compiler, $app['files']);
+        $this->app->extend('view.engine.resolver', function ($resolver, $app) {
+            $resolver->register('blade-mjml', function () use ($app) {
+                $app = Container::getInstance();
+
+                $compiler = new BladeMjmlCompilerEngine(
+                    $app->make('blade.compiler'),
+                    $app->make('files'),
+                );
+
+                // @phpstan-ignore-next-line
+                $app->terminating(static function () use ($compiler) {
+                    $compiler->forgetCompiledOrNotExpired();
+                });
+
+                return $compiler;
             });
 
             return $resolver;

@@ -48,6 +48,22 @@ HTML;
     expect((string) blade($template))->toEqualMjmlHtml($template);
 });
 
+it('applies width, height', function () {
+    $template = <<<'HTML'
+<mjml>
+    <mj-body>
+        <mj-section>
+            <mj-column>
+                <mj-image src="https://example.com/image.png" width="300px" height="150px"></mj-image>
+            </mj-column>
+        </mj-section>
+    </mj-body>
+</mjml>
+HTML;
+
+    expect((string) blade($template))->toEqualMjmlHtml($template);
+});
+
 it('applies width, height and max-height', function () {
     $template = <<<'HTML'
 <mjml>

@@ -1,11 +1,15 @@
 <?php
 
 use colq2\BladeMjml\Tests\TestCase;
+use Illuminate\Foundation\Testing\Concerns\InteractsWithViews;
 use Illuminate\Support\Facades\View as ViewFacade;
+use Illuminate\Testing\Assert;
 use Illuminate\Testing\TestView;
+use PHPUnit\Framework\ExpectationFailedException;
 use Symfony\Component\Process\Exception\ProcessFailedException;
+use Symfony\Component\Process\Process;
 
-uses(TestCase::class, \Illuminate\Foundation\Testing\Concerns\InteractsWithViews::class)->in(__DIR__);
+uses(TestCase::class, InteractsWithViews::class)->in(__DIR__);
 
 function blade(string $template, array $data = []): TestView
 {
@@ -35,14 +39,14 @@ expect()->extend('toEqualHtml', function (string $expectedHtml) {
     $domAreEqual = areDomsEqual($actual, $expected);
 
     if (! $domAreEqual) {
-        throw new \PHPUnit\Framework\ExpectationFailedException(
+        throw new ExpectationFailedException(
             "HTML documents do not match.\n\n".
             "Actual:\n".$parsedActual."\n\n".
             "Expected:\n".$parsedExpected
         );
     }
 
-    \Illuminate\Testing\Assert::assertTrue($domAreEqual);
+    Assert::assertTrue($domAreEqual);
 
     return $this;
 });
@@ -259,7 +263,7 @@ function convertMjml(string $mjmlTemplate, array $options = []): string
     // Create the process
     $workingDirectory = __DIR__.'/../';
 
-    $process = new Symfony\Component\Process\Process($command, $workingDirectory);
+    $process = new Process($command, $workingDirectory);
     $process->setTimeout(30);
 
     // Run the process

@@ -2,6 +2,7 @@
 
 namespace colq2\BladeMjml;
 
+use colq2\BladeMjml\Helpers\MediaQueries;
 use Illuminate\Support\Arr;
 
 class BladeMjmlGlobalContext
@@ -130,7 +131,7 @@ class BladeMjmlGlobalContext
      */
     public function addMediaQuery(string $className, array $options): void
     {
-        $this->mediaQueries = \colq2\BladeMjml\Helpers\MediaQueries::addMediaQuery(
+        $this->mediaQueries = MediaQueries::addMediaQuery(
             $this->mediaQueries,
             $className,
             $options
@@ -145,7 +146,7 @@ class BladeMjmlGlobalContext
      */
     public function generateMediaQueries(array $options = []): string
     {
-        return \colq2\BladeMjml\Helpers\MediaQueries::buildMediaQueriesTags(
+        return MediaQueries::buildMediaQueriesTags(
             $this->breakpoint,
             $this->mediaQueries,
             $options

@@ -3,7 +3,9 @@
 namespace colq2\BladeMjml\Tests;
 
 use colq2\BladeMjml\BladeMjmlServiceProvider;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\ServiceProvider;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {
@@ -20,8 +22,8 @@ class TestCase extends \Orchestra\Testbench\TestCase
     /**
      * Get package providers.
      *
-     * @param  \Illuminate\Foundation\Application  $app
-     * @return array<int, class-string<\Illuminate\Support\ServiceProvider>>
+     * @param  Application  $app
+     * @return array<int, class-string<ServiceProvider>>
      */
     protected function getPackageProviders($app)
     {

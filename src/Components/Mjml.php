@@ -48,6 +48,7 @@ class Mjml extends MjmlComponent
             // $data['componentName'];
             // $data['attributes'];
             // $data['slot'];
+            /* @phpstan-ignore argument.type */
             $view = view('blade-mjml::components.mjml', [
                 'title' => $this->bladeMjml->title,
                 'bodyStyle' => $this->bodyStyle(),
